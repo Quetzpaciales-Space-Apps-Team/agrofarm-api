@@ -5,15 +5,18 @@ from typing import Annotated
 
 from fastapi import Header, Request
 
+from core_api.clients.ml import FixtureMLClient, HttpMLClient, MLClient
 from core_api.config import Settings
 from core_api.domain.auth import CurrentUser, decode_access_token
 from core_api.domain.problem import ProblemError
 from core_api.repositories.auth import SqlAlchemyAuthRepository
 from core_api.repositories.farms import SqlAlchemyFarmRepository
+from core_api.repositories.recommendations import SqlAlchemyRecommendationRepository
 from core_api.repositories.uploads import SqlAlchemyUploadRepository
 from core_api.services.auth import AuthService
 from core_api.services.farms import FarmService
 from core_api.services.readiness import ReadinessService
+from core_api.services.recommendations import SimulationAndRecommendationService
 from core_api.services.uploads import UploadService
 
 
@@ -61,4 +64,19 @@ def get_upload_service(request: Request) -> UploadService:
         SqlAlchemyFarmRepository(request.app.state.engine),
         SqlAlchemyUploadRepository(request.app.state.engine),
         raw_dir=Path(settings.raw_uploads_dir),
+    )
+
+
+def get_ml_client(settings: Settings) -> MLClient:
+    if settings.ml_mode == "http":
+        return HttpMLClient(settings.ml_service_url, timeout_seconds=settings.ml_timeout_seconds)
+    return FixtureMLClient()
+
+
+def get_simulation_service(request: Request) -> SimulationAndRecommendationService:
+    settings: Settings = request.app.state.settings
+    return SimulationAndRecommendationService(
+        SqlAlchemyFarmRepository(request.app.state.engine),
+        SqlAlchemyRecommendationRepository(request.app.state.engine),
+        get_ml_client(settings),
     )
