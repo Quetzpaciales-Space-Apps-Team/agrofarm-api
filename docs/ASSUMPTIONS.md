@@ -18,3 +18,6 @@ This file records pragmatic decisions made during the NASA Space Apps Challenge 
 
 ## 5. CORS & JWT Configuration (`fix/config-cors-jwt`)
 - **Decision:** `Settings` accepts both `CORS_ALLOWED_ORIGINS` (JSON list or comma-separated) and `CORS_ORIGINS` (used by `infra/terraform/main.tf`) without modifying Terraform; when `ENVIRONMENT != "local"`, empty or default `JWT_SECRET` fails startup validation.
+
+## 6. Canonical OpenAPI & Provenance (`feat/contract-source-of-truth`)
+- **Decision:** `agrofarm-api/docs/contract/openapi.yaml` is the single source of truth for frontend and backend. `Provenance.data_versions` uses a flat `dict[str, str]` (simpler than nested dataset arrays) and `Provenance` always includes `model_name`, `model_version`, `data_versions`, `input_hash`, and `generated_at`. `disclaimer` is included on `/v1/climate/enso`, `/v1/scenarios/simulate`, and `/v1/farms/{farm_id}/recommendations`.
