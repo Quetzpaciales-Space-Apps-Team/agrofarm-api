@@ -1,0 +1,145 @@
+name: CD
+
+"on":
+  push:
+    branches:
+      - develop
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy-staging:
+    name: Deploy to Cloud Run (staging)
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-24.04
+    environment: staging
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud via Workload Identity Federation
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_CI_DEPLOYER }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker "${{ secrets.GCP_REGION }}-docker.pkg.dev" --quiet
+
+      - name: Build and push container image tagged with commit SHA
+        env:
+          IMAGE_URI: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/core-api:${{ github.sha }}
+        run: |
+          docker build -t "$IMAGE_URI" .
+          docker push "$IMAGE_URI"
+
+      - name: Update and run database migrations job before traffic switch
+        env:
+          IMAGE_URI: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/core-api:${{ github.sha }}
+        run: |
+          gcloud run jobs update core-api-migrate-staging \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region="${{ secrets.GCP_REGION }}" \
+            --image="$IMAGE_URI" \
+            --quiet
+          gcloud run jobs execute core-api-migrate-staging \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region="${{ secrets.GCP_REGION }}" \
+            --wait \
+            --quiet
+
+      - name: Deploy new revision to Cloud Run staging
+        env:
+          IMAGE_URI: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/core-api:${{ github.sha }}
+        run: |
+          gcloud run services update core-api-staging \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region="${{ secrets.GCP_REGION }}" \
+            --image="$IMAGE_URI" \
+            --quiet
+
+      - name: Run post-deploy smoke test
+        run: |
+          SERVICE_URL="$(gcloud run services describe core-api-staging \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region="${{ secrets.GCP_REGION }}" \
+            --format='value(status.url)')"
+          echo "::add-mask::$SERVICE_URL"
+          curl -fsS --retry 5 --retry-delay 3 "$SERVICE_URL/healthz" >/dev/null
+          curl -fsS --retry 5 --retry-delay 3 "$SERVICE_URL/readyz" >/dev/null
+
+  deploy-production:
+    name: Deploy to Cloud Run (production)
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud via Workload Identity Federation
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA_CI_DEPLOYER }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker "${{ secrets.GCP_REGION }}-docker.pkg.dev" --quiet
+
+      - name: Ensure commit SHA image exists in Artifact Registry
+        env:
+          IMAGE_URI: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/core-api:${{ github.sha }}
+        run: |
+          if ! gcloud artifacts docker images describe "$IMAGE_URI" --quiet >/dev/null 2>&1; then
+            docker build -t "$IMAGE_URI" .
+            docker push "$IMAGE_URI"
+          fi
+
+      - name: Update and run production database migrations job before traffic switch
+        env:
+          IMAGE_URI: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/core-api:${{ github.sha }}
+        run: |
+          gcloud run jobs update core-api-migrate-prod \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region="${{ secrets.GCP_REGION }}" \
+            --image="$IMAGE_URI" \
+            --quiet
+          gcloud run jobs execute core-api-migrate-prod \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region="${{ secrets.GCP_REGION }}" \
+            --wait \
+            --quiet
+
+      - name: Deploy image to Cloud Run production
+        env:
+          IMAGE_URI: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/core-api:${{ github.sha }}
+        run: |
+          gcloud run services update core-api-prod \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region="${{ secrets.GCP_REGION }}" \
+            --image="$IMAGE_URI" \
+            --quiet
+
+      - name: Run post-deploy smoke test
+        run: |
+          SERVICE_URL="$(gcloud run services describe core-api-prod \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region="${{ secrets.GCP_REGION }}" \
+            --format='value(status.url)')"
+          echo "::add-mask::$SERVICE_URL"
+          curl -fsS --retry 5 --retry-delay 3 "$SERVICE_URL/healthz" >/dev/null
+          curl -fsS --retry 5 --retry-delay 3 "$SERVICE_URL/readyz" >/dev/null
