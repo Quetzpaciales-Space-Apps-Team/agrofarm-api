@@ -39,12 +39,129 @@ jobs:
             *) echo "::error::Branch '$HEAD' does not follow the naming rule (feat/, fix/, chore/, docs/, test/, refactor/, ci/, hotfix/)."; exit 1 ;;
           esac
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.5.14"
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.5.14"
+      - run: uv sync --frozen
+      - run: uv run mypy src tests
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: agrofarm
+          POSTGRES_PASSWORD: agrofarm
+          POSTGRES_DB: agrofarm
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U agrofarm -d agrofarm"
+          --health-interval=5s
+          --health-timeout=3s
+          --health-retries=10
+    env:
+      DATABASE_URL: postgresql+psycopg://agrofarm:agrofarm@localhost:5432/agrofarm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.5.14"
+      - run: uv sync --frozen
+      - name: Initialize PostgreSQL extensions
+        run: |
+          uv run python -c "
+          import os
+          from pathlib import Path
+          from sqlalchemy import create_engine, text
+          engine = create_engine(os.environ['DATABASE_URL'])
+          sql = Path('deploy/init-db.sql').read_text()
+          with engine.begin() as conn:
+              for stmt in sql.split(';'):
+                  if stmt.strip():
+                      conn.execute(text(stmt))
+          "
+      - run: uv run pytest --cov --cov-fail-under=80
+
+  migrations:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: agrofarm
+          POSTGRES_PASSWORD: agrofarm
+          POSTGRES_DB: agrofarm
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U agrofarm -d agrofarm"
+          --health-interval=5s
+          --health-timeout=3s
+          --health-retries=10
+    env:
+      DATABASE_URL: postgresql+psycopg://agrofarm:agrofarm@localhost:5432/agrofarm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.5.14"
+      - run: uv sync --frozen
+      - run: uv run alembic upgrade head
+      - run: uv run alembic downgrade base
+      - run: uv run alembic upgrade head
+
+  pip-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.5.14"
+      - run: uv sync --frozen
+      - run: uv run pip-audit
+
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t agrofarm-api:ci .
+
+  trivy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t agrofarm-api:ci .
+      - uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: agrofarm-api:ci
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          severity: CRITICAL,HIGH
+
   # The single required status check (rule G3). Keep the job name stable.
   # Add every new job to `needs`. A skipped job counts as passed, so path
   # filters (rule G3.1) never block or bypass this gate.
   ci-gate:
     if: always()
-    needs: [policy]
+    needs: [policy, lint, typecheck, test, migrations, pip-audit, docker-build, trivy]
     runs-on: ubuntu-latest
     steps:
       - name: Check results of all jobs

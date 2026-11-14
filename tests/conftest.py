@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 from agrofarm_api.config import Settings
 from agrofarm_api.main import create_app
 
-TEST_DATABASE_URL = 'postgresql+psycopg://agrofarm:agrofarm@localhost:5432/agrofarm'
+TEST_DATABASE_URL = "postgresql+psycopg://agrofarm:agrofarm@localhost:5432/agrofarm"
 
 
 class FakeDatabase:
@@ -21,7 +21,7 @@ class FakeDatabase:
 def settings() -> Settings:
     return Settings(
         database_url=TEST_DATABASE_URL,
-        cors_origins=['http://localhost:5173'],
+        cors_origins=["http://localhost:5173"],
     )
 
 
