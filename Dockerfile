@@ -9,7 +9,12 @@ COPY src ./src
 RUN uv sync --frozen --no-dev --no-editable
 
 FROM python:3.14-slim-trixie AS runtime
-RUN useradd --system --uid 10001 --no-create-home app
+# Apply pending Debian security updates, and drop pip: the runtime never installs
+# anything and pip vendors packages that image scanners flag.
+RUN apt-get update && apt-get upgrade -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* \
+    && python -m pip uninstall -y pip \
+    && useradd --system --uid 10001 --no-create-home app
 WORKDIR /app
 COPY --from=build /app/.venv /app/.venv
 COPY alembic.ini ./
