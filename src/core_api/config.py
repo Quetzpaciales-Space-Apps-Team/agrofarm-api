@@ -24,6 +24,8 @@ class Settings(BaseSettings):
     ml_service_url: str = "http://localhost:8081"
     ml_timeout_seconds: float = 5.0
     demo_mode: bool = False
+    max_upload_bytes: int = 2 * 1024 * 1024
+    raw_uploads_dir: str = "data/raw/uploads"
 
     @field_validator("cors_allowed_origins")
     @classmethod
