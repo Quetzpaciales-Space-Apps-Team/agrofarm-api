@@ -380,7 +380,6 @@ paths:
       tags: [recommendations]
       operationId: createRecommendations
       summary: Compare at least three rotation strategies, including the current one
-      x-stub: true
       parameters:
         - { $ref: "#/components/parameters/IdempotencyKey" }
       requestBody:
@@ -440,6 +439,7 @@ paths:
                     risks: [{ description: "The cover crop gives no direct income.", needs_local_review: true }]
                     needs_local_review: true
                 provenance: *provenance
+        "400": { $ref: "#/components/responses/Problem" }
         "401": { $ref: "#/components/responses/Problem" }
         "404": { $ref: "#/components/responses/Problem" }
         "422": { $ref: "#/components/responses/Problem" }
@@ -489,7 +489,6 @@ paths:
       tags: [data]
       operationId: getEnso
       summary: Monthly ENSO index with the phase of each month
-      x-stub: true
       parameters:
         - { name: start, in: query, schema: { type: string, format: date } }
         - { name: end, in: query, schema: { type: string, format: date } }
@@ -513,7 +512,6 @@ paths:
       tags: [simulation]
       operationId: simulateScenario
       summary: Simulate crop response under a scenario, always with an uncertainty range
-      x-stub: true
       requestBody:
         required: true
         content:
@@ -541,6 +539,7 @@ paths:
                   - { feature: temperature_anomaly_jja, contribution: -1.6 }
                 out_of_range_inputs: []
                 provenance: *provenance
+        "400": { $ref: "#/components/responses/Problem" }
         "401": { $ref: "#/components/responses/Problem" }
         "404": { $ref: "#/components/responses/Problem" }
         "422": { $ref: "#/components/responses/Problem" }
