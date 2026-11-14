@@ -7,13 +7,27 @@ from fastapi import Header, Request
 from core_api.config import Settings
 from core_api.domain.auth import CurrentUser, decode_access_token
 from core_api.domain.problem import ProblemError
+from core_api.repositories.auth import SqlAlchemyAuthRepository
 from core_api.repositories.farms import SqlAlchemyFarmRepository
+from core_api.services.auth import AuthService
 from core_api.services.farms import FarmService
 from core_api.services.readiness import ReadinessService
 
 
 def get_readiness_service(request: Request) -> ReadinessService:
     return ReadinessService(request.app.state.probes)
+
+
+def get_auth_service(request: Request) -> AuthService:
+    settings: Settings = request.app.state.settings
+    return AuthService(
+        SqlAlchemyAuthRepository(request.app.state.engine),
+        jwt_secret=settings.jwt_secret.get_secret_value(),
+        jwt_issuer=settings.jwt_issuer,
+        jwt_audience=settings.jwt_audience,
+        access_ttl_seconds=settings.access_token_ttl_seconds,
+        refresh_ttl_seconds=settings.refresh_token_ttl_seconds,
+    )
 
 
 def get_current_user(
