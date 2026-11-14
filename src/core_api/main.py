@@ -5,7 +5,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from core_api.api import auth, farms, health, uploads
+from core_api.api import auth, farms, health, simulation, uploads
 from core_api.api.stubs import build_stub_router
 from core_api.config import Settings
 from core_api.contract import load_contract
@@ -47,5 +47,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(auth.router)
     app.include_router(farms.router)
     app.include_router(uploads.router)
+    app.include_router(simulation.router)
     app.include_router(build_stub_router(contract))
     return app
