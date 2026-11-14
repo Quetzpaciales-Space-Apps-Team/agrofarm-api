@@ -31,14 +31,14 @@ def test_probe_answers_false_when_postgresql_is_unreachable() -> None:
 
 
 def test_readyz_is_ready_with_the_real_database(database_url: str) -> None:
-    with TestClient(create_app(Settings(database_url=database_url))) as client:  # type: ignore[arg-type]
+    with TestClient(create_app(Settings(database_url=database_url))) as client:
         response = client.get("/readyz")
 
     assert response.status_code == 200
 
 
 def test_readyz_is_503_when_the_real_database_is_down() -> None:
-    settings = Settings(database_url="postgresql+psycopg://u:p@127.0.0.1:1/app")  # type: ignore[arg-type]
+    settings = Settings(database_url="postgresql+psycopg://u:p@127.0.0.1:1/app")
     with TestClient(create_app(settings)) as client:
         response = client.get("/readyz")
 
