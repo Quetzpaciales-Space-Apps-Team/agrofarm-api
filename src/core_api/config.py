@@ -1,7 +1,12 @@
 """Settings come from the environment and are validated at startup."""
 
-from pydantic import SecretStr, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+import json
+from typing import Annotated, Any
+
+from pydantic import AliasChoices, Field, SecretStr, field_validator, model_validator
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
+
+DEFAULT_DEV_JWT_SECRET = "local-dev-jwt-secret-change-in-production"  # noqa: S105
 
 
 class Settings(BaseSettings):
@@ -11,10 +16,13 @@ class Settings(BaseSettings):
     # the app refuses to start without it.
     database_url: SecretStr
     environment: str = "local"
-    cors_allowed_origins: list[str] = []
+    cors_allowed_origins: Annotated[list[str], NoDecode] = Field(
+        default_factory=list,
+        validation_alias=AliasChoices("CORS_ALLOWED_ORIGINS", "CORS_ORIGINS"),
+    )
     log_level: str = "INFO"
 
-    jwt_secret: SecretStr = SecretStr("local-dev-jwt-secret-change-in-production")
+    jwt_secret: SecretStr = SecretStr(DEFAULT_DEV_JWT_SECRET)
     jwt_issuer: str = "agrofarm-core-api"
     jwt_audience: str = "agrofarm-clients"
     access_token_ttl_seconds: int = 900
@@ -27,9 +35,37 @@ class Settings(BaseSettings):
     max_upload_bytes: int = 2 * 1024 * 1024
     raw_uploads_dir: str = "data/raw/uploads"
 
+    @field_validator("cors_allowed_origins", mode="before")
+    @classmethod
+    def _parse_cors_origins(cls, value: Any) -> list[str]:
+        if value is None or value == "":
+            return []
+        if isinstance(value, str):
+            stripped = value.strip()
+            if stripped.startswith("["):
+                parsed = json.loads(stripped)
+                if not isinstance(parsed, list):
+                    raise ValueError("CORS origins JSON must be a list of strings.")
+                return [str(item).strip() for item in parsed if str(item).strip()]
+            return [item.strip() for item in stripped.split(",") if item.strip()]
+        if isinstance(value, list):
+            return [str(item).strip() for item in value if str(item).strip()]
+        raise ValueError("CORS origins must be a list or comma-separated string.")
+
     @field_validator("cors_allowed_origins")
     @classmethod
     def _no_wildcard_origin(cls, origins: list[str]) -> list[str]:
         if "*" in origins:
             raise ValueError("CORS needs an explicit allowlist. '*' is not allowed.")
         return origins
+
+    @model_validator(mode="after")
+    def _require_non_default_jwt_in_non_local(self) -> "Settings":
+        if self.environment != "local":
+            secret = self.jwt_secret.get_secret_value().strip()
+            if not secret or secret == DEFAULT_DEV_JWT_SECRET:
+                raise ValueError(
+                    "JWT_SECRET must be explicitly set to a non-default value "
+                    "when ENVIRONMENT != 'local'."
+                )
+        return self

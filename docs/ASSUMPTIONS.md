@@ -15,3 +15,6 @@ This file records pragmatic decisions made during the NASA Space Apps Challenge 
 
 ## 4. `ml-service` Contract & `ML_MODE=http|fixture` (`BE-045` / `BE-050`)
 - **Decision:** `agrofarm-analytic/services/ml/docs/contract/openapi.yaml` does not exist yet (`ML-001` is open). `core-api` defines an explicit `MLClient` interface with `ML_MODE=fixture|http` (default `fixture` for offline/local safety) and an explicit mapper that guarantees all required fields (`why`, `evidence`, `benefits`, `gaps`, `risks`, `needs_local_review`, `uncertainty`, priority scores, and provenance).
+
+## 5. CORS & JWT Configuration (`fix/config-cors-jwt`)
+- **Decision:** `Settings` accepts both `CORS_ALLOWED_ORIGINS` (JSON list or comma-separated) and `CORS_ORIGINS` (used by `infra/terraform/main.tf`) without modifying Terraform; when `ENVIRONMENT != "local"`, empty or default `JWT_SECRET` fails startup validation.
