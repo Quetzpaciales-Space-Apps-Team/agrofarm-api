@@ -5,7 +5,7 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from core_api.api import health
+from core_api.api import farms, health
 from core_api.api.stubs import build_stub_router
 from core_api.config import Settings
 from core_api.contract import load_contract
@@ -44,5 +44,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     # Real routers first. Stubs only cover operations still marked `x-stub` in the contract.
     app.include_router(health.router)
+    app.include_router(farms.router)
     app.include_router(build_stub_router(contract))
     return app
