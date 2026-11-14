@@ -1,0 +1,40 @@
+"""Application factory. Run with: uvicorn core_api.main:create_app --factory"""
+
+import logging
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from core_api.api import health
+from core_api.config import Settings
+from core_api.middleware.errors import register_error_handlers
+from core_api.middleware.request_id import RequestContextMiddleware
+from core_api.repositories.database import DatabaseProbe, create_db_engine
+
+
+def create_app(settings: Settings | None = None) -> FastAPI:
+    # Settings() raises when a required secret is missing, so the app refuses to start.
+    settings = settings or Settings()
+    logging.basicConfig(level=settings.log_level, format="%(message)s")
+
+    app = FastAPI(title="AgroFarm core-api", version="0.1.0")
+    engine = create_db_engine(settings.database_url.get_secret_value())
+    app.state.settings = settings
+    app.state.engine = engine
+    app.state.probes = [DatabaseProbe(engine)]
+
+    # Order (outermost first): request id and logging, CORS, [rate limit, auth: later tasks],
+    # error handlers. Starlette runs the middleware added last first.
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.cors_allowed_origins,
+        allow_credentials=True,
+        allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
+        allow_headers=["Authorization", "Content-Type", "Idempotency-Key", "X-Request-Id"],
+        expose_headers=["X-Request-Id"],
+    )
+    app.add_middleware(RequestContextMiddleware)
+    register_error_handlers(app)
+
+    app.include_router(health.router)
+    return app

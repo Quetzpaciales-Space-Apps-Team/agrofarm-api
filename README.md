@@ -4,6 +4,20 @@ Public REST API: auth, farms, uploads, search and orchestration. Owns PostgreSQL
 
 Part of AgroFarm, a crop growth and rotation simulator for farmers. The tool supports decisions. It never replaces farmers or local agronomists.
 
+## Run it
+
+Needs Docker and [uv](https://docs.astral.sh/uv/) (dependency manager for this repo, lockfile `uv.lock`).
+
+```
+cp .env.example .env
+make dev      # API on http://localhost:8080 and PostgreSQL, migrations applied
+make check    # lint, typecheck and all tests against a real PostgreSQL (what CI runs)
+```
+
+Other targets: `make test-unit`, `make test-integration`, `make migrate`, `make format`, `make audit`, `make build`. If port 5432 or 8080 is taken, set `DB_PORT` or `API_PORT`.
+
+Layout (`src/core_api/`): `api/` routers, `middleware/`, `services/` use cases, `repositories/` data access, `domain/` pure code, `clients/` other services, `config.py` settings. The layer rules are enforced by `tests/unit/test_architecture.py`.
+
 ## Start here
 
 - **Rules for people and agents:** [`AGENTS.md`](AGENTS.md). Read it before changing anything.

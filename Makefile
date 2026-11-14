@@ -1,0 +1,44 @@
+.PHONY: dev test test-unit test-integration lint format typecheck build check migrate audit db-up db-down
+DB_PORT ?= 5432
+TEST_DATABASE_URL ?= postgresql+psycopg://agrofarm:local-dev-only@localhost:$(DB_PORT)/agrofarm
+
+dev: ## full local environment (API + PostgreSQL)
+	docker compose up --build
+
+db-up: ## start only PostgreSQL and wait until it is healthy
+	DB_PORT=$(DB_PORT) docker compose up -d --wait db
+
+db-down:
+	docker compose down
+
+migrate: ## apply migrations to the local database
+	DATABASE_URL=$(TEST_DATABASE_URL) uv run alembic upgrade head
+
+test-unit: ## no network, no database
+	uv run pytest -m "not integration"
+
+test-integration: db-up migrate ## real PostgreSQL, never SQLite
+	DATABASE_URL=$(TEST_DATABASE_URL) uv run pytest -m integration
+
+test: db-up migrate ## everything, with the coverage gate
+	DATABASE_URL=$(TEST_DATABASE_URL) uv run pytest --cov --cov-report=term-missing
+
+lint:
+	uv run ruff check .
+	uv run ruff format --check .
+
+format:
+	uv run ruff format .
+	uv run ruff check --fix .
+
+typecheck:
+	uv run mypy
+
+audit: ## known vulnerabilities in the locked dependencies
+	uv export --frozen --no-dev --no-emit-project -o /tmp/core-api-requirements.txt -q
+	uv run pip-audit -r /tmp/core-api-requirements.txt --require-hashes --disable-pip
+
+build:
+	docker build -t core-api:local .
+
+check: lint typecheck test ## what CI runs
