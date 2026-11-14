@@ -6,7 +6,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from core_api.api import health
+from core_api.api.stubs import build_stub_router
 from core_api.config import Settings
+from core_api.contract import load_contract
 from core_api.middleware.errors import register_error_handlers
 from core_api.middleware.request_id import RequestContextMiddleware
 from core_api.repositories.database import DatabaseProbe, create_db_engine
@@ -36,5 +38,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.add_middleware(RequestContextMiddleware)
     register_error_handlers(app)
 
+    # Contract first: serve the hand-written contract, not a generated schema.
+    contract = load_contract()
+    app.openapi = lambda: contract  # type: ignore[method-assign]
+
+    # Real routers first. Stubs only cover operations still marked `x-stub` in the contract.
     app.include_router(health.router)
+    app.include_router(build_stub_router(contract))
     return app
