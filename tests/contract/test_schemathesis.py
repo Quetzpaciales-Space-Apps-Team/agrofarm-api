@@ -1,6 +1,8 @@
 """Property-based conformance: generated requests must never crash the service and every
 response must match the contract. Runs in process, no network."""
 
+from typing import Any
+
 import schemathesis
 from schemathesis.checks import not_a_server_error
 from schemathesis.specs.openapi.checks import (
@@ -11,17 +13,15 @@ from schemathesis.specs.openapi.checks import (
 
 from core_api.config import Settings
 from core_api.main import create_app
-from core_api.services.readiness import ReadinessService
 from tests.conftest import TEST_DATABASE_URL, FakeProbe
 
 app = create_app(Settings(database_url=TEST_DATABASE_URL))
 app.state.probes = [FakeProbe("database", healthy=True)]
-assert isinstance(ReadinessService(app.state.probes), ReadinessService)
 schema = schemathesis.openapi.from_asgi("/openapi.json", app)
 
 
 @schema.parametrize()
-def test_service_conforms_to_the_contract(case: schemathesis.Case) -> None:
+def test_service_conforms_to_the_contract(case: "schemathesis.Case[Any]") -> None:
     case.call_and_validate(
         checks=[
             not_a_server_error,
