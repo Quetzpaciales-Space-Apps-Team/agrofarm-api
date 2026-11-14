@@ -11,6 +11,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
 from starlette.responses import Response
+from starlette.routing import Match
 
 PROBLEM_JSON = "application/problem+json"
 logger = logging.getLogger("agrofarm_api.errors")
@@ -86,9 +87,32 @@ def register_error_handlers(app: FastAPI) -> None:
 
     @app.exception_handler(StarletteHTTPException)
     async def _http(request: Request, exc: StarletteHTTPException) -> JSONResponse:
+        if exc.status_code == 400 and exc.detail == "There was an error parsing the body":
+            return problem_response(
+                request,
+                422,
+                "validation_error",
+                "Validation Error",
+                "The request is not valid.",
+            )
         code = _STATUS_CODES.get(exc.status_code, "http_error")
         title = re.sub(r"\s+", " ", str(exc.detail)) if exc.detail else "Error"
-        return problem_response(request, exc.status_code, code, title)
+        response = problem_response(request, exc.status_code, code, title)
+        if exc.headers:
+            for k, v in exc.headers.items():
+                response.headers[k] = v
+        if exc.status_code == 405:
+            allowed = [
+                method
+                for method in ("DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT")
+                if any(
+                    route.matches({**request.scope, "method": method})[0] == Match.FULL
+                    for route in request.app.routes
+                )
+            ]
+            if allowed:
+                response.headers["Allow"] = ", ".join(allowed)
+        return response
 
     @app.exception_handler(RequestValidationError)
     async def _validation(request: Request, exc: RequestValidationError) -> JSONResponse:

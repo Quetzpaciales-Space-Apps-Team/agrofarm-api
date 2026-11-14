@@ -9,6 +9,7 @@ ENV UV_COMPILE_BYTECODE=1 \
 WORKDIR /app
 
 COPY pyproject.toml uv.lock README.md ./
+COPY docs/contract ./docs/contract
 COPY src ./src
 
 RUN uv sync --frozen --no-dev
@@ -21,6 +22,7 @@ RUN groupadd --gid 10001 appuser && \
 WORKDIR /app
 
 COPY --from=builder --chown=appuser:appuser /app/.venv /app/.venv
+COPY --from=builder --chown=appuser:appuser /app/docs/contract /app/docs/contract
 COPY --from=builder --chown=appuser:appuser /app/src /app/src
 
 ENV PATH="/app/.venv/bin:$PATH" \
