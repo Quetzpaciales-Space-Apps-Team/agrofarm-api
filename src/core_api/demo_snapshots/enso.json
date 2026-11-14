@@ -1,0 +1,10 @@
+{
+  "threshold_c": 0.5,
+  "source": "NOAA CPC (cached_demo)",
+  "items": [
+    {"month": "2023-12", "oni": 2.0, "roni": 1.5, "phase": "el_nino"},
+    {"month": "2024-06", "oni": 0.2, "roni": -0.3, "phase": "neutral"},
+    {"month": "2025-01", "oni": -0.6, "roni": -1.1, "phase": "la_nina"},
+    {"month": "2026-10", "oni": 0.6, "roni": 0.5, "phase": "el_nino"}
+  ]
+}
