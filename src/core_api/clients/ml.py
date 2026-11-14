@@ -1,13 +1,17 @@
 """ML service client behind an interface with ML_MODE=http|fixture."""
 
 import json
+import logging
 import urllib.error
 import urllib.request
+from collections.abc import Callable
 from datetime import UTC, datetime
 from typing import Any, Protocol
 
 from core_api.domain.problem import ProblemError
 from core_api.domain.recommendations import DISCLAIMER_TEXT
+
+logger = logging.getLogger(__name__)
 
 
 class MLClient(Protocol):
@@ -183,34 +187,57 @@ class FixtureMLClient:
 
 
 class HttpMLClient:
-    """HTTP client for ml-service with timeout and single bounded retry."""
+    """HTTP client for ml-service with timeout, bounded retry, and optional fixture fallback."""
 
-    def __init__(self, base_url: str, timeout_seconds: float = 5.0) -> None:
+    def __init__(
+        self,
+        base_url: str,
+        timeout_seconds: float = 5.0,
+        *,
+        fallback: MLClient | None = None,
+        post_fn: Callable[[str, dict[str, Any], float], dict[str, Any]] | None = None,
+    ) -> None:
         self._base_url = base_url.rstrip("/")
         self._timeout = timeout_seconds
+        self._fallback = fallback
+        self._post_fn = post_fn
 
     def simulate(self, payload: dict[str, Any]) -> dict[str, Any]:
-        return self._post_json("/v1/simulate", payload)
+        try:
+            return self._post_json("/v1/simulate", payload)
+        except ProblemError:
+            if self._fallback is not None:
+                logger.warning("ml-service simulate failed; falling back to fixture client.")
+                return self._fallback.simulate(payload)
+            raise
 
     def score_rotations(self, payload: dict[str, Any]) -> dict[str, Any]:
-        return self._post_json("/v1/rotations/score", payload)
+        try:
+            return self._post_json("/v1/rotations/score", payload)
+        except ProblemError:
+            if self._fallback is not None:
+                logger.warning("ml-service score_rotations failed; falling back to fixture.")
+                return self._fallback.score_rotations(payload)
+            raise
 
     def _post_json(self, path: str, payload: dict[str, Any]) -> dict[str, Any]:
         url = f"{self._base_url}{path}"
-        body = json.dumps(payload).encode("utf-8")
         last_error: Exception | None = None
         for _attempt in range(2):
-            req = urllib.request.Request(  # noqa: S310
-                url,
-                data=body,
-                headers={"Content-Type": "application/json"},
-                method="POST",
-            )
             try:
+                if self._post_fn is not None:
+                    return self._post_fn(url, payload, self._timeout)
+                body = json.dumps(payload).encode("utf-8")
+                req = urllib.request.Request(  # noqa: S310
+                    url,
+                    data=body,
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
                 with urllib.request.urlopen(req, timeout=self._timeout) as resp:  # noqa: S310
                     parsed: dict[str, Any] = json.loads(resp.read().decode("utf-8"))
                     return parsed
-            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+            except (urllib.error.URLError, TimeoutError, json.JSONDecodeError, OSError) as exc:
                 last_error = exc
         raise ProblemError(
             503,
