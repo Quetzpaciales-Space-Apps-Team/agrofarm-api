@@ -18,6 +18,12 @@ Other targets: `make test-unit`, `make test-integration`, `make migrate`, `make 
 
 Layout (`src/core_api/`): `api/` routers, `middleware/`, `services/` use cases, `repositories/` data access, `domain/` pure code, `clients/` other services, `config.py` settings. The layer rules are enforced by `tests/unit/test_architecture.py`.
 
+## Contract
+
+The API contract is [`docs/contract/openapi.yaml`](docs/contract/openapi.yaml). It is written by hand and comes first: change the contract, then the tests, then the code. The service serves it at `/openapi.json`.
+
+Operations marked `x-stub: true` answer with the example data of the contract (response header `X-Stub: true`). They do not validate input and do not check authentication. Clients can build against them today. When the real implementation of an operation lands, `x-stub` is removed from it.
+
 ## Start here
 
 - **Rules for people and agents:** [`AGENTS.md`](AGENTS.md). Read it before changing anything.
