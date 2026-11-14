@@ -247,7 +247,6 @@ paths:
       tags: [farms]
       operationId: listUploads
       summary: Files uploaded for a farm
-      x-stub: true
       parameters:
         - { $ref: "#/components/parameters/Limit" }
         - { $ref: "#/components/parameters/Cursor" }
@@ -278,7 +277,6 @@ paths:
       tags: [farms]
       operationId: createUpload
       summary: Upload farm records (CSV or GeoJSON). Errors are reported per row
-      x-stub: true
       parameters:
         - { $ref: "#/components/parameters/IdempotencyKey" }
       requestBody:

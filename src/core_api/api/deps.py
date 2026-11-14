@@ -1,5 +1,6 @@
 """Dependency injection wiring. Tests replace these providers."""
 
+from pathlib import Path
 from typing import Annotated
 
 from fastapi import Header, Request
@@ -9,9 +10,11 @@ from core_api.domain.auth import CurrentUser, decode_access_token
 from core_api.domain.problem import ProblemError
 from core_api.repositories.auth import SqlAlchemyAuthRepository
 from core_api.repositories.farms import SqlAlchemyFarmRepository
+from core_api.repositories.uploads import SqlAlchemyUploadRepository
 from core_api.services.auth import AuthService
 from core_api.services.farms import FarmService
 from core_api.services.readiness import ReadinessService
+from core_api.services.uploads import UploadService
 
 
 def get_readiness_service(request: Request) -> ReadinessService:
@@ -50,3 +53,12 @@ def get_current_user(
 
 def get_farm_service(request: Request) -> FarmService:
     return FarmService(SqlAlchemyFarmRepository(request.app.state.engine))
+
+
+def get_upload_service(request: Request) -> UploadService:
+    settings: Settings = request.app.state.settings
+    return UploadService(
+        SqlAlchemyFarmRepository(request.app.state.engine),
+        SqlAlchemyUploadRepository(request.app.state.engine),
+        raw_dir=Path(settings.raw_uploads_dir),
+    )
