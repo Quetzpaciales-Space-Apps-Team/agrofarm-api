@@ -93,12 +93,21 @@ jobs:
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.76.2
           image --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 core-api:ci
 
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: bash -n infra/bootstrap.sh infra/github-protect.sh
+      - run: docker run --rm -v "$PWD:/work" -w /work/infra/terraform hashicorp/terraform:1.9 fmt -check -recursive
+      - run: |
+          docker run --rm -v "$PWD:/work" -w /work/infra/terraform --entrypoint sh hashicorp/terraform:1.9 -c "terraform init -backend=false && terraform validate"
+
   # The single required status check (rule G3). Keep the job name stable.
   # Add every new job to `needs`. A skipped job counts as passed, so path
   # filters (rule G3.1) never block or bypass this gate.
   ci-gate:
     if: always()
-    needs: [policy, lint-typecheck, test, audit, image]
+    needs: [policy, lint-typecheck, test, audit, image, terraform]
     runs-on: ubuntu-latest
     steps:
       - name: Check results of all jobs

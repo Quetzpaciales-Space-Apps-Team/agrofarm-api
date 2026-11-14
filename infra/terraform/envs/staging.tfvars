@@ -1,0 +1,5 @@
+environment  = "staging"
+region       = "us-central1"
+github_org   = "Quetzpaciales-Space-Apps-Team"
+db_tier      = "db-f1-micro"
+cors_origins = "https://frontend-staging.agrofarm.example"
