@@ -54,7 +54,9 @@ def compute_input_hash(payload: dict[str, Any]) -> str:
     return hashlib.sha256(canonical).hexdigest()
 
 
-def validate_simulation_response(data: dict[str, Any]) -> dict[str, Any]:
+def validate_simulation_response(
+    data: dict[str, Any], *, input_hash: str | None = None
+) -> dict[str, Any]:
     """Ensure simulation response has ordered quantiles (p10 <= p50 <= p90) and provenance."""
     for key in ("baseline", "scenario"):
         q = data.get(key)
@@ -65,6 +67,9 @@ def validate_simulation_response(data: dict[str, Any]) -> dict[str, Any]:
     prov = data.get("provenance")
     if not isinstance(prov, dict) or not prov.get("model_version") or "data_versions" not in prov:
         raise ProblemError(503, "invalid_ml_response", "Missing provenance in simulation response")
+    prov.setdefault("model_name", "agrofarm-yield-anomaly")
+    prov.setdefault("input_hash", input_hash or compute_input_hash(data))
+    data.setdefault("disclaimer", DISCLAIMER_TEXT)
     return data
 
 
@@ -73,6 +78,7 @@ def map_and_validate_recommendations(
     rec_id: uuid.UUID,
     farm_id: uuid.UUID,
     raw: dict[str, Any],
+    input_hash: str | None = None,
 ) -> dict[str, Any]:
     """Map ml-service rotation scoring output and enforce all required blocks."""
     strategies = raw.get("strategies")
@@ -114,6 +120,8 @@ def map_and_validate_recommendations(
     prov = raw.get("provenance")
     if not isinstance(prov, dict) or not prov.get("model_version") or "data_versions" not in prov:
         raise ProblemError(503, "invalid_ml_response", "Missing provenance in recommendations.")
+    prov.setdefault("model_name", "agrofarm-rotation-ranker")
+    prov.setdefault("input_hash", input_hash or compute_input_hash(raw))
 
     return {
         "id": str(rec_id),

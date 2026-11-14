@@ -10,6 +10,7 @@ from core_api.domain.auth import CurrentUser
 from core_api.domain.farms import default_priorities
 from core_api.domain.problem import ProblemError
 from core_api.domain.recommendations import (
+    DISCLAIMER_TEXT,
     RecommendationRequestInput,
     SimulationRequestInput,
     compute_input_hash,
@@ -73,7 +74,12 @@ class SimulationAndRecommendationService:
             if (start_ym is None or str(item["month"]) >= start_ym)
             and (end_ym is None or str(item["month"]) <= end_ym)
         ]
-        return {"threshold_c": threshold_c, "items": items, "source": source}
+        return {
+            "threshold_c": threshold_c,
+            "items": items,
+            "source": source,
+            "disclaimer": DISCLAIMER_TEXT,
+        }
 
     def simulate(self, user: CurrentUser, payload: SimulationRequestInput) -> dict[str, Any]:
         farm = self._require_farm(user, payload.farm_id)
@@ -85,7 +91,7 @@ class SimulationAndRecommendationService:
             "scenario": payload.scenario.model_dump(),
         }
         raw = self._ml_client.simulate(ml_payload)
-        return validate_simulation_response(raw)
+        return validate_simulation_response(raw, input_hash=compute_input_hash(ml_payload))
 
     def create_recommendations(
         self,
@@ -105,14 +111,17 @@ class SimulationAndRecommendationService:
         }
         raw = self._ml_client.score_rotations(ml_payload)
         rec_id = uuid.uuid4()
-        mapped = map_and_validate_recommendations(rec_id=rec_id, farm_id=farm.id, raw=raw)
+        input_hash = compute_input_hash(ml_payload)
+        mapped = map_and_validate_recommendations(
+            rec_id=rec_id, farm_id=farm.id, raw=raw, input_hash=input_hash
+        )
         prov = mapped["provenance"]
         self._rec_repo.save(
             rec_id=rec_id,
             farm_id=farm.id,
             model_version=str(prov["model_version"]),
             data_versions=dict(prov["data_versions"]),
-            input_hash=compute_input_hash(ml_payload),
+            input_hash=input_hash,
             payload=mapped,
         )
         return mapped
