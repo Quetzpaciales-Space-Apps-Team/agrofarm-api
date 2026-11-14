@@ -55,7 +55,6 @@ paths:
       tags: [auth]
       operationId: register
       summary: Create an account
-      x-stub: true
       security: []
       requestBody:
         required: true
@@ -75,6 +74,7 @@ paths:
                 name: Ana Lopez
                 role: farmer
                 created_at: "2026-11-14T15:00:00Z"
+        "400": { $ref: "#/components/responses/Problem" }
         "409": { $ref: "#/components/responses/Problem" }
         "422": { $ref: "#/components/responses/Problem" }
         "429": { $ref: "#/components/responses/Problem" }
@@ -83,7 +83,6 @@ paths:
       tags: [auth]
       operationId: login
       summary: Log in. Sets the refresh token as an httpOnly cookie
-      x-stub: true
       security: []
       requestBody:
         required: true
@@ -101,6 +100,7 @@ paths:
                 access_token: stub.access.token
                 token_type: bearer
                 expires_in: 900
+        "400": { $ref: "#/components/responses/Problem" }
         "401": { $ref: "#/components/responses/Problem" }
         "422": { $ref: "#/components/responses/Problem" }
         "429": { $ref: "#/components/responses/Problem" }
@@ -109,7 +109,6 @@ paths:
       tags: [auth]
       operationId: refresh
       summary: Rotate the refresh cookie and return a new access token
-      x-stub: true
       security:
         - refreshCookie: []
       responses:
@@ -125,7 +124,6 @@ paths:
       tags: [auth]
       operationId: logout
       summary: Revoke the refresh token
-      x-stub: true
       security:
         - refreshCookie: []
       responses:
@@ -135,7 +133,6 @@ paths:
       tags: [auth]
       operationId: me
       summary: The current user
-      x-stub: true
       responses:
         "200":
           description: Current user
