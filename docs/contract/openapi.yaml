@@ -367,8 +367,10 @@ paths:
                 vulnerable_seasons:
                   - { start_month: 7, end_month: 8, hazard: dry_spell, reason: "Mid-summer dry spell during maize flowering.", source: insivumeh_daily }
                 provenance: &provenance
+                  model_name: agrofarm-stub
                   model_version: stub-0.1.0
                   data_versions: { insivumeh_daily: "2026-11-14", enso_monthly: "2026-11" }
+                  input_hash: "0000000000000000000000000000000000000000000000000000000000000000"
                   generated_at: "2026-11-14T15:20:00Z"
         "401": { $ref: "#/components/responses/Problem" }
         "404": { $ref: "#/components/responses/Problem" }
@@ -505,6 +507,7 @@ paths:
                   - { month: "2024-06", oni: 0.2, roni: -0.3, phase: neutral }
                   - { month: "2025-01", oni: -0.6, roni: -1.1, phase: la_nina }
                 source: "NOAA CPC"
+                disclaimer: "This tool supports decisions. It does not replace farmers or local agronomists."
         "401": { $ref: "#/components/responses/Problem" }
         "422": { $ref: "#/components/responses/Problem" }
   /v1/scenarios/simulate:
@@ -539,6 +542,7 @@ paths:
                   - { feature: temperature_anomaly_jja, contribution: -1.6 }
                 out_of_range_inputs: []
                 provenance: *provenance
+                disclaimer: "This tool supports decisions. It does not replace farmers or local agronomists."
         "400": { $ref: "#/components/responses/Problem" }
         "401": { $ref: "#/components/responses/Problem" }
         "404": { $ref: "#/components/responses/Problem" }
@@ -743,10 +747,12 @@ components:
             equipment: { type: array, maxItems: 10, items: { type: string, enum: [hand_tools, animal_traction, tractor, irrigation] } }
     Provenance:
       type: object
-      required: [model_version, data_versions, generated_at]
+      required: [model_name, model_version, data_versions, input_hash, generated_at]
       properties:
+        model_name: { type: string }
         model_version: { type: string }
         data_versions: { type: object, additionalProperties: { type: string } }
+        input_hash: { type: string }
         generated_at: { type: string, format: date-time }
     Insights:
       type: object
@@ -806,10 +812,11 @@ components:
     EnsoPhase: { type: string, enum: [el_nino, la_nina, neutral] }
     EnsoSeries:
       type: object
-      required: [threshold_c, items, source]
+      required: [threshold_c, items, source, disclaimer]
       properties:
         threshold_c: { type: number }
         source: { type: string }
+        disclaimer: { type: string }
         items:
           type: array
           items:
@@ -842,7 +849,7 @@ components:
       properties: { p10: { type: number }, p50: { type: number }, p90: { type: number } }
     SimulationResult:
       type: object
-      required: [crop, target, unit, baseline, scenario, attributions, out_of_range_inputs, provenance]
+      required: [crop, target, unit, baseline, scenario, attributions, out_of_range_inputs, provenance, disclaimer]
       properties:
         crop: { type: string }
         target: { type: string, description: What the model predicts (label or proxy) }
@@ -857,6 +864,7 @@ components:
             properties: { feature: { type: string }, contribution: { type: number } }
         out_of_range_inputs: { type: array, items: { type: string }, description: Inputs outside the training range }
         provenance: { $ref: "#/components/schemas/Provenance" }
+        disclaimer: { type: string }
     RecommendationRequest:
       type: object
       additionalProperties: false
