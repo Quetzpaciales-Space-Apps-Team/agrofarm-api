@@ -45,6 +45,21 @@ class SqlAlchemyRecommendationRepository:
     def __init__(self, engine: Engine) -> None:
         self._engine = engine
 
+    def get(self, rec_id: uuid.UUID) -> RecommendationRecord | None:
+        with Session(self._engine) as session:
+            row = session.get(FarmRecommendationRow, rec_id)
+            if row is None:
+                return None
+            return RecommendationRecord(
+                id=row.id,
+                farm_id=row.farm_id,
+                model_version=row.model_version,
+                data_versions=row.data_versions,
+                input_hash=row.input_hash,
+                payload=row.payload,
+                created_at=row.created_at,
+            )
+
     def save(
         self,
         *,
