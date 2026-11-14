@@ -39,12 +39,66 @@ jobs:
             *) echo "::error::Branch '$HEAD' does not follow the naming rule (feat/, fix/, chore/, docs/, test/, refactor/, ci/, hotfix/)."; exit 1 ;;
           esac
 
+  lint-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: pipx install uv==0.13.5
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_USER: agrofarm
+          POSTGRES_PASSWORD: ci-only
+          POSTGRES_DB: agrofarm
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U agrofarm -d agrofarm"
+          --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      DATABASE_URL: postgresql+psycopg://agrofarm:ci-only@localhost:5432/agrofarm
+    steps:
+      - uses: actions/checkout@v7
+      - run: pipx install uv==0.13.5
+      - run: uv sync --frozen
+      # Migration test: empty database up, all the way down, and up again.
+      - run: uv run alembic upgrade head
+      - run: uv run alembic downgrade base
+      - run: uv run alembic upgrade head
+      # Unit and integration tests with the coverage gate (fail_under in pyproject.toml).
+      - run: uv run pytest --cov --cov-report=term-missing
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: pipx install uv==0.13.5
+      - run: uv sync --frozen
+      - run: make audit
+
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker build -t core-api:ci .
+      - name: Trivy image scan
+        run: >-
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.76.2
+          image --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 core-api:ci
+
   # The single required status check (rule G3). Keep the job name stable.
   # Add every new job to `needs`. A skipped job counts as passed, so path
   # filters (rule G3.1) never block or bypass this gate.
   ci-gate:
     if: always()
-    needs: [policy]
+    needs: [policy, lint-typecheck, test, audit, image]
     runs-on: ubuntu-latest
     steps:
       - name: Check results of all jobs
