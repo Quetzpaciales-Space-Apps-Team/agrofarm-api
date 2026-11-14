@@ -5,6 +5,7 @@ from typing import Annotated
 
 from fastapi import Header, Request
 
+from core_api.clients.demo import DemoMLClient
 from core_api.clients.ml import FixtureMLClient, HttpMLClient, MLClient
 from core_api.config import Settings
 from core_api.domain.auth import CurrentUser, decode_access_token
@@ -68,6 +69,8 @@ def get_upload_service(request: Request) -> UploadService:
 
 
 def get_ml_client(settings: Settings) -> MLClient:
+    if settings.demo_mode:
+        return DemoMLClient()
     if settings.ml_mode == "http":
         return HttpMLClient(settings.ml_service_url, timeout_seconds=settings.ml_timeout_seconds)
     return FixtureMLClient()
@@ -79,4 +82,5 @@ def get_simulation_service(request: Request) -> SimulationAndRecommendationServi
         SqlAlchemyFarmRepository(request.app.state.engine),
         SqlAlchemyRecommendationRepository(request.app.state.engine),
         get_ml_client(settings),
+        demo_mode=settings.demo_mode,
     )

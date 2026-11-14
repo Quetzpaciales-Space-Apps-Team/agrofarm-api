@@ -4,6 +4,7 @@ import uuid
 from datetime import date
 from typing import Any
 
+from core_api.clients.demo import load_demo_enso_snapshot
 from core_api.clients.ml import MLClient
 from core_api.domain.auth import CurrentUser
 from core_api.domain.farms import default_priorities
@@ -39,10 +40,13 @@ class SimulationAndRecommendationService:
         farm_repo: FarmRepository,
         rec_repo: RecommendationRepository,
         ml_client: MLClient,
+        *,
+        demo_mode: bool = False,
     ) -> None:
         self._farm_repo = farm_repo
         self._rec_repo = rec_repo
         self._ml_client = ml_client
+        self._demo_mode = demo_mode
 
     def _require_farm(self, user: CurrentUser, farm_id: uuid.UUID) -> Any:
         farm = self._farm_repo.get(farm_id)
@@ -53,13 +57,23 @@ class SimulationAndRecommendationService:
     def get_enso_series(self, start: date | None = None, end: date | None = None) -> dict[str, Any]:
         start_ym = start.strftime("%Y-%m") if start else None
         end_ym = end.strftime("%Y-%m") if end else None
+        if self._demo_mode:
+            snapshot = load_demo_enso_snapshot()
+            raw_items: list[dict[str, Any]] = snapshot["items"]
+            threshold_c = snapshot["threshold_c"]
+            source = snapshot["source"]
+        else:
+            raw_items = _ENSO_ITEMS
+            threshold_c = 0.5
+            source = "NOAA CPC"
+
         items = [
             item
-            for item in _ENSO_ITEMS
+            for item in raw_items
             if (start_ym is None or str(item["month"]) >= start_ym)
             and (end_ym is None or str(item["month"]) <= end_ym)
         ]
-        return {"threshold_c": 0.5, "items": items, "source": "NOAA CPC"}
+        return {"threshold_c": threshold_c, "items": items, "source": source}
 
     def simulate(self, user: CurrentUser, payload: SimulationRequestInput) -> dict[str, Any]:
         farm = self._require_farm(user, payload.farm_id)
