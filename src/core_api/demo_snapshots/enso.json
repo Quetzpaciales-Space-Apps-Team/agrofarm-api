@@ -1,10 +1,5532 @@
 {
-  "threshold_c": 0.5,
-  "source": "NOAA CPC (cached_demo)",
-  "items": [
-    {"month": "2023-12", "oni": 2.0, "roni": 1.5, "phase": "el_nino"},
-    {"month": "2024-06", "oni": 0.2, "roni": -0.3, "phase": "neutral"},
-    {"month": "2025-01", "oni": -0.6, "roni": -1.1, "phase": "la_nina"},
-    {"month": "2026-10", "oni": 0.6, "roni": 0.5, "phase": "el_nino"}
-  ]
+ "threshold_c": 0.5,
+ "source": "NOAA CPC (cached_demo snapshot of the ONI and RONI tables, 1950-01 to 2026-09)",
+ "items": [
+  {
+   "month": "1950-01",
+   "oni": -1.32,
+   "roni": -1.19,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1950-02",
+   "oni": -1.2,
+   "roni": -1.08,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1950-03",
+   "oni": -1.12,
+   "roni": -0.96,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1950-04",
+   "oni": -1.08,
+   "roni": -1.0,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1950-05",
+   "oni": -1.1,
+   "roni": -0.99,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1950-06",
+   "oni": -0.9,
+   "roni": -0.75,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1950-07",
+   "oni": -0.62,
+   "roni": -0.38,
+   "phase": "neutral"
+  },
+  {
+   "month": "1950-08",
+   "oni": -0.57,
+   "roni": -0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1950-09",
+   "oni": -0.56,
+   "roni": -0.29,
+   "phase": "neutral"
+  },
+  {
+   "month": "1950-10",
+   "oni": -0.62,
+   "roni": -0.38,
+   "phase": "neutral"
+  },
+  {
+   "month": "1950-11",
+   "oni": -0.66,
+   "roni": -0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "1950-12",
+   "oni": -0.79,
+   "roni": -0.5,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1951-01",
+   "oni": -0.66,
+   "roni": -0.28,
+   "phase": "neutral"
+  },
+  {
+   "month": "1951-02",
+   "oni": -0.36,
+   "roni": 0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "1951-03",
+   "oni": -0.04,
+   "roni": 0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "1951-04",
+   "oni": 0.16,
+   "roni": 0.63,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1951-05",
+   "oni": 0.27,
+   "roni": 0.59,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1951-06",
+   "oni": 0.5,
+   "roni": 0.69,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1951-07",
+   "oni": 0.71,
+   "roni": 0.79,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1951-08",
+   "oni": 0.9,
+   "roni": 0.97,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1951-09",
+   "oni": 1.02,
+   "roni": 1.04,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1951-10",
+   "oni": 1.03,
+   "roni": 0.98,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1951-11",
+   "oni": 0.96,
+   "roni": 0.94,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1951-12",
+   "oni": 0.71,
+   "roni": 0.71,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1952-01",
+   "oni": 0.52,
+   "roni": 0.65,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1952-02",
+   "oni": 0.27,
+   "roni": 0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-03",
+   "oni": 0.33,
+   "roni": 0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-04",
+   "oni": 0.18,
+   "roni": 0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-05",
+   "oni": -0.07,
+   "roni": -0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-06",
+   "oni": -0.44,
+   "roni": -0.45,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-07",
+   "oni": -0.45,
+   "roni": -0.41,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-08",
+   "oni": -0.2,
+   "roni": -0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-09",
+   "oni": 0.03,
+   "roni": 0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-10",
+   "oni": 0.04,
+   "roni": 0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-11",
+   "oni": -0.11,
+   "roni": -0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "1952-12",
+   "oni": 0.06,
+   "roni": 0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "1953-01",
+   "oni": 0.25,
+   "roni": 0.4,
+   "phase": "neutral"
+  },
+  {
+   "month": "1953-02",
+   "oni": 0.5,
+   "roni": 0.67,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-03",
+   "oni": 0.48,
+   "roni": 0.68,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-04",
+   "oni": 0.56,
+   "roni": 0.72,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-05",
+   "oni": 0.77,
+   "roni": 0.94,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-06",
+   "oni": 0.74,
+   "roni": 0.84,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-07",
+   "oni": 0.63,
+   "roni": 0.68,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-08",
+   "oni": 0.68,
+   "roni": 0.73,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-09",
+   "oni": 0.59,
+   "roni": 0.65,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-10",
+   "oni": 0.78,
+   "roni": 0.84,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-11",
+   "oni": 0.52,
+   "roni": 0.57,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1953-12",
+   "oni": 0.56,
+   "roni": 0.66,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1954-01",
+   "oni": 0.41,
+   "roni": 0.63,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1954-02",
+   "oni": 0.35,
+   "roni": 0.63,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1954-03",
+   "oni": 0.01,
+   "roni": 0.31,
+   "phase": "neutral"
+  },
+  {
+   "month": "1954-04",
+   "oni": -0.27,
+   "roni": -0.02,
+   "phase": "neutral"
+  },
+  {
+   "month": "1954-05",
+   "oni": -0.48,
+   "roni": -0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1954-06",
+   "oni": -0.48,
+   "roni": -0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1954-07",
+   "oni": -0.67,
+   "roni": -0.45,
+   "phase": "neutral"
+  },
+  {
+   "month": "1954-08",
+   "oni": -0.83,
+   "roni": -0.62,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1954-09",
+   "oni": -0.73,
+   "roni": -0.54,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1954-10",
+   "oni": -0.52,
+   "roni": -0.31,
+   "phase": "neutral"
+  },
+  {
+   "month": "1954-11",
+   "oni": -0.4,
+   "roni": -0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "1954-12",
+   "oni": -0.44,
+   "roni": -0.18,
+   "phase": "neutral"
+  },
+  {
+   "month": "1955-01",
+   "oni": -0.5,
+   "roni": -0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "1955-02",
+   "oni": -0.48,
+   "roni": -0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1955-03",
+   "oni": -0.58,
+   "roni": -0.13,
+   "phase": "neutral"
+  },
+  {
+   "month": "1955-04",
+   "oni": -0.76,
+   "roni": -0.38,
+   "phase": "neutral"
+  },
+  {
+   "month": "1955-05",
+   "oni": -0.78,
+   "roni": -0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "1955-06",
+   "oni": -0.88,
+   "roni": -0.52,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1955-07",
+   "oni": -0.72,
+   "roni": -0.4,
+   "phase": "neutral"
+  },
+  {
+   "month": "1955-08",
+   "oni": -0.92,
+   "roni": -0.7,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1955-09",
+   "oni": -1.11,
+   "roni": -0.9,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1955-10",
+   "oni": -1.44,
+   "roni": -1.31,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1955-11",
+   "oni": -1.59,
+   "roni": -1.4,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1955-12",
+   "oni": -1.51,
+   "roni": -1.31,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1956-01",
+   "oni": -1.17,
+   "roni": -0.81,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1956-02",
+   "oni": -0.81,
+   "roni": -0.4,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-03",
+   "oni": -0.57,
+   "roni": -0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-04",
+   "oni": -0.51,
+   "roni": -0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-05",
+   "oni": -0.49,
+   "roni": -0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-06",
+   "oni": -0.47,
+   "roni": -0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-07",
+   "oni": -0.55,
+   "roni": -0.15,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-08",
+   "oni": -0.52,
+   "roni": -0.18,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-09",
+   "oni": -0.43,
+   "roni": -0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-10",
+   "oni": -0.39,
+   "roni": -0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-11",
+   "oni": -0.37,
+   "roni": -0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1956-12",
+   "oni": -0.39,
+   "roni": -0.17,
+   "phase": "neutral"
+  },
+  {
+   "month": "1957-01",
+   "oni": -0.27,
+   "roni": 0.0,
+   "phase": "neutral"
+  },
+  {
+   "month": "1957-02",
+   "oni": -0.06,
+   "roni": 0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "1957-03",
+   "oni": 0.26,
+   "roni": 0.53,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1957-04",
+   "oni": 0.63,
+   "roni": 0.83,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1957-05",
+   "oni": 0.72,
+   "roni": 0.88,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1957-06",
+   "oni": 0.82,
+   "roni": 0.9,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1957-07",
+   "oni": 0.96,
+   "roni": 1.03,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1957-08",
+   "oni": 1.03,
+   "roni": 1.05,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1957-09",
+   "oni": 1.12,
+   "roni": 1.14,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1957-10",
+   "oni": 1.15,
+   "roni": 1.16,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1957-11",
+   "oni": 1.39,
+   "roni": 1.45,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1957-12",
+   "oni": 1.62,
+   "roni": 1.75,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1958-01",
+   "oni": 1.69,
+   "roni": 1.89,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1958-02",
+   "oni": 1.59,
+   "roni": 1.79,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1958-03",
+   "oni": 1.17,
+   "roni": 1.31,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1958-04",
+   "oni": 0.84,
+   "roni": 0.95,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1958-05",
+   "oni": 0.57,
+   "roni": 0.66,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1958-06",
+   "oni": 0.49,
+   "roni": 0.56,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1958-07",
+   "oni": 0.43,
+   "roni": 0.45,
+   "phase": "neutral"
+  },
+  {
+   "month": "1958-08",
+   "oni": 0.32,
+   "roni": 0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1958-09",
+   "oni": 0.28,
+   "roni": 0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1958-10",
+   "oni": 0.3,
+   "roni": 0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1958-11",
+   "oni": 0.36,
+   "roni": 0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "1958-12",
+   "oni": 0.56,
+   "roni": 0.64,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1959-01",
+   "oni": 0.6,
+   "roni": 0.77,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1959-02",
+   "oni": 0.64,
+   "roni": 0.83,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1959-03",
+   "oni": 0.48,
+   "roni": 0.64,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1959-04",
+   "oni": 0.39,
+   "roni": 0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "1959-05",
+   "oni": 0.24,
+   "roni": 0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "1959-06",
+   "oni": 0.02,
+   "roni": 0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "1959-07",
+   "oni": -0.19,
+   "roni": -0.11,
+   "phase": "neutral"
+  },
+  {
+   "month": "1959-08",
+   "oni": -0.23,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1959-09",
+   "oni": -0.04,
+   "roni": -0.07,
+   "phase": "neutral"
+  },
+  {
+   "month": "1959-10",
+   "oni": 0.11,
+   "roni": 0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "1959-11",
+   "oni": 0.23,
+   "roni": 0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1959-12",
+   "oni": 0.14,
+   "roni": 0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-01",
+   "oni": 0.02,
+   "roni": 0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-02",
+   "oni": 0.03,
+   "roni": 0.19,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-03",
+   "oni": 0.06,
+   "roni": 0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-04",
+   "oni": 0.17,
+   "roni": 0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-05",
+   "oni": 0.04,
+   "roni": 0.16,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-06",
+   "oni": 0.0,
+   "roni": 0.06,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-07",
+   "oni": 0.01,
+   "roni": 0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-08",
+   "oni": 0.15,
+   "roni": 0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-09",
+   "oni": 0.19,
+   "roni": 0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-10",
+   "oni": 0.08,
+   "roni": 0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-11",
+   "oni": -0.07,
+   "roni": -0.07,
+   "phase": "neutral"
+  },
+  {
+   "month": "1960-12",
+   "oni": -0.07,
+   "roni": -0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-01",
+   "oni": 0.0,
+   "roni": 0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-02",
+   "oni": 0.03,
+   "roni": 0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-03",
+   "oni": 0.01,
+   "roni": 0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-04",
+   "oni": 0.05,
+   "roni": 0.06,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-05",
+   "oni": 0.22,
+   "roni": 0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-06",
+   "oni": 0.22,
+   "roni": 0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-07",
+   "oni": 0.08,
+   "roni": 0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-08",
+   "oni": -0.2,
+   "roni": -0.07,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-09",
+   "oni": -0.32,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-10",
+   "oni": -0.22,
+   "roni": -0.16,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-11",
+   "oni": -0.11,
+   "roni": -0.06,
+   "phase": "neutral"
+  },
+  {
+   "month": "1961-12",
+   "oni": -0.05,
+   "roni": 0.02,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-01",
+   "oni": -0.16,
+   "roni": -0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-02",
+   "oni": -0.17,
+   "roni": -0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-03",
+   "oni": -0.15,
+   "roni": 0.0,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-04",
+   "oni": -0.2,
+   "roni": -0.16,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-05",
+   "oni": -0.19,
+   "roni": -0.17,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-06",
+   "oni": -0.13,
+   "roni": -0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-07",
+   "oni": 0.0,
+   "roni": 0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-08",
+   "oni": -0.1,
+   "roni": -0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-09",
+   "oni": -0.16,
+   "roni": -0.15,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-10",
+   "oni": -0.25,
+   "roni": -0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-11",
+   "oni": -0.25,
+   "roni": -0.29,
+   "phase": "neutral"
+  },
+  {
+   "month": "1962-12",
+   "oni": -0.32,
+   "roni": -0.37,
+   "phase": "neutral"
+  },
+  {
+   "month": "1963-01",
+   "oni": -0.33,
+   "roni": -0.29,
+   "phase": "neutral"
+  },
+  {
+   "month": "1963-02",
+   "oni": -0.17,
+   "roni": -0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "1963-03",
+   "oni": 0.01,
+   "roni": 0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "1963-04",
+   "oni": 0.13,
+   "roni": 0.06,
+   "phase": "neutral"
+  },
+  {
+   "month": "1963-05",
+   "oni": 0.12,
+   "roni": 0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "1963-06",
+   "oni": 0.45,
+   "roni": 0.37,
+   "phase": "neutral"
+  },
+  {
+   "month": "1963-07",
+   "oni": 0.76,
+   "roni": 0.73,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1963-08",
+   "oni": 1.09,
+   "roni": 1.08,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1963-09",
+   "oni": 1.09,
+   "roni": 1.07,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1963-10",
+   "oni": 1.13,
+   "roni": 1.06,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1963-11",
+   "oni": 1.19,
+   "roni": 1.11,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1963-12",
+   "oni": 1.13,
+   "roni": 1.07,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1964-01",
+   "oni": 0.95,
+   "roni": 1.0,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1964-02",
+   "oni": 0.52,
+   "roni": 0.6,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1964-03",
+   "oni": 0.06,
+   "roni": 0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "1964-04",
+   "oni": -0.35,
+   "roni": -0.37,
+   "phase": "neutral"
+  },
+  {
+   "month": "1964-05",
+   "oni": -0.6,
+   "roni": -0.66,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1964-06",
+   "oni": -0.66,
+   "roni": -0.66,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1964-07",
+   "oni": -0.67,
+   "roni": -0.59,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1964-08",
+   "oni": -0.7,
+   "roni": -0.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1964-09",
+   "oni": -0.72,
+   "roni": -0.53,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1964-10",
+   "oni": -0.8,
+   "roni": -0.64,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1964-11",
+   "oni": -0.79,
+   "roni": -0.58,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1964-12",
+   "oni": -0.75,
+   "roni": -0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "1965-01",
+   "oni": -0.51,
+   "roni": -0.16,
+   "phase": "neutral"
+  },
+  {
+   "month": "1965-02",
+   "oni": -0.25,
+   "roni": 0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "1965-03",
+   "oni": -0.04,
+   "roni": 0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "1965-04",
+   "oni": 0.16,
+   "roni": 0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "1965-05",
+   "oni": 0.47,
+   "roni": 0.64,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1965-06",
+   "oni": 0.79,
+   "roni": 1.01,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1965-07",
+   "oni": 1.1,
+   "roni": 1.33,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1965-08",
+   "oni": 1.27,
+   "roni": 1.49,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1965-09",
+   "oni": 1.55,
+   "roni": 1.76,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1965-10",
+   "oni": 1.7,
+   "roni": 1.86,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1965-11",
+   "oni": 1.82,
+   "roni": 1.99,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1965-12",
+   "oni": 1.6,
+   "roni": 1.81,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1966-01",
+   "oni": 1.24,
+   "roni": 1.53,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1966-02",
+   "oni": 0.95,
+   "roni": 1.29,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1966-03",
+   "oni": 0.76,
+   "roni": 1.04,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1966-04",
+   "oni": 0.43,
+   "roni": 0.59,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1966-05",
+   "oni": 0.24,
+   "roni": 0.31,
+   "phase": "neutral"
+  },
+  {
+   "month": "1966-06",
+   "oni": 0.18,
+   "roni": 0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "1966-07",
+   "oni": 0.25,
+   "roni": 0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1966-08",
+   "oni": 0.13,
+   "roni": 0.19,
+   "phase": "neutral"
+  },
+  {
+   "month": "1966-09",
+   "oni": -0.09,
+   "roni": 0.0,
+   "phase": "neutral"
+  },
+  {
+   "month": "1966-10",
+   "oni": -0.12,
+   "roni": -0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1966-11",
+   "oni": -0.23,
+   "roni": -0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "1966-12",
+   "oni": -0.35,
+   "roni": -0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-01",
+   "oni": -0.46,
+   "roni": -0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-02",
+   "oni": -0.48,
+   "roni": -0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-03",
+   "oni": -0.5,
+   "roni": -0.35,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-04",
+   "oni": -0.37,
+   "roni": -0.31,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-05",
+   "oni": -0.15,
+   "roni": -0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-06",
+   "oni": 0.05,
+   "roni": 0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-07",
+   "oni": -0.02,
+   "roni": 0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-08",
+   "oni": -0.26,
+   "roni": -0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-09",
+   "oni": -0.4,
+   "roni": -0.11,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-10",
+   "oni": -0.4,
+   "roni": -0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-11",
+   "oni": -0.36,
+   "roni": 0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "1967-12",
+   "oni": -0.42,
+   "roni": -0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1968-01",
+   "oni": -0.62,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1968-02",
+   "oni": -0.73,
+   "roni": -0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "1968-03",
+   "oni": -0.63,
+   "roni": -0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1968-04",
+   "oni": -0.48,
+   "roni": -0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1968-05",
+   "oni": -0.1,
+   "roni": 0.07,
+   "phase": "neutral"
+  },
+  {
+   "month": "1968-06",
+   "oni": 0.17,
+   "roni": 0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1968-07",
+   "oni": 0.44,
+   "roni": 0.56,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1968-08",
+   "oni": 0.38,
+   "roni": 0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "1968-09",
+   "oni": 0.34,
+   "roni": 0.39,
+   "phase": "neutral"
+  },
+  {
+   "month": "1968-10",
+   "oni": 0.5,
+   "roni": 0.56,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1968-11",
+   "oni": 0.66,
+   "roni": 0.74,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1968-12",
+   "oni": 0.93,
+   "roni": 1.02,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1969-01",
+   "oni": 0.98,
+   "roni": 1.07,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1969-02",
+   "oni": 0.98,
+   "roni": 1.0,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1969-03",
+   "oni": 0.77,
+   "roni": 0.67,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1969-04",
+   "oni": 0.69,
+   "roni": 0.44,
+   "phase": "neutral"
+  },
+  {
+   "month": "1969-05",
+   "oni": 0.62,
+   "roni": 0.37,
+   "phase": "neutral"
+  },
+  {
+   "month": "1969-06",
+   "oni": 0.48,
+   "roni": 0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1969-07",
+   "oni": 0.37,
+   "roni": 0.28,
+   "phase": "neutral"
+  },
+  {
+   "month": "1969-08",
+   "oni": 0.41,
+   "roni": 0.34,
+   "phase": "neutral"
+  },
+  {
+   "month": "1969-09",
+   "oni": 0.61,
+   "roni": 0.57,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1969-10",
+   "oni": 0.71,
+   "roni": 0.67,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1969-11",
+   "oni": 0.81,
+   "roni": 0.81,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1969-12",
+   "oni": 0.71,
+   "roni": 0.68,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1970-01",
+   "oni": 0.46,
+   "roni": 0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "1970-02",
+   "oni": 0.23,
+   "roni": 0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1970-03",
+   "oni": 0.23,
+   "roni": 0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1970-04",
+   "oni": 0.28,
+   "roni": 0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1970-05",
+   "oni": 0.11,
+   "roni": 0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "1970-06",
+   "oni": -0.26,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1970-07",
+   "oni": -0.55,
+   "roni": -0.47,
+   "phase": "neutral"
+  },
+  {
+   "month": "1970-08",
+   "oni": -0.72,
+   "roni": -0.64,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1970-09",
+   "oni": -0.69,
+   "roni": -0.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1970-10",
+   "oni": -0.72,
+   "roni": -0.57,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1970-11",
+   "oni": -0.78,
+   "roni": -0.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1970-12",
+   "oni": -1.1,
+   "roni": -0.85,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1971-01",
+   "oni": -1.29,
+   "roni": -0.95,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1971-02",
+   "oni": -1.36,
+   "roni": -1.0,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1971-03",
+   "oni": -1.08,
+   "roni": -0.78,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1971-04",
+   "oni": -0.81,
+   "roni": -0.57,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1971-05",
+   "oni": -0.72,
+   "roni": -0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "1971-06",
+   "oni": -0.69,
+   "roni": -0.37,
+   "phase": "neutral"
+  },
+  {
+   "month": "1971-07",
+   "oni": -0.68,
+   "roni": -0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1971-08",
+   "oni": -0.6,
+   "roni": -0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "1971-09",
+   "oni": -0.68,
+   "roni": -0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1971-10",
+   "oni": -0.78,
+   "roni": -0.4,
+   "phase": "neutral"
+  },
+  {
+   "month": "1971-11",
+   "oni": -0.86,
+   "roni": -0.41,
+   "phase": "neutral"
+  },
+  {
+   "month": "1971-12",
+   "oni": -0.78,
+   "roni": -0.38,
+   "phase": "neutral"
+  },
+  {
+   "month": "1972-01",
+   "oni": -0.57,
+   "roni": -0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1972-02",
+   "oni": -0.27,
+   "roni": 0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1972-03",
+   "oni": 0.04,
+   "roni": 0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1972-04",
+   "oni": 0.25,
+   "roni": 0.51,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1972-05",
+   "oni": 0.48,
+   "roni": 0.66,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1972-06",
+   "oni": 0.7,
+   "roni": 0.87,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1972-07",
+   "oni": 1.0,
+   "roni": 1.14,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1972-08",
+   "oni": 1.26,
+   "roni": 1.4,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1972-09",
+   "oni": 1.49,
+   "roni": 1.64,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1972-10",
+   "oni": 1.69,
+   "roni": 1.82,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1972-11",
+   "oni": 1.84,
+   "roni": 1.97,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1972-12",
+   "oni": 1.77,
+   "roni": 1.88,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1973-01",
+   "oni": 1.55,
+   "roni": 1.69,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1973-02",
+   "oni": 1.13,
+   "roni": 1.25,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1973-03",
+   "oni": 0.56,
+   "roni": 0.58,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1973-04",
+   "oni": -0.03,
+   "roni": -0.17,
+   "phase": "neutral"
+  },
+  {
+   "month": "1973-05",
+   "oni": -0.51,
+   "roni": -0.73,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1973-06",
+   "oni": -0.8,
+   "roni": -0.98,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1973-07",
+   "oni": -0.99,
+   "roni": -1.1,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1973-08",
+   "oni": -1.11,
+   "roni": -1.19,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1973-09",
+   "oni": -1.26,
+   "roni": -1.3,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1973-10",
+   "oni": -1.58,
+   "roni": -1.63,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1973-11",
+   "oni": -1.89,
+   "roni": -1.86,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1973-12",
+   "oni": -2.04,
+   "roni": -1.91,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1974-01",
+   "oni": -1.87,
+   "roni": -1.6,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1974-02",
+   "oni": -1.59,
+   "roni": -1.28,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1974-03",
+   "oni": -1.24,
+   "roni": -0.97,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1974-04",
+   "oni": -0.99,
+   "roni": -0.84,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1974-05",
+   "oni": -0.71,
+   "roni": -0.57,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1974-06",
+   "oni": -0.64,
+   "roni": -0.5,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1974-07",
+   "oni": -0.46,
+   "roni": -0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "1974-08",
+   "oni": -0.4,
+   "roni": -0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1974-09",
+   "oni": -0.47,
+   "roni": -0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1974-10",
+   "oni": -0.69,
+   "roni": -0.45,
+   "phase": "neutral"
+  },
+  {
+   "month": "1974-11",
+   "oni": -0.88,
+   "roni": -0.59,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1974-12",
+   "oni": -0.71,
+   "roni": -0.35,
+   "phase": "neutral"
+  },
+  {
+   "month": "1975-01",
+   "oni": -0.56,
+   "roni": -0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "1975-02",
+   "oni": -0.55,
+   "roni": -0.13,
+   "phase": "neutral"
+  },
+  {
+   "month": "1975-03",
+   "oni": -0.61,
+   "roni": -0.29,
+   "phase": "neutral"
+  },
+  {
+   "month": "1975-04",
+   "oni": -0.66,
+   "roni": -0.42,
+   "phase": "neutral"
+  },
+  {
+   "month": "1975-05",
+   "oni": -0.8,
+   "roni": -0.61,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1975-06",
+   "oni": -0.92,
+   "roni": -0.73,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1975-07",
+   "oni": -1.08,
+   "roni": -0.87,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1975-08",
+   "oni": -1.12,
+   "roni": -0.88,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1975-09",
+   "oni": -1.29,
+   "roni": -0.98,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1975-10",
+   "oni": -1.32,
+   "roni": -0.95,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1975-11",
+   "oni": -1.47,
+   "roni": -1.02,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1975-12",
+   "oni": -1.58,
+   "roni": -1.11,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1976-01",
+   "oni": -1.49,
+   "roni": -1.0,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1976-02",
+   "oni": -1.11,
+   "roni": -0.65,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1976-03",
+   "oni": -0.65,
+   "roni": -0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1976-04",
+   "oni": -0.45,
+   "roni": -0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1976-05",
+   "oni": -0.23,
+   "roni": 0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "1976-06",
+   "oni": 0.0,
+   "roni": 0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "1976-07",
+   "oni": 0.23,
+   "roni": 0.52,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1976-08",
+   "oni": 0.4,
+   "roni": 0.72,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1976-09",
+   "oni": 0.6,
+   "roni": 0.89,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1976-10",
+   "oni": 0.79,
+   "roni": 1.04,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1976-11",
+   "oni": 0.81,
+   "roni": 1.05,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1976-12",
+   "oni": 0.84,
+   "roni": 1.08,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1977-01",
+   "oni": 0.71,
+   "roni": 0.96,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1977-02",
+   "oni": 0.66,
+   "roni": 0.89,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1977-03",
+   "oni": 0.33,
+   "roni": 0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "1977-04",
+   "oni": 0.26,
+   "roni": 0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1977-05",
+   "oni": 0.26,
+   "roni": 0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "1977-06",
+   "oni": 0.46,
+   "roni": 0.51,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1977-07",
+   "oni": 0.39,
+   "roni": 0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "1977-08",
+   "oni": 0.35,
+   "roni": 0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "1977-09",
+   "oni": 0.45,
+   "roni": 0.62,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1977-10",
+   "oni": 0.68,
+   "roni": 0.89,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1977-11",
+   "oni": 0.84,
+   "roni": 1.1,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1977-12",
+   "oni": 0.82,
+   "roni": 1.05,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1978-01",
+   "oni": 0.71,
+   "roni": 0.96,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1978-02",
+   "oni": 0.52,
+   "roni": 0.71,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1978-03",
+   "oni": 0.17,
+   "roni": 0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1978-04",
+   "oni": -0.06,
+   "roni": -0.07,
+   "phase": "neutral"
+  },
+  {
+   "month": "1978-05",
+   "oni": -0.28,
+   "roni": -0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "1978-06",
+   "oni": -0.24,
+   "roni": -0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "1978-07",
+   "oni": -0.37,
+   "roni": -0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1978-08",
+   "oni": -0.37,
+   "roni": -0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "1978-09",
+   "oni": -0.44,
+   "roni": -0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "1978-10",
+   "oni": -0.27,
+   "roni": -0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "1978-11",
+   "oni": -0.07,
+   "roni": 0.15,
+   "phase": "neutral"
+  },
+  {
+   "month": "1978-12",
+   "oni": 0.11,
+   "roni": 0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-01",
+   "oni": 0.19,
+   "roni": 0.35,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-02",
+   "oni": 0.21,
+   "roni": 0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-03",
+   "oni": 0.29,
+   "roni": 0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-04",
+   "oni": 0.32,
+   "roni": 0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-05",
+   "oni": 0.29,
+   "roni": 0.13,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-06",
+   "oni": 0.14,
+   "roni": 0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-07",
+   "oni": 0.09,
+   "roni": 0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-08",
+   "oni": 0.22,
+   "roni": 0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-09",
+   "oni": 0.34,
+   "roni": 0.41,
+   "phase": "neutral"
+  },
+  {
+   "month": "1979-10",
+   "oni": 0.47,
+   "roni": 0.52,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1979-11",
+   "oni": 0.5,
+   "roni": 0.52,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1979-12",
+   "oni": 0.64,
+   "roni": 0.64,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1980-01",
+   "oni": 0.62,
+   "roni": 0.65,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1980-02",
+   "oni": 0.47,
+   "roni": 0.45,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-03",
+   "oni": 0.35,
+   "roni": 0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-04",
+   "oni": 0.34,
+   "roni": 0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-05",
+   "oni": 0.45,
+   "roni": 0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-06",
+   "oni": 0.4,
+   "roni": 0.28,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-07",
+   "oni": 0.18,
+   "roni": 0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-08",
+   "oni": -0.06,
+   "roni": -0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-09",
+   "oni": -0.17,
+   "roni": -0.18,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-10",
+   "oni": -0.07,
+   "roni": -0.06,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-11",
+   "oni": 0.08,
+   "roni": 0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1980-12",
+   "oni": -0.05,
+   "roni": 0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-01",
+   "oni": -0.27,
+   "roni": -0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-02",
+   "oni": -0.42,
+   "roni": -0.18,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-03",
+   "oni": -0.41,
+   "roni": -0.28,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-04",
+   "oni": -0.27,
+   "roni": -0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-05",
+   "oni": -0.28,
+   "roni": -0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-06",
+   "oni": -0.27,
+   "roni": -0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-07",
+   "oni": -0.28,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-08",
+   "oni": -0.23,
+   "roni": -0.16,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-09",
+   "oni": -0.08,
+   "roni": -0.02,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-10",
+   "oni": -0.16,
+   "roni": -0.17,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-11",
+   "oni": -0.19,
+   "roni": -0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1981-12",
+   "oni": -0.14,
+   "roni": -0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "1982-01",
+   "oni": -0.05,
+   "roni": 0.11,
+   "phase": "neutral"
+  },
+  {
+   "month": "1982-02",
+   "oni": 0.02,
+   "roni": 0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "1982-03",
+   "oni": 0.07,
+   "roni": 0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1982-04",
+   "oni": 0.34,
+   "roni": 0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "1982-05",
+   "oni": 0.65,
+   "roni": 0.74,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1982-06",
+   "oni": 0.73,
+   "roni": 0.84,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1982-07",
+   "oni": 0.78,
+   "roni": 0.89,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1982-08",
+   "oni": 0.99,
+   "roni": 1.14,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1982-09",
+   "oni": 1.45,
+   "roni": 1.64,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1982-10",
+   "oni": 1.82,
+   "roni": 2.03,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1982-11",
+   "oni": 2.03,
+   "roni": 2.24,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1982-12",
+   "oni": 2.12,
+   "roni": 2.36,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1983-01",
+   "oni": 2.14,
+   "roni": 2.4,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1983-02",
+   "oni": 1.91,
+   "roni": 2.15,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1983-03",
+   "oni": 1.52,
+   "roni": 1.67,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1983-04",
+   "oni": 1.23,
+   "roni": 1.3,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1983-05",
+   "oni": 0.95,
+   "roni": 0.87,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1983-06",
+   "oni": 0.62,
+   "roni": 0.47,
+   "phase": "neutral"
+  },
+  {
+   "month": "1983-07",
+   "oni": 0.25,
+   "roni": 0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1983-08",
+   "oni": -0.06,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1983-09",
+   "oni": -0.43,
+   "roni": -0.59,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1983-10",
+   "oni": -0.76,
+   "roni": -0.9,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1983-11",
+   "oni": -0.96,
+   "roni": -1.1,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1983-12",
+   "oni": -0.89,
+   "roni": -0.96,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1984-01",
+   "oni": -0.63,
+   "roni": -0.63,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1984-02",
+   "oni": -0.51,
+   "roni": -0.52,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1984-03",
+   "oni": -0.38,
+   "roni": -0.45,
+   "phase": "neutral"
+  },
+  {
+   "month": "1984-04",
+   "oni": -0.47,
+   "roni": -0.59,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1984-05",
+   "oni": -0.55,
+   "roni": -0.62,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1984-06",
+   "oni": -0.52,
+   "roni": -0.51,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1984-07",
+   "oni": -0.39,
+   "roni": -0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1984-08",
+   "oni": -0.22,
+   "roni": -0.17,
+   "phase": "neutral"
+  },
+  {
+   "month": "1984-09",
+   "oni": -0.32,
+   "roni": -0.28,
+   "phase": "neutral"
+  },
+  {
+   "month": "1984-10",
+   "oni": -0.62,
+   "roni": -0.61,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1984-11",
+   "oni": -0.95,
+   "roni": -0.88,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1984-12",
+   "oni": -1.06,
+   "roni": -0.93,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1985-01",
+   "oni": -1.01,
+   "roni": -0.83,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1985-02",
+   "oni": -0.86,
+   "roni": -0.68,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1985-03",
+   "oni": -0.85,
+   "roni": -0.75,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1985-04",
+   "oni": -0.8,
+   "roni": -0.76,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1985-05",
+   "oni": -0.79,
+   "roni": -0.77,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1985-06",
+   "oni": -0.6,
+   "roni": -0.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1985-07",
+   "oni": -0.44,
+   "roni": -0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "1985-08",
+   "oni": -0.33,
+   "roni": -0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "1985-09",
+   "oni": -0.31,
+   "roni": -0.16,
+   "phase": "neutral"
+  },
+  {
+   "month": "1985-10",
+   "oni": -0.3,
+   "roni": -0.18,
+   "phase": "neutral"
+  },
+  {
+   "month": "1985-11",
+   "oni": -0.28,
+   "roni": -0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1985-12",
+   "oni": -0.36,
+   "roni": -0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1986-01",
+   "oni": -0.4,
+   "roni": -0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1986-02",
+   "oni": -0.38,
+   "roni": -0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "1986-03",
+   "oni": -0.25,
+   "roni": -0.19,
+   "phase": "neutral"
+  },
+  {
+   "month": "1986-04",
+   "oni": -0.17,
+   "roni": -0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "1986-05",
+   "oni": -0.09,
+   "roni": -0.11,
+   "phase": "neutral"
+  },
+  {
+   "month": "1986-06",
+   "oni": 0.02,
+   "roni": -0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "1986-07",
+   "oni": 0.24,
+   "roni": 0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1986-08",
+   "oni": 0.46,
+   "roni": 0.57,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1986-09",
+   "oni": 0.64,
+   "roni": 0.79,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1986-10",
+   "oni": 0.86,
+   "roni": 1.0,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1986-11",
+   "oni": 1.06,
+   "roni": 1.22,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1986-12",
+   "oni": 1.21,
+   "roni": 1.42,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-01",
+   "oni": 1.18,
+   "roni": 1.46,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-02",
+   "oni": 1.13,
+   "roni": 1.35,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-03",
+   "oni": 1.02,
+   "roni": 1.14,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-04",
+   "oni": 0.94,
+   "roni": 0.93,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-05",
+   "oni": 0.95,
+   "roni": 0.85,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-06",
+   "oni": 1.11,
+   "roni": 0.94,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-07",
+   "oni": 1.3,
+   "roni": 1.11,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-08",
+   "oni": 1.46,
+   "roni": 1.3,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-09",
+   "oni": 1.49,
+   "roni": 1.34,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-10",
+   "oni": 1.41,
+   "roni": 1.2,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-11",
+   "oni": 1.2,
+   "roni": 0.98,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1987-12",
+   "oni": 1.0,
+   "roni": 0.8,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1988-01",
+   "oni": 0.63,
+   "roni": 0.45,
+   "phase": "neutral"
+  },
+  {
+   "month": "1988-02",
+   "oni": 0.37,
+   "roni": 0.11,
+   "phase": "neutral"
+  },
+  {
+   "month": "1988-03",
+   "oni": -0.03,
+   "roni": -0.4,
+   "phase": "neutral"
+  },
+  {
+   "month": "1988-04",
+   "oni": -0.45,
+   "roni": -0.91,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1988-05",
+   "oni": -0.99,
+   "roni": -1.49,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1988-06",
+   "oni": -1.3,
+   "roni": -1.74,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1988-07",
+   "oni": -1.3,
+   "roni": -1.64,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1988-08",
+   "oni": -1.14,
+   "roni": -1.36,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1988-09",
+   "oni": -1.27,
+   "roni": -1.44,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1988-10",
+   "oni": -1.54,
+   "roni": -1.71,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1988-11",
+   "oni": -1.81,
+   "roni": -1.95,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1988-12",
+   "oni": -1.85,
+   "roni": -1.94,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1989-01",
+   "oni": -1.64,
+   "roni": -1.64,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1989-02",
+   "oni": -1.38,
+   "roni": -1.37,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1989-03",
+   "oni": -1.09,
+   "roni": -1.11,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1989-04",
+   "oni": -0.85,
+   "roni": -0.89,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1989-05",
+   "oni": -0.61,
+   "roni": -0.65,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1989-06",
+   "oni": -0.4,
+   "roni": -0.43,
+   "phase": "neutral"
+  },
+  {
+   "month": "1989-07",
+   "oni": -0.37,
+   "roni": -0.41,
+   "phase": "neutral"
+  },
+  {
+   "month": "1989-08",
+   "oni": -0.36,
+   "roni": -0.38,
+   "phase": "neutral"
+  },
+  {
+   "month": "1989-09",
+   "oni": -0.33,
+   "roni": -0.31,
+   "phase": "neutral"
+  },
+  {
+   "month": "1989-10",
+   "oni": -0.25,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1989-11",
+   "oni": -0.12,
+   "roni": -0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "1989-12",
+   "oni": -0.04,
+   "roni": 0.06,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-01",
+   "oni": 0.18,
+   "roni": 0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-02",
+   "oni": 0.19,
+   "roni": 0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-03",
+   "oni": 0.3,
+   "roni": 0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-04",
+   "oni": 0.27,
+   "roni": 0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-05",
+   "oni": 0.25,
+   "roni": 0.19,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-06",
+   "oni": 0.25,
+   "roni": 0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-07",
+   "oni": 0.26,
+   "roni": 0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-08",
+   "oni": 0.32,
+   "roni": 0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-09",
+   "oni": 0.31,
+   "roni": 0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-10",
+   "oni": 0.27,
+   "roni": 0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-11",
+   "oni": 0.31,
+   "roni": 0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1990-12",
+   "oni": 0.34,
+   "roni": 0.43,
+   "phase": "neutral"
+  },
+  {
+   "month": "1991-01",
+   "oni": 0.35,
+   "roni": 0.57,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1991-02",
+   "oni": 0.26,
+   "roni": 0.53,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1991-03",
+   "oni": 0.23,
+   "roni": 0.42,
+   "phase": "neutral"
+  },
+  {
+   "month": "1991-04",
+   "oni": 0.29,
+   "roni": 0.42,
+   "phase": "neutral"
+  },
+  {
+   "month": "1991-05",
+   "oni": 0.49,
+   "roni": 0.56,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1991-06",
+   "oni": 0.63,
+   "roni": 0.7,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1991-07",
+   "oni": 0.77,
+   "roni": 0.86,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1991-08",
+   "oni": 0.67,
+   "roni": 0.83,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1991-09",
+   "oni": 0.72,
+   "roni": 1.01,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1991-10",
+   "oni": 0.83,
+   "roni": 1.2,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1991-11",
+   "oni": 1.18,
+   "roni": 1.66,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1991-12",
+   "oni": 1.43,
+   "roni": 1.97,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1992-01",
+   "oni": 1.54,
+   "roni": 2.12,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1992-02",
+   "oni": 1.5,
+   "roni": 2.08,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1992-03",
+   "oni": 1.4,
+   "roni": 1.94,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1992-04",
+   "oni": 1.3,
+   "roni": 1.76,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1992-05",
+   "oni": 1.08,
+   "roni": 1.4,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1992-06",
+   "oni": 0.72,
+   "roni": 0.93,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1992-07",
+   "oni": 0.35,
+   "roni": 0.52,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1992-08",
+   "oni": 0.08,
+   "roni": 0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1992-09",
+   "oni": -0.15,
+   "roni": 0.13,
+   "phase": "neutral"
+  },
+  {
+   "month": "1992-10",
+   "oni": -0.22,
+   "roni": 0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "1992-11",
+   "oni": -0.24,
+   "roni": 0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "1992-12",
+   "oni": -0.05,
+   "roni": 0.35,
+   "phase": "neutral"
+  },
+  {
+   "month": "1993-01",
+   "oni": 0.13,
+   "roni": 0.55,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1993-02",
+   "oni": 0.31,
+   "roni": 0.7,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1993-03",
+   "oni": 0.5,
+   "roni": 0.86,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1993-04",
+   "oni": 0.73,
+   "roni": 1.06,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1993-05",
+   "oni": 0.76,
+   "roni": 1.0,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1993-06",
+   "oni": 0.56,
+   "roni": 0.77,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1993-07",
+   "oni": 0.28,
+   "roni": 0.45,
+   "phase": "neutral"
+  },
+  {
+   "month": "1993-08",
+   "oni": 0.22,
+   "roni": 0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "1993-09",
+   "oni": 0.2,
+   "roni": 0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "1993-10",
+   "oni": 0.2,
+   "roni": 0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "1993-11",
+   "oni": 0.2,
+   "roni": 0.44,
+   "phase": "neutral"
+  },
+  {
+   "month": "1993-12",
+   "oni": 0.19,
+   "roni": 0.42,
+   "phase": "neutral"
+  },
+  {
+   "month": "1994-01",
+   "oni": 0.07,
+   "roni": 0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "1994-02",
+   "oni": 0.0,
+   "roni": 0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1994-03",
+   "oni": 0.04,
+   "roni": 0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1994-04",
+   "oni": 0.17,
+   "roni": 0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "1994-05",
+   "oni": 0.25,
+   "roni": 0.4,
+   "phase": "neutral"
+  },
+  {
+   "month": "1994-06",
+   "oni": 0.23,
+   "roni": 0.41,
+   "phase": "neutral"
+  },
+  {
+   "month": "1994-07",
+   "oni": 0.3,
+   "roni": 0.53,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1994-08",
+   "oni": 0.3,
+   "roni": 0.6,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1994-09",
+   "oni": 0.47,
+   "roni": 0.79,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1994-10",
+   "oni": 0.66,
+   "roni": 0.97,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1994-11",
+   "oni": 0.93,
+   "roni": 1.23,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1994-12",
+   "oni": 0.97,
+   "roni": 1.28,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1995-01",
+   "oni": 0.88,
+   "roni": 1.17,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1995-02",
+   "oni": 0.65,
+   "roni": 0.86,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1995-03",
+   "oni": 0.46,
+   "roni": 0.55,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1995-04",
+   "oni": 0.19,
+   "roni": 0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "1995-05",
+   "oni": 0.03,
+   "roni": -0.07,
+   "phase": "neutral"
+  },
+  {
+   "month": "1995-06",
+   "oni": -0.11,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "1995-07",
+   "oni": -0.3,
+   "roni": -0.41,
+   "phase": "neutral"
+  },
+  {
+   "month": "1995-08",
+   "oni": -0.55,
+   "roni": -0.57,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1995-09",
+   "oni": -0.81,
+   "roni": -0.76,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1995-10",
+   "oni": -0.97,
+   "roni": -0.93,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1995-11",
+   "oni": -1.05,
+   "roni": -1.02,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1995-12",
+   "oni": -1.01,
+   "roni": -0.99,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1996-01",
+   "oni": -0.88,
+   "roni": -0.87,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1996-02",
+   "oni": -0.7,
+   "roni": -0.75,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1996-03",
+   "oni": -0.52,
+   "roni": -0.58,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1996-04",
+   "oni": -0.36,
+   "roni": -0.37,
+   "phase": "neutral"
+  },
+  {
+   "month": "1996-05",
+   "oni": -0.25,
+   "roni": -0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "1996-06",
+   "oni": -0.24,
+   "roni": -0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "1996-07",
+   "oni": -0.22,
+   "roni": -0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "1996-08",
+   "oni": -0.27,
+   "roni": -0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "1996-09",
+   "oni": -0.3,
+   "roni": -0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "1996-10",
+   "oni": -0.33,
+   "roni": -0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "1996-11",
+   "oni": -0.39,
+   "roni": -0.3,
+   "phase": "neutral"
+  },
+  {
+   "month": "1996-12",
+   "oni": -0.41,
+   "roni": -0.29,
+   "phase": "neutral"
+  },
+  {
+   "month": "1997-01",
+   "oni": -0.41,
+   "roni": -0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "1997-02",
+   "oni": -0.26,
+   "roni": -0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "1997-03",
+   "oni": -0.03,
+   "roni": 0.17,
+   "phase": "neutral"
+  },
+  {
+   "month": "1997-04",
+   "oni": 0.3,
+   "roni": 0.47,
+   "phase": "neutral"
+  },
+  {
+   "month": "1997-05",
+   "oni": 0.71,
+   "roni": 0.83,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1997-06",
+   "oni": 1.13,
+   "roni": 1.2,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1997-07",
+   "oni": 1.48,
+   "roni": 1.5,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1997-08",
+   "oni": 1.79,
+   "roni": 1.84,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1997-09",
+   "oni": 2.04,
+   "roni": 2.07,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1997-10",
+   "oni": 2.24,
+   "roni": 2.22,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1997-11",
+   "oni": 2.34,
+   "roni": 2.25,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1997-12",
+   "oni": 2.37,
+   "roni": 2.28,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1998-01",
+   "oni": 2.22,
+   "roni": 2.13,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1998-02",
+   "oni": 1.91,
+   "roni": 1.82,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1998-03",
+   "oni": 1.4,
+   "roni": 1.22,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1998-04",
+   "oni": 1.03,
+   "roni": 0.81,
+   "phase": "el_nino"
+  },
+  {
+   "month": "1998-05",
+   "oni": 0.4,
+   "roni": 0.07,
+   "phase": "neutral"
+  },
+  {
+   "month": "1998-06",
+   "oni": -0.08,
+   "roni": -0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "1998-07",
+   "oni": -0.63,
+   "roni": -1.05,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1998-08",
+   "oni": -0.83,
+   "roni": -1.14,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1998-09",
+   "oni": -1.02,
+   "roni": -1.24,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1998-10",
+   "oni": -1.12,
+   "roni": -1.33,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1998-11",
+   "oni": -1.31,
+   "roni": -1.51,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1998-12",
+   "oni": -1.47,
+   "roni": -1.61,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-01",
+   "oni": -1.51,
+   "roni": -1.56,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-02",
+   "oni": -1.25,
+   "roni": -1.28,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-03",
+   "oni": -0.93,
+   "roni": -0.99,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-04",
+   "oni": -0.8,
+   "roni": -0.88,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-05",
+   "oni": -0.79,
+   "roni": -0.81,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-06",
+   "oni": -0.84,
+   "roni": -0.82,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-07",
+   "oni": -0.9,
+   "roni": -0.83,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-08",
+   "oni": -0.94,
+   "roni": -0.86,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-09",
+   "oni": -1.0,
+   "roni": -0.87,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-10",
+   "oni": -1.13,
+   "roni": -1.06,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-11",
+   "oni": -1.35,
+   "roni": -1.33,
+   "phase": "la_nina"
+  },
+  {
+   "month": "1999-12",
+   "oni": -1.53,
+   "roni": -1.56,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2000-01",
+   "oni": -1.47,
+   "roni": -1.5,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2000-02",
+   "oni": -1.26,
+   "roni": -1.31,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2000-03",
+   "oni": -0.98,
+   "roni": -1.06,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2000-04",
+   "oni": -0.81,
+   "roni": -0.88,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2000-05",
+   "oni": -0.67,
+   "roni": -0.68,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2000-06",
+   "oni": -0.62,
+   "roni": -0.54,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2000-07",
+   "oni": -0.48,
+   "roni": -0.35,
+   "phase": "neutral"
+  },
+  {
+   "month": "2000-08",
+   "oni": -0.4,
+   "roni": -0.29,
+   "phase": "neutral"
+  },
+  {
+   "month": "2000-09",
+   "oni": -0.42,
+   "roni": -0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "2000-10",
+   "oni": -0.54,
+   "roni": -0.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2000-11",
+   "oni": -0.76,
+   "roni": -0.79,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2000-12",
+   "oni": -0.78,
+   "roni": -0.82,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2001-01",
+   "oni": -0.76,
+   "roni": -0.79,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2001-02",
+   "oni": -0.54,
+   "roni": -0.62,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2001-03",
+   "oni": -0.43,
+   "roni": -0.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2001-04",
+   "oni": -0.29,
+   "roni": -0.41,
+   "phase": "neutral"
+  },
+  {
+   "month": "2001-05",
+   "oni": -0.19,
+   "roni": -0.28,
+   "phase": "neutral"
+  },
+  {
+   "month": "2001-06",
+   "oni": -0.08,
+   "roni": -0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "2001-07",
+   "oni": -0.05,
+   "roni": 0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "2001-08",
+   "oni": -0.13,
+   "roni": -0.02,
+   "phase": "neutral"
+  },
+  {
+   "month": "2001-09",
+   "oni": -0.15,
+   "roni": -0.05,
+   "phase": "neutral"
+  },
+  {
+   "month": "2001-10",
+   "oni": -0.26,
+   "roni": -0.18,
+   "phase": "neutral"
+  },
+  {
+   "month": "2001-11",
+   "oni": -0.33,
+   "roni": -0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "2001-12",
+   "oni": -0.32,
+   "roni": -0.32,
+   "phase": "neutral"
+  },
+  {
+   "month": "2002-01",
+   "oni": -0.15,
+   "roni": -0.16,
+   "phase": "neutral"
+  },
+  {
+   "month": "2002-02",
+   "oni": 0.07,
+   "roni": 0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "2002-03",
+   "oni": 0.11,
+   "roni": 0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "2002-04",
+   "oni": 0.15,
+   "roni": 0.05,
+   "phase": "neutral"
+  },
+  {
+   "month": "2002-05",
+   "oni": 0.3,
+   "roni": 0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "2002-06",
+   "oni": 0.45,
+   "roni": 0.44,
+   "phase": "neutral"
+  },
+  {
+   "month": "2002-07",
+   "oni": 0.57,
+   "roni": 0.64,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2002-08",
+   "oni": 0.63,
+   "roni": 0.8,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2002-09",
+   "oni": 0.78,
+   "roni": 0.97,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2002-10",
+   "oni": 0.99,
+   "roni": 1.18,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2002-11",
+   "oni": 1.19,
+   "roni": 1.33,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2002-12",
+   "oni": 1.08,
+   "roni": 1.13,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2003-01",
+   "oni": 0.9,
+   "roni": 0.85,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2003-02",
+   "oni": 0.59,
+   "roni": 0.47,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-03",
+   "oni": 0.38,
+   "roni": 0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-04",
+   "oni": -0.01,
+   "roni": -0.19,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-05",
+   "oni": -0.18,
+   "roni": -0.34,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-06",
+   "oni": -0.13,
+   "roni": -0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-07",
+   "oni": 0.09,
+   "roni": 0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-08",
+   "oni": 0.14,
+   "roni": 0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-09",
+   "oni": 0.23,
+   "roni": 0.17,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-10",
+   "oni": 0.23,
+   "roni": 0.17,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-11",
+   "oni": 0.29,
+   "roni": 0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "2003-12",
+   "oni": 0.29,
+   "roni": 0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "2004-01",
+   "oni": 0.34,
+   "roni": 0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "2004-02",
+   "oni": 0.27,
+   "roni": 0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "2004-03",
+   "oni": 0.19,
+   "roni": 0.07,
+   "phase": "neutral"
+  },
+  {
+   "month": "2004-04",
+   "oni": 0.1,
+   "roni": 0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "2004-05",
+   "oni": 0.12,
+   "roni": 0.18,
+   "phase": "neutral"
+  },
+  {
+   "month": "2004-06",
+   "oni": 0.22,
+   "roni": 0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "2004-07",
+   "oni": 0.39,
+   "roni": 0.54,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2004-08",
+   "oni": 0.54,
+   "roni": 0.69,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2004-09",
+   "oni": 0.58,
+   "roni": 0.71,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2004-10",
+   "oni": 0.61,
+   "roni": 0.7,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2004-11",
+   "oni": 0.64,
+   "roni": 0.7,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2004-12",
+   "oni": 0.71,
+   "roni": 0.69,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2005-01",
+   "oni": 0.62,
+   "roni": 0.54,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2005-02",
+   "oni": 0.55,
+   "roni": 0.4,
+   "phase": "neutral"
+  },
+  {
+   "month": "2005-03",
+   "oni": 0.4,
+   "roni": 0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "2005-04",
+   "oni": 0.37,
+   "roni": 0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "2005-05",
+   "oni": 0.27,
+   "roni": 0.2,
+   "phase": "neutral"
+  },
+  {
+   "month": "2005-06",
+   "oni": 0.09,
+   "roni": 0.05,
+   "phase": "neutral"
+  },
+  {
+   "month": "2005-07",
+   "oni": -0.04,
+   "roni": -0.06,
+   "phase": "neutral"
+  },
+  {
+   "month": "2005-08",
+   "oni": -0.14,
+   "roni": -0.11,
+   "phase": "neutral"
+  },
+  {
+   "month": "2005-09",
+   "oni": -0.11,
+   "roni": -0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "2005-10",
+   "oni": -0.27,
+   "roni": -0.18,
+   "phase": "neutral"
+  },
+  {
+   "month": "2005-11",
+   "oni": -0.57,
+   "roni": -0.5,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2005-12",
+   "oni": -0.82,
+   "roni": -0.81,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2006-01",
+   "oni": -0.86,
+   "roni": -0.9,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2006-02",
+   "oni": -0.8,
+   "roni": -0.87,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2006-03",
+   "oni": -0.63,
+   "roni": -0.69,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2006-04",
+   "oni": -0.45,
+   "roni": -0.49,
+   "phase": "neutral"
+  },
+  {
+   "month": "2006-05",
+   "oni": -0.19,
+   "roni": -0.19,
+   "phase": "neutral"
+  },
+  {
+   "month": "2006-06",
+   "oni": -0.05,
+   "roni": -0.05,
+   "phase": "neutral"
+  },
+  {
+   "month": "2006-07",
+   "oni": 0.12,
+   "roni": 0.15,
+   "phase": "neutral"
+  },
+  {
+   "month": "2006-08",
+   "oni": 0.33,
+   "roni": 0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "2006-09",
+   "oni": 0.54,
+   "roni": 0.57,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2006-10",
+   "oni": 0.71,
+   "roni": 0.73,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2006-11",
+   "oni": 0.88,
+   "roni": 0.91,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2006-12",
+   "oni": 0.88,
+   "roni": 0.89,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2007-01",
+   "oni": 0.62,
+   "roni": 0.6,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2007-02",
+   "oni": 0.19,
+   "roni": 0.16,
+   "phase": "neutral"
+  },
+  {
+   "month": "2007-03",
+   "oni": -0.12,
+   "roni": -0.15,
+   "phase": "neutral"
+  },
+  {
+   "month": "2007-04",
+   "oni": -0.32,
+   "roni": -0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "2007-05",
+   "oni": -0.34,
+   "roni": -0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "2007-06",
+   "oni": -0.41,
+   "roni": -0.44,
+   "phase": "neutral"
+  },
+  {
+   "month": "2007-07",
+   "oni": -0.49,
+   "roni": -0.5,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2007-08",
+   "oni": -0.77,
+   "roni": -0.79,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2007-09",
+   "oni": -1.05,
+   "roni": -1.04,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2007-10",
+   "oni": -1.38,
+   "roni": -1.33,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2007-11",
+   "oni": -1.57,
+   "roni": -1.49,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2007-12",
+   "oni": -1.72,
+   "roni": -1.65,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2008-01",
+   "oni": -1.76,
+   "roni": -1.73,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2008-02",
+   "oni": -1.61,
+   "roni": -1.62,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2008-03",
+   "oni": -1.37,
+   "roni": -1.39,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2008-04",
+   "oni": -1.05,
+   "roni": -1.04,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2008-05",
+   "oni": -0.85,
+   "roni": -0.8,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2008-06",
+   "oni": -0.56,
+   "roni": -0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "2008-07",
+   "oni": -0.33,
+   "roni": -0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "2008-08",
+   "oni": -0.2,
+   "roni": -0.17,
+   "phase": "neutral"
+  },
+  {
+   "month": "2008-09",
+   "oni": -0.25,
+   "roni": -0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "2008-10",
+   "oni": -0.36,
+   "roni": -0.38,
+   "phase": "neutral"
+  },
+  {
+   "month": "2008-11",
+   "oni": -0.57,
+   "roni": -0.6,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2008-12",
+   "oni": -0.79,
+   "roni": -0.86,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2009-01",
+   "oni": -0.89,
+   "roni": -0.96,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2009-02",
+   "oni": -0.84,
+   "roni": -0.92,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2009-03",
+   "oni": -0.63,
+   "roni": -0.7,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2009-04",
+   "oni": -0.35,
+   "roni": -0.43,
+   "phase": "neutral"
+  },
+  {
+   "month": "2009-05",
+   "oni": 0.03,
+   "roni": -0.05,
+   "phase": "neutral"
+  },
+  {
+   "month": "2009-06",
+   "oni": 0.34,
+   "roni": 0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "2009-07",
+   "oni": 0.5,
+   "roni": 0.35,
+   "phase": "neutral"
+  },
+  {
+   "month": "2009-08",
+   "oni": 0.56,
+   "roni": 0.42,
+   "phase": "neutral"
+  },
+  {
+   "month": "2009-09",
+   "oni": 0.66,
+   "roni": 0.53,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2009-10",
+   "oni": 0.92,
+   "roni": 0.86,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2009-11",
+   "oni": 1.31,
+   "roni": 1.29,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2009-12",
+   "oni": 1.5,
+   "roni": 1.5,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2010-01",
+   "oni": 1.47,
+   "roni": 1.44,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2010-02",
+   "oni": 1.21,
+   "roni": 1.11,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2010-03",
+   "oni": 0.88,
+   "roni": 0.69,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2010-04",
+   "oni": 0.38,
+   "roni": 0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "2010-05",
+   "oni": -0.16,
+   "roni": -0.5,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2010-06",
+   "oni": -0.66,
+   "roni": -0.97,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2010-07",
+   "oni": -0.98,
+   "roni": -1.21,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2010-08",
+   "oni": -1.24,
+   "roni": -1.39,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2010-09",
+   "oni": -1.43,
+   "roni": -1.54,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2010-10",
+   "oni": -1.54,
+   "roni": -1.61,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2010-11",
+   "oni": -1.57,
+   "roni": -1.63,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2010-12",
+   "oni": -1.48,
+   "roni": -1.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2011-01",
+   "oni": -1.29,
+   "roni": -1.42,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2011-02",
+   "oni": -1.06,
+   "roni": -1.21,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2011-03",
+   "oni": -0.85,
+   "roni": -0.97,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2011-04",
+   "oni": -0.68,
+   "roni": -0.76,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2011-05",
+   "oni": -0.5,
+   "roni": -0.52,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2011-06",
+   "oni": -0.34,
+   "roni": -0.29,
+   "phase": "neutral"
+  },
+  {
+   "month": "2011-07",
+   "oni": -0.37,
+   "roni": -0.29,
+   "phase": "neutral"
+  },
+  {
+   "month": "2011-08",
+   "oni": -0.5,
+   "roni": -0.41,
+   "phase": "neutral"
+  },
+  {
+   "month": "2011-09",
+   "oni": -0.76,
+   "roni": -0.7,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2011-10",
+   "oni": -0.94,
+   "roni": -0.91,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2011-11",
+   "oni": -1.02,
+   "roni": -1.02,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2011-12",
+   "oni": -0.92,
+   "roni": -0.96,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2012-01",
+   "oni": -0.71,
+   "roni": -0.77,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2012-02",
+   "oni": -0.56,
+   "roni": -0.6,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2012-03",
+   "oni": -0.44,
+   "roni": -0.5,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2012-04",
+   "oni": -0.35,
+   "roni": -0.42,
+   "phase": "neutral"
+  },
+  {
+   "month": "2012-05",
+   "oni": -0.18,
+   "roni": -0.26,
+   "phase": "neutral"
+  },
+  {
+   "month": "2012-06",
+   "oni": 0.03,
+   "roni": 0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "2012-07",
+   "oni": 0.28,
+   "roni": 0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "2012-08",
+   "oni": 0.39,
+   "roni": 0.43,
+   "phase": "neutral"
+  },
+  {
+   "month": "2012-09",
+   "oni": 0.37,
+   "roni": 0.37,
+   "phase": "neutral"
+  },
+  {
+   "month": "2012-10",
+   "oni": 0.28,
+   "roni": 0.21,
+   "phase": "neutral"
+  },
+  {
+   "month": "2012-11",
+   "oni": 0.13,
+   "roni": -0.03,
+   "phase": "neutral"
+  },
+  {
+   "month": "2012-12",
+   "oni": -0.03,
+   "roni": -0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-01",
+   "oni": -0.24,
+   "roni": -0.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2013-02",
+   "oni": -0.28,
+   "roni": -0.57,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2013-03",
+   "oni": -0.23,
+   "roni": -0.49,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-04",
+   "oni": -0.2,
+   "roni": -0.44,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-05",
+   "oni": -0.3,
+   "roni": -0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-06",
+   "oni": -0.38,
+   "roni": -0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-07",
+   "oni": -0.45,
+   "roni": -0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-08",
+   "oni": -0.34,
+   "roni": -0.38,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-09",
+   "oni": -0.32,
+   "roni": -0.38,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-10",
+   "oni": -0.14,
+   "roni": -0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-11",
+   "oni": -0.12,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "2013-12",
+   "oni": -0.11,
+   "roni": -0.27,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-01",
+   "oni": -0.24,
+   "roni": -0.43,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-02",
+   "oni": -0.21,
+   "roni": -0.38,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-03",
+   "oni": -0.02,
+   "roni": -0.15,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-04",
+   "oni": 0.25,
+   "roni": 0.11,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-05",
+   "oni": 0.35,
+   "roni": 0.15,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-06",
+   "oni": 0.22,
+   "roni": 0.0,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-07",
+   "oni": 0.07,
+   "roni": -0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-08",
+   "oni": 0.07,
+   "roni": -0.09,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-09",
+   "oni": 0.24,
+   "roni": 0.06,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-10",
+   "oni": 0.51,
+   "roni": 0.35,
+   "phase": "neutral"
+  },
+  {
+   "month": "2014-11",
+   "oni": 0.7,
+   "roni": 0.54,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2014-12",
+   "oni": 0.8,
+   "roni": 0.62,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-01",
+   "oni": 0.73,
+   "roni": 0.54,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-02",
+   "oni": 0.65,
+   "roni": 0.47,
+   "phase": "neutral"
+  },
+  {
+   "month": "2015-03",
+   "oni": 0.72,
+   "roni": 0.59,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-04",
+   "oni": 0.86,
+   "roni": 0.72,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-05",
+   "oni": 1.04,
+   "roni": 0.89,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-06",
+   "oni": 1.19,
+   "roni": 1.02,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-07",
+   "oni": 1.44,
+   "roni": 1.27,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-08",
+   "oni": 1.73,
+   "roni": 1.54,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-09",
+   "oni": 2.02,
+   "roni": 1.8,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-10",
+   "oni": 2.28,
+   "roni": 2.03,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-11",
+   "oni": 2.45,
+   "roni": 2.18,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2015-12",
+   "oni": 2.59,
+   "roni": 2.25,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2016-01",
+   "oni": 2.5,
+   "roni": 2.14,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2016-02",
+   "oni": 2.21,
+   "roni": 1.81,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2016-03",
+   "oni": 1.69,
+   "roni": 1.3,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2016-04",
+   "oni": 1.11,
+   "roni": 0.65,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2016-05",
+   "oni": 0.57,
+   "roni": 0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "2016-06",
+   "oni": 0.09,
+   "roni": -0.43,
+   "phase": "neutral"
+  },
+  {
+   "month": "2016-07",
+   "oni": -0.19,
+   "roni": -0.7,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2016-08",
+   "oni": -0.34,
+   "roni": -0.81,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2016-09",
+   "oni": -0.42,
+   "roni": -0.88,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2016-10",
+   "oni": -0.51,
+   "roni": -0.96,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2016-11",
+   "oni": -0.49,
+   "roni": -0.96,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2016-12",
+   "oni": -0.37,
+   "roni": -0.89,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2017-01",
+   "oni": -0.08,
+   "roni": -0.6,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2017-02",
+   "oni": 0.08,
+   "roni": -0.44,
+   "phase": "neutral"
+  },
+  {
+   "month": "2017-03",
+   "oni": 0.27,
+   "roni": -0.18,
+   "phase": "neutral"
+  },
+  {
+   "month": "2017-04",
+   "oni": 0.32,
+   "roni": -0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "2017-05",
+   "oni": 0.35,
+   "roni": -0.02,
+   "phase": "neutral"
+  },
+  {
+   "month": "2017-06",
+   "oni": 0.32,
+   "roni": -0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "2017-07",
+   "oni": 0.14,
+   "roni": -0.23,
+   "phase": "neutral"
+  },
+  {
+   "month": "2017-08",
+   "oni": -0.07,
+   "roni": -0.46,
+   "phase": "neutral"
+  },
+  {
+   "month": "2017-09",
+   "oni": -0.23,
+   "roni": -0.62,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2017-10",
+   "oni": -0.44,
+   "roni": -0.82,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2017-11",
+   "oni": -0.61,
+   "roni": -0.97,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2017-12",
+   "oni": -0.76,
+   "roni": -1.14,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2018-01",
+   "oni": -0.71,
+   "roni": -1.08,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2018-02",
+   "oni": -0.67,
+   "roni": -1.04,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2018-03",
+   "oni": -0.55,
+   "roni": -0.9,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2018-04",
+   "oni": -0.35,
+   "roni": -0.69,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2018-05",
+   "oni": -0.07,
+   "roni": -0.33,
+   "phase": "neutral"
+  },
+  {
+   "month": "2018-06",
+   "oni": 0.13,
+   "roni": -0.02,
+   "phase": "neutral"
+  },
+  {
+   "month": "2018-07",
+   "oni": 0.2,
+   "roni": 0.08,
+   "phase": "neutral"
+  },
+  {
+   "month": "2018-08",
+   "oni": 0.3,
+   "roni": 0.16,
+   "phase": "neutral"
+  },
+  {
+   "month": "2018-09",
+   "oni": 0.52,
+   "roni": 0.35,
+   "phase": "neutral"
+  },
+  {
+   "month": "2018-10",
+   "oni": 0.82,
+   "roni": 0.62,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2018-11",
+   "oni": 1.04,
+   "roni": 0.82,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2018-12",
+   "oni": 1.05,
+   "roni": 0.78,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2019-01",
+   "oni": 0.99,
+   "roni": 0.68,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2019-02",
+   "oni": 0.94,
+   "roni": 0.64,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2019-03",
+   "oni": 0.87,
+   "roni": 0.57,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2019-04",
+   "oni": 0.82,
+   "roni": 0.53,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2019-05",
+   "oni": 0.71,
+   "roni": 0.37,
+   "phase": "neutral"
+  },
+  {
+   "month": "2019-06",
+   "oni": 0.59,
+   "roni": 0.24,
+   "phase": "neutral"
+  },
+  {
+   "month": "2019-07",
+   "oni": 0.38,
+   "roni": 0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "2019-08",
+   "oni": 0.2,
+   "roni": -0.12,
+   "phase": "neutral"
+  },
+  {
+   "month": "2019-09",
+   "oni": 0.31,
+   "roni": -0.01,
+   "phase": "neutral"
+  },
+  {
+   "month": "2019-10",
+   "oni": 0.51,
+   "roni": 0.15,
+   "phase": "neutral"
+  },
+  {
+   "month": "2019-11",
+   "oni": 0.72,
+   "roni": 0.29,
+   "phase": "neutral"
+  },
+  {
+   "month": "2019-12",
+   "oni": 0.75,
+   "roni": 0.22,
+   "phase": "neutral"
+  },
+  {
+   "month": "2020-01",
+   "oni": 0.71,
+   "roni": 0.14,
+   "phase": "neutral"
+  },
+  {
+   "month": "2020-02",
+   "oni": 0.66,
+   "roni": 0.1,
+   "phase": "neutral"
+  },
+  {
+   "month": "2020-03",
+   "oni": 0.57,
+   "roni": 0.02,
+   "phase": "neutral"
+  },
+  {
+   "month": "2020-04",
+   "oni": 0.33,
+   "roni": -0.25,
+   "phase": "neutral"
+  },
+  {
+   "month": "2020-05",
+   "oni": 0.04,
+   "roni": -0.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2020-06",
+   "oni": -0.18,
+   "roni": -0.72,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2020-07",
+   "oni": -0.29,
+   "roni": -0.76,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2020-08",
+   "oni": -0.43,
+   "roni": -0.85,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2020-09",
+   "oni": -0.77,
+   "roni": -1.16,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2020-10",
+   "oni": -1.0,
+   "roni": -1.37,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2020-11",
+   "oni": -1.11,
+   "roni": -1.46,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2020-12",
+   "oni": -1.06,
+   "roni": -1.39,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-01",
+   "oni": -0.99,
+   "roni": -1.32,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-02",
+   "oni": -0.85,
+   "roni": -1.18,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-03",
+   "oni": -0.74,
+   "roni": -1.08,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-04",
+   "oni": -0.56,
+   "roni": -0.89,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-05",
+   "oni": -0.4,
+   "roni": -0.68,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-06",
+   "oni": -0.31,
+   "roni": -0.57,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-07",
+   "oni": -0.35,
+   "roni": -0.6,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-08",
+   "oni": -0.46,
+   "roni": -0.76,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-09",
+   "oni": -0.64,
+   "roni": -0.95,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-10",
+   "oni": -0.77,
+   "roni": -1.08,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-11",
+   "oni": -0.91,
+   "roni": -1.24,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2021-12",
+   "oni": -0.83,
+   "roni": -1.22,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-01",
+   "oni": -0.76,
+   "roni": -1.18,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-02",
+   "oni": -0.68,
+   "roni": -1.13,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-03",
+   "oni": -0.77,
+   "roni": -1.19,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-04",
+   "oni": -0.86,
+   "roni": -1.26,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-05",
+   "oni": -0.83,
+   "roni": -1.17,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-06",
+   "oni": -0.73,
+   "roni": -0.95,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-07",
+   "oni": -0.7,
+   "roni": -0.86,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-08",
+   "oni": -0.78,
+   "roni": -0.94,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-09",
+   "oni": -0.87,
+   "roni": -1.07,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-10",
+   "oni": -0.89,
+   "roni": -1.1,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-11",
+   "oni": -0.82,
+   "roni": -1.05,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2022-12",
+   "oni": -0.7,
+   "roni": -0.99,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2023-01",
+   "oni": -0.55,
+   "roni": -0.86,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2023-02",
+   "oni": -0.33,
+   "roni": -0.68,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2023-03",
+   "oni": -0.11,
+   "roni": -0.55,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2023-04",
+   "oni": 0.19,
+   "roni": -0.31,
+   "phase": "neutral"
+  },
+  {
+   "month": "2023-05",
+   "oni": 0.46,
+   "roni": -0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "2023-06",
+   "oni": 0.73,
+   "roni": 0.28,
+   "phase": "neutral"
+  },
+  {
+   "month": "2023-07",
+   "oni": 1.0,
+   "roni": 0.54,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2023-08",
+   "oni": 1.25,
+   "roni": 0.79,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2023-09",
+   "oni": 1.5,
+   "roni": 1.04,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2023-10",
+   "oni": 1.74,
+   "roni": 1.3,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2023-11",
+   "oni": 1.9,
+   "roni": 1.42,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2023-12",
+   "oni": 1.99,
+   "roni": 1.4,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2024-01",
+   "oni": 1.84,
+   "roni": 1.13,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2024-02",
+   "oni": 1.53,
+   "roni": 0.78,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2024-03",
+   "oni": 1.18,
+   "roni": 0.42,
+   "phase": "neutral"
+  },
+  {
+   "month": "2024-04",
+   "oni": 0.77,
+   "roni": 0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "2024-05",
+   "oni": 0.43,
+   "roni": -0.28,
+   "phase": "neutral"
+  },
+  {
+   "month": "2024-06",
+   "oni": 0.18,
+   "roni": -0.45,
+   "phase": "neutral"
+  },
+  {
+   "month": "2024-07",
+   "oni": 0.06,
+   "roni": -0.49,
+   "phase": "neutral"
+  },
+  {
+   "month": "2024-08",
+   "oni": -0.04,
+   "roni": -0.56,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2024-09",
+   "oni": -0.12,
+   "roni": -0.67,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2024-10",
+   "oni": -0.19,
+   "roni": -0.76,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2024-11",
+   "oni": -0.29,
+   "roni": -0.88,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2024-12",
+   "oni": -0.43,
+   "roni": -1.05,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2025-01",
+   "oni": -0.46,
+   "roni": -1.1,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2025-02",
+   "oni": -0.22,
+   "roni": -0.85,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2025-03",
+   "oni": -0.08,
+   "roni": -0.66,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2025-04",
+   "oni": 0.02,
+   "roni": -0.5,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2025-05",
+   "oni": -0.04,
+   "roni": -0.48,
+   "phase": "neutral"
+  },
+  {
+   "month": "2025-06",
+   "oni": -0.02,
+   "roni": -0.36,
+   "phase": "neutral"
+  },
+  {
+   "month": "2025-07",
+   "oni": -0.11,
+   "roni": -0.41,
+   "phase": "neutral"
+  },
+  {
+   "month": "2025-08",
+   "oni": -0.26,
+   "roni": -0.59,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2025-09",
+   "oni": -0.43,
+   "roni": -0.78,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2025-10",
+   "oni": -0.57,
+   "roni": -0.93,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2025-11",
+   "oni": -0.61,
+   "roni": -0.98,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2025-12",
+   "oni": -0.6,
+   "roni": -1.04,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2026-01",
+   "oni": -0.39,
+   "roni": -0.91,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2026-02",
+   "oni": -0.21,
+   "roni": -0.76,
+   "phase": "la_nina"
+  },
+  {
+   "month": "2026-03",
+   "oni": 0.11,
+   "roni": -0.44,
+   "phase": "neutral"
+  },
+  {
+   "month": "2026-04",
+   "oni": 0.46,
+   "roni": -0.04,
+   "phase": "neutral"
+  },
+  {
+   "month": "2026-05",
+   "oni": 0.95,
+   "roni": 0.49,
+   "phase": "neutral"
+  },
+  {
+   "month": "2026-06",
+   "oni": 1.39,
+   "roni": 0.97,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2026-07",
+   "oni": 1.8,
+   "roni": 1.36,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2026-08",
+   "oni": 2.16,
+   "roni": 1.69,
+   "phase": "el_nino"
+  },
+  {
+   "month": "2026-09",
+   "oni": 2.46,
+   "roni": 1.97,
+   "phase": "el_nino"
+  }
+ ]
 }
