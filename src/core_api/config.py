@@ -32,6 +32,8 @@ class Settings(BaseSettings):
     ml_service_url: str = "http://localhost:8081"
     ml_timeout_seconds: float = 5.0
     demo_mode: bool = False
+    demo_rate_limit_per_minute: int = 20
+    demo_max_guests: int = 200
     max_upload_bytes: int = 2 * 1024 * 1024
     raw_uploads_dir: str = "data/raw/uploads"
 
