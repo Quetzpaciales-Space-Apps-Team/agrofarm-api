@@ -20,20 +20,6 @@ from core_api.domain.recommendations import (
 from core_api.repositories.farms import FarmRepository
 from core_api.repositories.recommendations import RecommendationRepository
 
-_ENSO_ITEMS: list[dict[str, Any]] = [
-    {"month": "2023-07", "oni": 1.1, "roni": 0.9, "phase": "el_nino"},
-    {"month": "2023-10", "oni": 1.8, "roni": 1.4, "phase": "el_nino"},
-    {"month": "2023-12", "oni": 2.0, "roni": 1.5, "phase": "el_nino"},
-    {"month": "2024-03", "oni": 1.1, "roni": 0.8, "phase": "el_nino"},
-    {"month": "2024-06", "oni": 0.2, "roni": -0.3, "phase": "neutral"},
-    {"month": "2024-09", "oni": -0.2, "roni": -0.4, "phase": "neutral"},
-    {"month": "2025-01", "oni": -0.6, "roni": -1.1, "phase": "la_nina"},
-    {"month": "2025-04", "oni": -0.3, "roni": -0.5, "phase": "la_nina"},
-    {"month": "2025-10", "oni": 0.1, "roni": 0.0, "phase": "neutral"},
-    {"month": "2026-06", "oni": 0.4, "roni": 0.3, "phase": "neutral"},
-    {"month": "2026-10", "oni": 0.6, "roni": 0.5, "phase": "el_nino"},
-]
-
 
 class SimulationAndRecommendationService:
     def __init__(
@@ -58,15 +44,11 @@ class SimulationAndRecommendationService:
     def get_enso_series(self, start: date | None = None, end: date | None = None) -> dict[str, Any]:
         start_ym = start.strftime("%Y-%m") if start else None
         end_ym = end.strftime("%Y-%m") if end else None
-        if self._demo_mode:
-            snapshot = load_demo_enso_snapshot()
-            raw_items: list[dict[str, Any]] = snapshot["items"]
-            threshold_c = snapshot["threshold_c"]
-            source = snapshot["source"]
-        else:
-            raw_items = _ENSO_ITEMS
-            threshold_c = 0.5
-            source = "NOAA CPC"
+        # One stored copy of the NOAA CPC tables serves every mode. It never invents months.
+        snapshot = load_demo_enso_snapshot()
+        raw_items: list[dict[str, Any]] = snapshot["items"]
+        threshold_c = snapshot["threshold_c"]
+        source = snapshot["source"]
 
         items = [
             item
