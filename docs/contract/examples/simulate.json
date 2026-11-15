@@ -1,0 +1,22 @@
+{
+  "crop": "maize",
+  "target": "yield_anomaly_pct",
+  "unit": "%",
+  "baseline": {"p10": -12.0, "p50": 0.0, "p90": 11.0},
+  "scenario": {"p10": -28.0, "p50": -13.0, "p90": 2.0},
+  "attributions": [
+    {"feature": "rainfall_anomaly_jja", "contribution": -8.1},
+    {"feature": "enso_roni_lag3", "contribution": -3.4},
+    {"feature": "temperature_anomaly_jja", "contribution": -1.5}
+  ],
+  "out_of_range_inputs": [],
+  "provenance": {
+    "model_version": "cached_demo-0.1.0",
+    "data_versions": {
+      "nasa_power": "2026-11-14",
+      "enso_monthly": "2026-11",
+      "snapshot_mode": "cached_demo"
+    },
+    "generated_at": "2026-11-14T15:20:00Z"
+  }
+}
