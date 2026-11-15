@@ -22,6 +22,55 @@ security:
   - bearerAuth: []
 
 paths:
+  /v1/farms/{farm_id}/vegetation/simulate:
+    post:
+      tags: [farms]
+      operationId: simulateFarmVegetation
+      summary: Estimate regional cropland greenness under a conditional scenario
+      description: >-
+        Requires farm ownership or admin access. Trained regional NDVI quantiles and raw median
+        SHAP differences, not parcel yield or an ENSO forecast. Original 5% skill goal was not
+        reached. No fixed-rule or cached fallback. Uses the nearest trained cropland cell within
+        15 km. A service or location without a supported estimate returns 503.
+      parameters:
+        - name: farm_id
+          in: path
+          required: true
+          schema: {type: string, format: uuid}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/Scenario'}
+      responses:
+        "200":
+          description: Regional NDVI anomaly quantiles, attribution differences, validation and caveats
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [target, unit, baseline, scenario, attributions, validation, limitations, provenance, disclaimer, needs_local_review]
+                properties:
+                  target: {const: seasonal_peak_ndvi_anomaly_pct}
+                  unit: {const: '%'}
+                  baseline: {type: object}
+                  scenario: {type: object}
+                  attributions: {type: array, items: {type: object}}
+                  validation: {type: object}
+                  limitations: {type: array, items: {type: string}}
+                  provenance: {type: object}
+                  disclaimer: {type: string}
+                  needs_local_review: {const: true}
+        "401":
+          description: Authentication required
+        "404":
+          description: Farm unavailable to this user
+        "422":
+          description: Invalid scenario
+        "502":
+          description: Invalid trained-model response
+        "503":
+          description: Trained inference or supported reference cell unavailable
   /v1/farms/{farm_id}/leaves/assess:
     post:
       tags: [farms]

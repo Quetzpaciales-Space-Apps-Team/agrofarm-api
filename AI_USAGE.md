@@ -27,3 +27,5 @@ Team members who used another tool add a row here in their next pull request (ru
 
 - The project idea and the choice of challenge.
 - Source datasets (INSIVUMEH, NOAA, NASA, CHIRPS, SoilGrids and the others in the dataset catalog).
+
+OpenAI Codex (GPT-6), 2026-11-15: connected farm-authorized regional NDVI inference with Google service identity, validated quantiles and original failed-goal disclosure, and added contract and ownership tests. No cached diagnosis or yield prediction is substituted.
