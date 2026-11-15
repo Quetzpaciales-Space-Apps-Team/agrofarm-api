@@ -10,7 +10,7 @@ This directory provisions all Google Cloud Platform infrastructure for AgroFarm 
 - `modules/cloud_sql`: Provisions PostgreSQL 16 (`agrofarm-pg-<env>`) with `cloudsql.iam_authentication`, `deletion_protection = true`, generated password stored in Secret Manager, and Secret Manager containers for application and external API secrets.
 - `modules/service_accounts`: Creates dedicated least-privilege runtime service accounts (`sa-core-api-<env>`, `sa-ml-service-<env>`, `sa-data-service-<env>`, `sa-frontend-<env>`) and `sa-ci-deployer-<env>`.
 - `modules/wif`: Configures Workload Identity Federation pool and OIDC provider restricted to `assertion.repository_owner == var.github_org` with per-repository bindings.
-- `modules/cloud_run_service`: Reusable Cloud Run v2 service module (`min_instance_count = 0`, `/healthz` startup and liveness probes, optional Cloud SQL mount, IAM invoker bindings).
+- `modules/cloud_run_service`: Reusable Cloud Run v2 service module (`min_instance_count` variable, default 0; staging keeps one `ml-service` instance warm with `ml_min_instances = 1`; `/healthz` startup and liveness probes, optional Cloud SQL mount, IAM invoker bindings).
 - `modules/cloud_run_job`: Reusable Cloud Run v2 job module (`core-api-migrate-<env>` and `data-service-<env>`).
 
 ## Usage
