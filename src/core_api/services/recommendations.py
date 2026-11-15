@@ -4,7 +4,7 @@ import uuid
 from datetime import date
 from typing import Any
 
-from core_api.clients.demo import load_demo_enso_snapshot
+from core_api.clients.demo import load_demo_enso_snapshot, load_demo_nasa_power_snapshot
 from core_api.clients.ml import MLClient
 from core_api.domain.auth import CurrentUser
 from core_api.domain.farms import default_priorities
@@ -80,6 +80,30 @@ class SimulationAndRecommendationService:
             "source": source,
             "disclaimer": DISCLAIMER_TEXT,
         }
+
+    def get_nasa_power_series(
+        self, start: str | None = None, end: str | None = None
+    ) -> dict[str, Any]:
+        """Monthly NASA POWER series, months `start` to `end` inclusive (`YYYY-MM`).
+
+        The data is a static snapshot served in every mode. Values are never altered: a missing
+        value stays `None`.
+        """
+        if start is not None and end is not None and start > end:
+            raise ProblemError(
+                422,
+                "validation_error",
+                "Request validation failed",
+                "start must not be after end",
+            )
+        series = load_demo_nasa_power_snapshot()
+        series["items"] = [
+            item
+            for item in series["items"]
+            if (start is None or str(item["month"]) >= start)
+            and (end is None or str(item["month"]) <= end)
+        ]
+        return series
 
     def simulate(self, user: CurrentUser, payload: SimulationRequestInput) -> dict[str, Any]:
         farm = self._require_farm(user, payload.farm_id)

@@ -1,4 +1,4 @@
-"""ENSO climate series, scenario simulation, and rotation recommendation endpoints."""
+"""ENSO and NASA POWER climate series, scenario simulation, and recommendation endpoints."""
 
 import uuid
 from datetime import date
@@ -22,6 +22,19 @@ def get_enso(
     end: Annotated[date | None, Query()] = None,
 ) -> dict[str, Any]:
     return service.get_enso_series(start=start, end=end)
+
+
+_MONTH_PATTERN = r"^[0-9]{4}-(0[1-9]|1[0-2])$"
+
+
+@router.get("/climate/nasa-power", tags=["data"])
+def get_nasa_power(
+    _: Annotated[CurrentUser, Depends(get_current_user)],
+    service: Annotated[SimulationAndRecommendationService, Depends(get_simulation_service)],
+    start: Annotated[str | None, Query(pattern=_MONTH_PATTERN)] = None,
+    end: Annotated[str | None, Query(pattern=_MONTH_PATTERN)] = None,
+) -> dict[str, Any]:
+    return service.get_nasa_power_series(start=start, end=end)
 
 
 @router.post("/scenarios/simulate")

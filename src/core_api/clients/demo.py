@@ -18,6 +18,11 @@ def load_demo_enso_snapshot() -> dict[str, Any]:
     return copy.deepcopy(_load_snapshot("enso.json"))
 
 
+def load_demo_nasa_power_snapshot() -> dict[str, Any]:
+    """Return the static NASA POWER monthly snapshot (reanalysis grid cell, not a station)."""
+    return copy.deepcopy(_load_snapshot("nasa_power.json"))
+
+
 class DemoMLClient:
     """Offline ML client serving deterministic cached_demo JSON snapshots."""
 
