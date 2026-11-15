@@ -8,6 +8,7 @@ from fastapi import Header, Request
 from core_api.clients.demo import DemoMLClient
 from core_api.clients.leaves import HttpLeafClient
 from core_api.clients.ml import FixtureMLClient, GoogleIdTokenProvider, HttpMLClient, MLClient
+from core_api.clients.vegetation import HttpVegetationClient
 from core_api.config import Settings
 from core_api.domain.auth import CurrentUser, decode_access_token
 from core_api.domain.problem import ProblemError
@@ -22,6 +23,7 @@ from core_api.services.leaves import LeafAssessmentService
 from core_api.services.readiness import ReadinessService
 from core_api.services.recommendations import SimulationAndRecommendationService
 from core_api.services.uploads import UploadService
+from core_api.services.vegetation import VegetationService
 
 
 def get_readiness_service(request: Request) -> ReadinessService:
@@ -114,4 +116,17 @@ def get_simulation_service(request: Request) -> SimulationAndRecommendationServi
         SqlAlchemyRecommendationRepository(request.app.state.engine),
         get_ml_client(settings),
         demo_mode=settings.demo_mode,
+    )
+
+
+def get_vegetation_service(request: Request) -> VegetationService:
+    settings: Settings = request.app.state.settings
+    provider = (
+        GoogleIdTokenProvider(settings.ml_service_url)
+        if settings.ml_auth == "google_id_token"
+        else None
+    )
+    return VegetationService(
+        get_farm_service(request),
+        HttpVegetationClient(settings.ml_service_url, token_provider=provider),
     )
