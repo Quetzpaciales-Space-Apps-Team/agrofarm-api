@@ -87,5 +87,5 @@ ML_MODE=http ML_SERVICE_URL=http://127.0.0.1:8081 DATABASE_URL="$DATABASE_URL" \
 
 To enable `ML_MODE=http` in staging/prod once `ml-service` is deployed:
 1. Set `ML_SERVICE_URL` to the deployed Cloud Run `ml-service` URL.
-2. Set `ML_MODE=http` (and `DEMO_MODE=false` if live predictions should replace cached demo snapshots).
+2. Set `ML_MODE=http`. To keep the guest demo entry (`DEMO_MODE=true`) and still get live answers, also set `DEMO_ML_SOURCE=live`; with the default `snapshot`, demo mode keeps serving the cached file and the scenario sliders change nothing.
 3. Verify `POST /v1/scenarios/simulate` and `POST /v1/farms/{farm_id}/recommendations` return `200`/`201` with `>=3` strategies.

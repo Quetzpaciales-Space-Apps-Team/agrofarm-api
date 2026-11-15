@@ -2,7 +2,9 @@
 
 import uuid
 
+import pytest
 from fastapi.testclient import TestClient
+from pydantic import ValidationError
 
 from core_api.api.deps import (
     get_farm_service,
@@ -11,6 +13,7 @@ from core_api.api.deps import (
     get_simulation_service,
 )
 from core_api.clients.demo import DemoMLClient
+from core_api.clients.ml import HttpMLClient
 from core_api.config import Settings
 from core_api.domain.auth import encode_access_token
 from core_api.main import create_app
@@ -115,3 +118,54 @@ def test_demo_mode_endpoints_serve_cached_demo_snapshots() -> None:
         assert body["provenance"]["data_versions"]["snapshot_mode"] == "cached_demo"
         assert len(body["strategies"]) >= 3
         assert any(s["is_current"] for s in body["strategies"])
+
+
+def test_demo_mode_keeps_snapshots_by_default_even_with_http_ml_mode() -> None:
+    settings = Settings(database_url=TEST_DATABASE_URL, ml_mode="http", demo_mode=True)
+    assert settings.demo_ml_source == "snapshot"
+    assert isinstance(get_ml_client(settings), DemoMLClient)
+
+
+def test_demo_mode_with_live_source_calls_ml_service() -> None:
+    settings = Settings(
+        database_url=TEST_DATABASE_URL,
+        ml_mode="http",
+        demo_mode=True,
+        demo_ml_source="live",
+    )
+    client = get_ml_client(settings)
+    assert isinstance(client, HttpMLClient)
+
+
+def test_demo_mode_live_source_falls_back_to_snapshot_when_ml_service_fails() -> None:
+    settings = Settings(
+        database_url=TEST_DATABASE_URL,
+        ml_mode="http",
+        ml_service_url="http://127.0.0.1:9",
+        ml_timeout_seconds=0.2,
+        demo_mode=True,
+        demo_ml_source="live",
+    )
+    client = get_ml_client(settings)
+
+    simulation = client.simulate({"crop": "maize", "scenario": {"rainfall_change_pct": -40}})
+    rotations = client.score_rotations({"current_rotation": ["maize", "beans"]})
+
+    # The fallback is labelled as cached, so the caller can tell it is not a live result.
+    assert simulation["provenance"]["data_versions"]["snapshot_mode"] == "cached_demo"
+    assert rotations["provenance"]["data_versions"]["snapshot_mode"] == "cached_demo"
+
+
+def test_demo_mode_live_source_without_http_ml_mode_stays_on_snapshots() -> None:
+    settings = Settings(
+        database_url=TEST_DATABASE_URL,
+        ml_mode="fixture",
+        demo_mode=True,
+        demo_ml_source="live",
+    )
+    assert isinstance(get_ml_client(settings), DemoMLClient)
+
+
+def test_demo_ml_source_rejects_unknown_values() -> None:
+    with pytest.raises(ValidationError):
+        Settings(database_url=TEST_DATABASE_URL, demo_ml_source="sometimes")

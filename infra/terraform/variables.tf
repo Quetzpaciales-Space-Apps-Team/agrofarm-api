@@ -29,6 +29,23 @@ variable "cors_origins" {
   type        = string
 }
 
+variable "demo_mode" {
+  description = "Open the passwordless guest demo entry (POST /v1/auth/demo) on core-api"
+  type        = bool
+  default     = false
+}
+
+variable "demo_ml_source" {
+  description = "In demo mode: snapshot serves cached ML answers, live calls ml-service and falls back to them"
+  type        = string
+  default     = "snapshot"
+
+  validation {
+    condition     = contains(["snapshot", "live"], var.demo_ml_source)
+    error_message = "demo_ml_source must be snapshot or live."
+  }
+}
+
 variable "db_tier" {
   description = "Cloud SQL machine tier"
   type        = string

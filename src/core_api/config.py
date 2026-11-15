@@ -1,7 +1,7 @@
 """Settings come from the environment and are validated at startup."""
 
 import json
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 from pydantic import AliasChoices, Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
@@ -34,6 +34,10 @@ class Settings(BaseSettings):
     ml_auth: str = "none"
     ml_timeout_seconds: float = 5.0
     demo_mode: bool = False
+    # "snapshot": demo mode serves the cached ML answers and never calls ml-service.
+    # "live": with ML_MODE=http, demo mode calls ml-service and uses the cached answers only
+    # when the call fails.
+    demo_ml_source: Literal["snapshot", "live"] = "snapshot"
     demo_rate_limit_per_minute: int = 20
     demo_max_guests: int = 200
     max_upload_bytes: int = 2 * 1024 * 1024
