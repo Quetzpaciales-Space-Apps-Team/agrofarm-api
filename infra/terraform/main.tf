@@ -80,6 +80,8 @@ module "core_api_service" {
     LOG_LEVEL          = "INFO"
     CLOUD_SQL_INSTANCE = module.cloud_sql.connection_name
     ML_SERVICE_URL     = module.ml_service.service_url
+    ML_MODE            = "http"
+    ML_AUTH            = "google_id_token"
     CORS_ORIGINS       = var.cors_origins
     GCS_BUCKET_CLEAN   = module.storage.bucket_names["clean"]
     GCS_BUCKET_UPLOADS = module.storage.bucket_names["uploads"]
