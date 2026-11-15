@@ -63,10 +63,16 @@ jobs:
         env:
           IMAGE_URI: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/core-api:${{ github.sha }}
         run: |
+          ML_SERVICE_URL="$(gcloud run services describe ml-service-staging \
+            --project="${{ secrets.GCP_PROJECT_ID }}" \
+            --region="${{ secrets.GCP_REGION }}" \
+            --format='value(status.url)')"
+          test -n "$ML_SERVICE_URL"
           gcloud run services update core-api-staging \
             --project="${{ secrets.GCP_PROJECT_ID }}" \
             --region="${{ secrets.GCP_REGION }}" \
             --image="$IMAGE_URI" \
+            --update-env-vars="ML_MODE=http,ML_AUTH=google_id_token,DEMO_MODE=true,DEMO_ML_SOURCE=live,ML_SERVICE_URL=$ML_SERVICE_URL" \
             --quiet
 
       - name: Run post-deploy smoke test
@@ -79,6 +85,7 @@ jobs:
           # Cloud Run reserves /healthz at its edge and answers 404 from outside, so the
           # external check uses /readyz. The in-container probes keep using /healthz.
           curl -fsS --retry 5 --retry-delay 3 "$SERVICE_URL/readyz" >/dev/null
+          python3 deploy/smoke_demo.py "$SERVICE_URL"
 
   deploy-production:
     name: Deploy to Cloud Run (production)

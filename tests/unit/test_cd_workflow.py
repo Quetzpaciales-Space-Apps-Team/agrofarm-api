@@ -64,3 +64,23 @@ def test_rollback_runbook_is_documented() -> None:
     assert "gcloud run services update-traffic" in content
     assert "--to-revisions" in content
     assert "core-api-migrate" in content
+
+
+def test_staging_deploy_configures_live_ml_and_checks_demo_behavior() -> None:
+    steps = _load_cd_workflow()["jobs"]["deploy-staging"]["steps"]
+    deploy = next(
+        s["run"] for s in steps if s["name"] == "Deploy new revision to Cloud Run staging"
+    )
+    assert "gcloud run services describe ml-service-staging" in deploy
+    for setting in (
+        "ML_MODE=http",
+        "ML_AUTH=google_id_token",
+        "DEMO_MODE=true",
+        "DEMO_ML_SOURCE=live",
+    ):
+        assert setting in deploy
+    assert "ML_SERVICE_URL=$ML_SERVICE_URL" in deploy
+    assert "--update-env-vars" in deploy
+    smoke = next(s["run"] for s in steps if s["name"] == "Run post-deploy smoke test")
+    assert "python3 deploy/smoke_demo.py" in smoke
+    assert smoke.index("/readyz") < smoke.index("python3 deploy/smoke_demo.py")
