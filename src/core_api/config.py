@@ -30,6 +30,8 @@ class Settings(BaseSettings):
 
     ml_mode: str = "fixture"
     ml_service_url: str = "http://localhost:8081"
+    # "none" for local runs; "google_id_token" when ml-service is a private Cloud Run service.
+    ml_auth: str = "none"
     ml_timeout_seconds: float = 5.0
     demo_mode: bool = False
     demo_rate_limit_per_minute: int = 20
@@ -53,6 +55,13 @@ class Settings(BaseSettings):
         if isinstance(value, list):
             return [str(item).strip() for item in value if str(item).strip()]
         raise ValueError("CORS origins must be a list or comma-separated string.")
+
+    @field_validator("ml_auth")
+    @classmethod
+    def _known_ml_auth(cls, value: str) -> str:
+        if value not in ("none", "google_id_token"):
+            raise ValueError("ml_auth must be 'none' or 'google_id_token'")
+        return value
 
     @field_validator("cors_allowed_origins")
     @classmethod

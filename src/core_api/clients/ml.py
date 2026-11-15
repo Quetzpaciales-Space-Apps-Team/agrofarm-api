@@ -2,7 +2,9 @@
 
 import json
 import logging
+import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from collections.abc import Callable
 from datetime import UTC, datetime
@@ -186,6 +188,54 @@ class FixtureMLClient:
         }
 
 
+_METADATA_IDENTITY_URL = (
+    "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity"
+)
+
+
+def _fetch_identity_token(audience: str) -> str:
+    """Ask the Cloud Run metadata server for an identity token of the service account."""
+    query = urllib.parse.urlencode({"audience": audience})
+    req = urllib.request.Request(  # noqa: S310
+        f"{_METADATA_IDENTITY_URL}?{query}", headers={"Metadata-Flavor": "Google"}
+    )
+    with urllib.request.urlopen(req, timeout=2.0) as resp:  # noqa: S310
+        token: str = resp.read().decode("utf-8").strip()
+    if not token:
+        raise OSError("empty identity token")
+    return token
+
+
+class GoogleIdTokenProvider:
+    """Google-signed identity token for calls to a private Cloud Run service.
+
+    The audience is the URL of the service being called. Tokens last one hour, so one is
+    reused for 50 minutes and then replaced. The token is never logged.
+    """
+
+    REFRESH_AFTER_SECONDS = 50 * 60
+
+    def __init__(
+        self,
+        audience: str,
+        *,
+        fetch: Callable[[str], str] = _fetch_identity_token,
+        clock: Callable[[], float] = time.monotonic,
+    ) -> None:
+        self.audience = audience.rstrip("/")
+        self._fetch = fetch
+        self._clock = clock
+        self._token: str | None = None
+        self._fetched_at = 0.0
+
+    def __call__(self) -> str:
+        now = self._clock()
+        if self._token is None or now - self._fetched_at > self.REFRESH_AFTER_SECONDS:
+            self._token = self._fetch(self.audience)
+            self._fetched_at = now
+        return self._token
+
+
 class HttpMLClient:
     """HTTP client for ml-service with timeout, bounded retry, and optional fixture fallback."""
 
@@ -196,7 +246,9 @@ class HttpMLClient:
         *,
         fallback: MLClient | None = None,
         post_fn: Callable[[str, dict[str, Any], float], dict[str, Any]] | None = None,
+        token_provider: Callable[[], str] | None = None,
     ) -> None:
+        self.token_provider = token_provider
         self._base_url = base_url.rstrip("/")
         self._timeout = timeout_seconds
         self._fallback = fallback
@@ -228,11 +280,12 @@ class HttpMLClient:
                 if self._post_fn is not None:
                     return self._post_fn(url, payload, self._timeout)
                 body = json.dumps(payload).encode("utf-8")
+                headers = {"Content-Type": "application/json"}
+                if self.token_provider is not None:
+                    # A failure to get the token ends as 503 below: never call without it.
+                    headers["Authorization"] = f"Bearer {self.token_provider()}"
                 req = urllib.request.Request(  # noqa: S310
-                    url,
-                    data=body,
-                    headers={"Content-Type": "application/json"},
-                    method="POST",
+                    url, data=body, headers=headers, method="POST"
                 )
                 with urllib.request.urlopen(req, timeout=self._timeout) as resp:  # noqa: S310
                     parsed: dict[str, Any] = json.loads(resp.read().decode("utf-8"))

@@ -6,7 +6,7 @@ from typing import Annotated
 from fastapi import Header, Request
 
 from core_api.clients.demo import DemoMLClient
-from core_api.clients.ml import FixtureMLClient, HttpMLClient, MLClient
+from core_api.clients.ml import FixtureMLClient, GoogleIdTokenProvider, HttpMLClient, MLClient
 from core_api.config import Settings
 from core_api.domain.auth import CurrentUser, decode_access_token
 from core_api.domain.problem import ProblemError
@@ -72,7 +72,16 @@ def get_ml_client(settings: Settings) -> MLClient:
     if settings.demo_mode:
         return DemoMLClient()
     if settings.ml_mode == "http":
-        return HttpMLClient(settings.ml_service_url, timeout_seconds=settings.ml_timeout_seconds)
+        provider = (
+            GoogleIdTokenProvider(settings.ml_service_url)
+            if settings.ml_auth == "google_id_token"
+            else None
+        )
+        return HttpMLClient(
+            settings.ml_service_url,
+            timeout_seconds=settings.ml_timeout_seconds,
+            token_provider=provider,
+        )
     return FixtureMLClient()
 
 
