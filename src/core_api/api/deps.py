@@ -6,16 +6,19 @@ from typing import Annotated
 from fastapi import Header, Request
 
 from core_api.clients.demo import DemoMLClient
+from core_api.clients.leaves import HttpLeafClient
 from core_api.clients.ml import FixtureMLClient, GoogleIdTokenProvider, HttpMLClient, MLClient
 from core_api.config import Settings
 from core_api.domain.auth import CurrentUser, decode_access_token
 from core_api.domain.problem import ProblemError
+from core_api.middleware.request_id import current_request_id
 from core_api.repositories.auth import SqlAlchemyAuthRepository
 from core_api.repositories.farms import SqlAlchemyFarmRepository
 from core_api.repositories.recommendations import SqlAlchemyRecommendationRepository
 from core_api.repositories.uploads import SqlAlchemyUploadRepository
 from core_api.services.auth import AuthService
 from core_api.services.farms import FarmService
+from core_api.services.leaves import LeafAssessmentService
 from core_api.services.readiness import ReadinessService
 from core_api.services.recommendations import SimulationAndRecommendationService
 from core_api.services.uploads import UploadService
@@ -57,6 +60,21 @@ def get_current_user(
 
 def get_farm_service(request: Request) -> FarmService:
     return FarmService(SqlAlchemyFarmRepository(request.app.state.engine))
+
+
+def get_leaf_service(request: Request) -> LeafAssessmentService:
+    settings: Settings = request.app.state.settings
+    provider = (
+        GoogleIdTokenProvider(settings.ml_service_url)
+        if settings.ml_auth == "google_id_token"
+        else None
+    )
+    return LeafAssessmentService(
+        get_farm_service(request),
+        HttpLeafClient(
+            settings.ml_service_url, token_provider=provider, request_id=current_request_id()
+        ),
+    )
 
 
 def get_upload_service(request: Request) -> UploadService:
