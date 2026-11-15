@@ -69,7 +69,8 @@ def get_upload_service(request: Request) -> UploadService:
 
 
 def get_ml_client(settings: Settings) -> MLClient:
-    if settings.demo_mode:
+    live_demo = settings.demo_mode and settings.demo_ml_source == "live"
+    if settings.demo_mode and not (live_demo and settings.ml_mode == "http"):
         return DemoMLClient()
     if settings.ml_mode == "http":
         provider = (
@@ -80,6 +81,9 @@ def get_ml_client(settings: Settings) -> MLClient:
         return HttpMLClient(
             settings.ml_service_url,
             timeout_seconds=settings.ml_timeout_seconds,
+            # A public demo must not show an error page when ml-service is down. The cached
+            # answer says "cached_demo" in its provenance, so it is never passed off as live.
+            fallback=DemoMLClient() if live_demo else None,
             token_provider=provider,
         )
     return FixtureMLClient()

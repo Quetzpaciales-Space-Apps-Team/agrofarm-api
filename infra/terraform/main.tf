@@ -82,6 +82,8 @@ module "core_api_service" {
     ML_SERVICE_URL     = module.ml_service.service_url
     ML_MODE            = "http"
     ML_AUTH            = "google_id_token"
+    DEMO_MODE          = tostring(var.demo_mode)
+    DEMO_ML_SOURCE     = var.demo_ml_source
     CORS_ORIGINS       = var.cors_origins
     GCS_BUCKET_CLEAN   = module.storage.bucket_names["clean"]
     GCS_BUCKET_UPLOADS = module.storage.bucket_names["uploads"]

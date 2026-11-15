@@ -259,7 +259,7 @@ class HttpMLClient:
             return self._post_json("/v1/simulate", payload)
         except ProblemError:
             if self._fallback is not None:
-                logger.warning("ml-service simulate failed; falling back to fixture client.")
+                logger.warning("ml-service simulate failed; using the offline client.")
                 return self._fallback.simulate(payload)
             raise
 
@@ -268,7 +268,7 @@ class HttpMLClient:
             return self._post_json("/v1/rotations/score", payload)
         except ProblemError:
             if self._fallback is not None:
-                logger.warning("ml-service score_rotations failed; falling back to fixture.")
+                logger.warning("ml-service score_rotations failed; using the offline client.")
                 return self._fallback.score_rotations(payload)
             raise
 

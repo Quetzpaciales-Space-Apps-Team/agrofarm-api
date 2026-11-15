@@ -16,7 +16,8 @@ All configuration is read from environment variables (or a local `.env` file, ne
 | `ML_MODE` | No | `fixture` | `fixture` / `http` | `http` calls `ML_SERVICE_URL`; `fixture` uses deterministic local outputs. |
 | `ML_SERVICE_URL` | No | `http://localhost:8081` | `https://ml-service-....run.app` | Base URL for `ml-service` when `ML_MODE=http`. |
 | `ML_TIMEOUT_SECONDS` | No | `5.0` | `5.0` | HTTP client timeout when calling `ml-service`. |
-| `DEMO_MODE` | No | `false` | `false` / `true` | Serves `cached_demo` snapshots and enables `POST /v1/auth/demo` guest sessions. Never auto-seeds DB. |
+| `DEMO_MODE` | No | `false` | `false` / `true` | Enables `POST /v1/auth/demo` guest sessions and, unless `DEMO_ML_SOURCE=live`, serves `cached_demo` snapshots instead of calling `ml-service`. Never auto-seeds DB. |
+| `DEMO_ML_SOURCE` | No | `snapshot` | `snapshot` / `live` | Only read when `DEMO_MODE=true`. `snapshot`: every simulation and rotation answer is the same cached file, whatever the scenario. `live`: with `ML_MODE=http`, calls `ml-service` and uses the cached file only when that call fails; the provenance then says `cached_demo`. |
 | `DEMO_RATE_LIMIT_PER_MINUTE` | No | `20` | `20` | Per-IP sliding-window limit for `POST /v1/auth/demo`. |
 | `DEMO_MAX_GUESTS` | No | `200` | `200` | Maximum concurrent `demo-guest-*` accounts allowed before `503`. |
 | `MAX_UPLOAD_BYTES` | No | `2097152` | `2097152` | 2 MiB streaming cap for farm CSV/GeoJSON uploads. |
