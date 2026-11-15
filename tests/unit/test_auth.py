@@ -5,6 +5,7 @@ import json
 import time
 import uuid
 from collections.abc import Iterator
+from dataclasses import replace
 from datetime import UTC, datetime
 
 import pytest
@@ -48,6 +49,16 @@ class InMemoryAuthRepository:
 
     def get_user_by_id(self, user_id: uuid.UUID) -> UserRecord | None:
         return self.users.get(user_id)
+
+    def update_password_hash(self, user_id: uuid.UUID, password_hash: str) -> None:
+        user = self.users.get(user_id)
+        if user is not None:
+            self.users[user_id] = replace(user, password_hash=password_hash)
+
+    def revoke_user_refresh_tokens(self, user_id: uuid.UUID) -> None:
+        for token_hash, token in self.tokens.items():
+            if token.user_id == user_id and token.revoked_at is None:
+                self.tokens[token_hash] = replace(token, revoked_at=datetime.now(UTC))
 
     def create_refresh_token(
         self, *, user_id: uuid.UUID, token_hash: str, expires_at: datetime

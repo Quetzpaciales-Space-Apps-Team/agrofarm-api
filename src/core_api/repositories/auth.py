@@ -4,7 +4,7 @@ import uuid
 from datetime import UTC, datetime
 from typing import Protocol
 
-from sqlalchemy import DateTime, ForeignKey, String, select
+from sqlalchemy import DateTime, ForeignKey, String, select, update
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.engine import Engine
 from sqlalchemy.exc import IntegrityError
@@ -50,6 +50,10 @@ class AuthRepository(Protocol):
     def get_user_by_email(self, email: str) -> UserRecord | None: ...
 
     def get_user_by_id(self, user_id: uuid.UUID) -> UserRecord | None: ...
+
+    def update_password_hash(self, user_id: uuid.UUID, password_hash: str) -> None: ...
+
+    def revoke_user_refresh_tokens(self, user_id: uuid.UUID) -> None: ...
 
     def create_refresh_token(
         self, *, user_id: uuid.UUID, token_hash: str, expires_at: datetime
@@ -113,6 +117,22 @@ class SqlAlchemyAuthRepository:
         with Session(self._engine) as session:
             row = session.get(UserRow, user_id)
             return _to_user(row) if row else None
+
+    def update_password_hash(self, user_id: uuid.UUID, password_hash: str) -> None:
+        with Session(self._engine) as session:
+            row = session.get(UserRow, user_id)
+            if row is not None:
+                row.password_hash = password_hash
+                session.commit()
+
+    def revoke_user_refresh_tokens(self, user_id: uuid.UUID) -> None:
+        with Session(self._engine) as session:
+            session.execute(
+                update(RefreshTokenRow)
+                .where(RefreshTokenRow.user_id == user_id, RefreshTokenRow.revoked_at.is_(None))
+                .values(revoked_at=datetime.now(UTC))
+            )
+            session.commit()
 
     def create_refresh_token(
         self, *, user_id: uuid.UUID, token_hash: str, expires_at: datetime

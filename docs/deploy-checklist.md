@@ -30,12 +30,14 @@ docker run --rm \
   core-api:local \
   alembic upgrade head
 
-# Idempotently seed demo user (demo@agrofarm.org), provisional Guatemala farm, and recommendation
+# Seed demo data; the account receives a random, discarded password hash
 docker run --rm \
   -e DATABASE_URL="$DATABASE_URL" \
   core-api:local \
   python -m core_api.seed_demo
 ```
+
+Before making the service public, run the seeder against the target database once. It replaces any earlier seeded password hash and revokes refresh tokens. Existing access tokens expire within their configured lifetime. The no-login public demo entry is a separate pending feature; seeding alone does not provide it.
 
 ---
 
@@ -55,13 +57,8 @@ curl -si -X OPTIONS "$API_URL/v1/auth/login" \
   -H "Origin: https://agrofarming.site" \
   -H "Access-Control-Request-Method: POST" | grep -i "access-control-allow-origin"
 
-# 3. Login with seeded demo user & check ENSO + recommendations
-TOKEN=$(curl -sf -X POST "$API_URL/v1/auth/login" \
-  -H "Content-Type: application/json" \
-  -d '{"email":"demo@agrofarm.org","password":"REMOVED-DEMO-PASSWORD"}' \
-  | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
-
-curl -sf "$API_URL/v1/climate/enso" -H "Authorization: Bearer $TOKEN" | head -c 300
+# 3. Verify the public no-login demo in a private browser window before submission.
+# Do not put user passwords or demo credentials in commands, docs, or submission materials.
 ```
 
 ---

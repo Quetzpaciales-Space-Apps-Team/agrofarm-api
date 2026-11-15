@@ -1,6 +1,7 @@
-"""Idempotent CLI seeder for a deterministic demo user, farm, priorities, and recommendation."""
+"""Seed deterministic demo data and keep its account password unknown and unpublished."""
 
 import logging
+import secrets
 import uuid
 from typing import Any
 
@@ -18,7 +19,6 @@ logger = logging.getLogger(__name__)
 
 DEMO_USER_EMAIL = "demo@agrofarm.org"
 DEMO_USER_NAME = "Guatemala Pilot Farmer"
-DEMO_USER_PASSWORD = "REMOVED-DEMO-PASSWORD"  # noqa: S105
 DEMO_FARM_NAME = "Guatemala Pilot Farm (Provisional)"
 DEMO_FARM_BOUNDARY: dict[str, Any] = {
     "type": "Polygon",
@@ -44,13 +44,19 @@ def seed_demo(database_url: str | None = None) -> dict[str, str]:
     rec_repo = SqlAlchemyRecommendationRepository(engine)
 
     user = auth_repo.get_user_by_email(DEMO_USER_EMAIL)
+    # Keep the seeded account inaccessible through a published password. The public demo must
+    # use a no-login route; this random secret is hashed and discarded.
+    password_hash = hash_password(secrets.token_urlsafe(32))
     if user is None:
         user = auth_repo.create_user(
             email=DEMO_USER_EMAIL,
             name=DEMO_USER_NAME,
             role="farmer",
-            password_hash=hash_password(DEMO_USER_PASSWORD),
+            password_hash=password_hash,
         )
+    else:
+        auth_repo.update_password_hash(user.id, password_hash)
+        auth_repo.revoke_user_refresh_tokens(user.id)
 
     farms, _ = farm_repo.list_by_owner(user.id, limit=50, cursor=None)
     farm = next((f for f in farms if f.name == DEMO_FARM_NAME), None)
