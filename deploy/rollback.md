@@ -42,7 +42,7 @@ SERVICE_URL="$(gcloud run services describe "core-api-${ENV}" \
   --region="${GCP_REGION}" \
   --project="${GCP_PROJECT_ID}" \
   --format='value(status.url)')"
-curl -fsS "${SERVICE_URL}/healthz"
+curl -fsS "${SERVICE_URL}/readyz"  # /healthz is reserved at the Cloud Run edge (404 from outside)
 curl -fsS "${SERVICE_URL}/readyz"
 ```
 

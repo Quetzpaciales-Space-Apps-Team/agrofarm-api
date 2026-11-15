@@ -76,7 +76,8 @@ jobs:
             --region="${{ secrets.GCP_REGION }}" \
             --format='value(status.url)')"
           echo "::add-mask::$SERVICE_URL"
-          curl -fsS --retry 5 --retry-delay 3 "$SERVICE_URL/healthz" >/dev/null
+          # Cloud Run reserves /healthz at its edge and answers 404 from outside, so the
+          # external check uses /readyz. The in-container probes keep using /healthz.
           curl -fsS --retry 5 --retry-delay 3 "$SERVICE_URL/readyz" >/dev/null
 
   deploy-production:
@@ -141,5 +142,6 @@ jobs:
             --region="${{ secrets.GCP_REGION }}" \
             --format='value(status.url)')"
           echo "::add-mask::$SERVICE_URL"
-          curl -fsS --retry 5 --retry-delay 3 "$SERVICE_URL/healthz" >/dev/null
+          # Cloud Run reserves /healthz at its edge and answers 404 from outside, so the
+          # external check uses /readyz. The in-container probes keep using /healthz.
           curl -fsS --retry 5 --retry-delay 3 "$SERVICE_URL/readyz" >/dev/null
