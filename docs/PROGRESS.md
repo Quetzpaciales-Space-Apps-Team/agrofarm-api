@@ -15,6 +15,7 @@
 | T3 | `agrofarm-api#32` (BE-048) | [agrofarm-api#33](https://github.com/Quetzpaciales-Space-Apps-Team/agrofarm-api/pull/33) | PR open | `docs/contract/ml-service-expected.yaml`, `HttpMLClient` fixture fallback + `httpx.MockTransport` contract tests, posted on `agrofarm-analytic#3` & `#27`. |
 | T4 | — (`chore/deploy-readiness`) | PR opening | PR opening | Local `docker build` + container `/healthz`/`/readyz`/`seed-demo` verified (`DEMO_MODE=true`), `docs/deploy-checklist.md`. |
 | T5 | — (`docs/submission-honesty`) | [agrofarm-docs#27](https://github.com/Quetzpaciales-Space-Apps-Team/agrofarm-docs/pull/27) | PR open | Clarified `cached_demo` / `ML_MODE=fixture` in `presentation.md` & `submission-form.md`, SI units, `https://agrofarming.site` + `TODO_PUBLIC_URL` placeholders. |
+| T6 | — (`feat/be-nasa-power-climate-endpoint`) | PR opening | PR opening | `GET /v1/climate/nasa-power` (`NasaPowerSeries`) serving the static `demo_snapshots/nasa_power.json` snapshot; contract first, drift test and disclaimer check extended. Frontend does not consume it yet. |
 
 ## Remaining Optional Items (If Time Before Freeze)
 - `BE-040` (out of MVP cut), stretch items (`BE-055`, `BE-058`, `BE-060`, `BE-070`, `BE-080` — untouched).

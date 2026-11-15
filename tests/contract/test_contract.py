@@ -23,7 +23,8 @@ REQUIRED_V1_PATHS = {
     "/v1/auth/register", "/v1/auth/login", "/v1/auth/refresh", "/v1/auth/logout", "/v1/me",
     "/v1/farms", "/v1/farms/{farm_id}", "/v1/farms/{farm_id}/uploads",
     "/v1/farms/{farm_id}/priorities", "/v1/farms/{farm_id}/insights", "/v1/layers",
-    "/v1/climate/enso", "/v1/scenarios/simulate", "/v1/farms/{farm_id}/recommendations",
+    "/v1/climate/enso", "/v1/climate/nasa-power", "/v1/scenarios/simulate",
+    "/v1/farms/{farm_id}/recommendations",
     "/v1/search",
 }  # fmt: skip
 FARM_ID = "6f1c2f0a-9a0e-4d53-8a55-0d6d7a1b2c33"

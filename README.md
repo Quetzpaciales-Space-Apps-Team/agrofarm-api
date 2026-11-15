@@ -24,6 +24,10 @@ The API contract is [`docs/contract/openapi.yaml`](docs/contract/openapi.yaml). 
 
 Operations marked `x-stub: true` answer with the example data of the contract (response header `X-Stub: true`). They do not validate input and do not check authentication. Clients can build against them today. When the real implementation of an operation lands, `x-stub` is removed from it.
 
+## Demo snapshots
+
+`src/core_api/demo_snapshots/` holds static JSON served by the climate and demo endpoints. `nasa_power.json` backs `GET /v1/climate/nasa-power`: monthly NASA POWER data (1995-01 to 2025-12) for one point, a reanalysis grid cell of about 50 km and not a station. It is served unchanged in every mode and is not read from the data-service yet.
+
 ## Start here
 
 - **Rules for people and agents:** [`AGENTS.md`](AGENTS.md). Read it before changing anything.
