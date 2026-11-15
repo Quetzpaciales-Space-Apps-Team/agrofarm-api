@@ -12,6 +12,7 @@ AI coding assistants were used as tools to write and review code, tests, CI work
 |---|---|---|---|
 | Claude Code | `claude-fable-5-2` | `eldmark` | Repository rules, CI, scaffolds, connectors, tests, documentation, data analysis |
 | OpenAI Codex | `GPT-6` | `eldmark` | Demo credential removal, safe demo seeding, documentation and model-status corrections |
+| Antigravity | `TODO_TEAM_CONFIRM` | `MarceloDetlefsen` | Backend API implementation, unit/integration tests, OpenAPI contract updates, deployment & demo docs (human-reviewed by `@MarceloDetlefsen`) |
 
 Team members who used another tool add a row here in their next pull request (rule G11.3).
 
