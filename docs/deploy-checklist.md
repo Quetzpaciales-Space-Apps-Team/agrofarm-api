@@ -46,10 +46,9 @@ Before making the service public, run the seeder against the target database onc
 Replace `API_URL` with the deployed `core-api` URL:
 
 ```bash
-export API_URL="https://api.agrofarming.site"
+export API_URL="https://core-api-staging-7l2bzjrqpq-uc.a.run.app"
 
-# 1. Health & readiness
-curl -sf "$API_URL/healthz"
+# 1. Readiness (Cloud Run reserves /healthz at its edge, so external smoke tests use /readyz)
 curl -sf "$API_URL/readyz"
 
 # 2. CORS preflight from https://agrofarming.site
