@@ -9,7 +9,6 @@ from typing import Any
 import pytest
 
 from core_api.api.deps import get_ml_client
-from core_api.clients import ml
 from core_api.clients.ml import GoogleIdTokenProvider, HttpMLClient
 from core_api.config import Settings
 from core_api.domain.problem import ProblemError
@@ -45,7 +44,7 @@ def capture_requests(monkeypatch: pytest.MonkeyPatch) -> list[urllib.request.Req
         seen.append(req)
         return io.BytesIO(json.dumps({"ok": True}).encode("utf-8"))
 
-    monkeypatch.setattr(ml.urllib.request, "urlopen", fake_urlopen)
+    monkeypatch.setattr(urllib.request, "urlopen", fake_urlopen)
     return seen
 
 
@@ -97,7 +96,7 @@ def test_token_never_appears_in_the_error(monkeypatch: pytest.MonkeyPatch) -> No
     def refuse(req: urllib.request.Request, timeout: float) -> Any:
         raise urllib.error.URLError("forbidden")
 
-    monkeypatch.setattr(ml.urllib.request, "urlopen", refuse)
+    monkeypatch.setattr(urllib.request, "urlopen", refuse)
     with pytest.raises(ProblemError) as raised:
         HttpMLClient(ML_URL, token_provider=lambda: "very-secret-token").simulate({})
     assert "very-secret-token" not in str(raised.value.__dict__)
