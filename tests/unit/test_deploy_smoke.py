@@ -122,3 +122,66 @@ def test_cli_reports_failure_without_exposing_response_or_token(
     assert "guest-test-token" not in output.out + output.err
     assert "private response" not in output.out + output.err
     assert ("passed" in output.out) if failure is None else ("failed" in output.err)
+
+
+def offline_baseline() -> dict[str, Any]:
+    return {
+        "scenario": {"p10": -28, "p50": -13, "p90": 2},
+        "provenance": {"model_version": "cached_demo-0.1.0"},
+    }
+
+
+def test_demo_smoke_waits_for_a_cold_ml_service_and_then_passes() -> None:
+    items = responses()
+    items.insert(1, offline_baseline())  # the first request meets a cold ml-service
+    sleeps: list[float] = []
+    with patch.object(smoke, "post_json", side_effect=items) as post:
+        smoke.check_demo(
+            "https://api.example.test", attempts=3, wait_seconds=7, sleep=sleeps.append
+        )
+    assert sleeps == [7]
+    assert post.call_count == 5
+
+
+def test_demo_smoke_still_fails_when_the_ml_service_never_goes_live() -> None:
+    items = [responses()[0], *[offline_baseline() for _ in range(3)]]
+    sleeps: list[float] = []
+    with (
+        patch.object(smoke, "post_json", side_effect=items) as post,
+        pytest.raises(RuntimeError, match="live ML provenance"),
+    ):
+        smoke.check_demo(
+            "https://api.example.test", attempts=3, wait_seconds=7, sleep=sleeps.append
+        )
+    assert sleeps == [7, 7]  # no wait after the last attempt
+    assert post.call_count == 4
+
+
+def test_demo_smoke_makes_one_attempt_by_default_so_existing_callers_do_not_wait() -> None:
+    items = [responses()[0], offline_baseline()]
+    with (
+        patch.object(smoke, "post_json", side_effect=items) as post,
+        patch.object(smoke.time, "sleep") as sleep,
+        pytest.raises(RuntimeError, match="live ML provenance"),
+    ):
+        smoke.check_demo("https://api.example.test")
+    sleep.assert_not_called()
+    assert post.call_count == 2
+
+
+def test_cli_waits_for_a_cold_start_by_default_and_can_be_told_otherwise() -> None:
+    with (
+        patch("sys.argv", ["smoke_demo.py", "https://api.example.test"]),
+        patch.object(smoke, "check_demo") as check,
+    ):
+        assert smoke.main() == 0
+    assert check.call_args.kwargs == {"attempts": 5, "wait_seconds": 15.0}
+    with (
+        patch(
+            "sys.argv",
+            ["smoke_demo.py", "https://api.example.test", "--attempts", "1", "--wait-seconds", "0"],
+        ),
+        patch.object(smoke, "check_demo") as check,
+    ):
+        assert smoke.main() == 0
+    assert check.call_args.kwargs == {"attempts": 1, "wait_seconds": 0.0}
