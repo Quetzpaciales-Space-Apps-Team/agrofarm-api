@@ -56,8 +56,9 @@ module "ml_service" {
   invoker_service_account_emails = toset([
     module.service_accounts.emails["core_api"],
   ])
-  cpu    = "1"
-  memory = "1Gi"
+  cpu                = "1"
+  memory             = "1Gi"
+  min_instance_count = var.ml_min_instances
   env_vars = {
     LOG_LEVEL         = "INFO"
     GCS_BUCKET_CLEAN  = module.storage.bucket_names["clean"]

@@ -75,3 +75,14 @@ variable "frontend_image" {
   type        = string
   default     = "us-docker.pkg.dev/cloudrun/container/hello"
 }
+
+variable "ml_min_instances" {
+  description = "Instances of ml-service kept running. 0 lets it scale to zero, and the first request after a quiet period then waits for a cold start."
+  type        = number
+  default     = 0
+
+  validation {
+    condition     = var.ml_min_instances >= 0 && var.ml_min_instances <= 5
+    error_message = "ml_min_instances must be between 0 and 5."
+  }
+}

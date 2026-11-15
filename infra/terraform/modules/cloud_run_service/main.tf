@@ -43,6 +43,11 @@ variable "invoker_service_account_emails" {
   default = []
 }
 
+variable "min_instance_count" {
+  type    = number
+  default = 0
+}
+
 variable "cpu" {
   type    = string
   default = "1"
@@ -63,7 +68,7 @@ resource "google_cloud_run_v2_service" "service" {
     service_account = var.service_account_email
 
     scaling {
-      min_instance_count = 0
+      min_instance_count = var.min_instance_count
       max_instance_count = 5
     }
 
