@@ -55,12 +55,16 @@ class InMemoryAuthRepository:
         if user is not None:
             self.users[user_id] = replace(user, password_hash=password_hash)
 
-    def count_demo_guests(self, prefix: str = "demo-guest-") -> int:
+    def count_demo_guests(
+        self, prefix: str = "demo-guest-", created_after: datetime | None = None
+    ) -> int:
         lower = prefix.lower()
         return sum(
             1
             for user in self.users.values()
-            if user.email.startswith(lower) and user.email.endswith("@demo.agrofarm.invalid")
+            if user.email.startswith(lower)
+            and user.email.endswith("@demo.agrofarm.invalid")
+            and (created_after is None or user.created_at >= created_after)
         )
 
     def revoke_user_refresh_tokens(self, user_id: uuid.UUID) -> None:

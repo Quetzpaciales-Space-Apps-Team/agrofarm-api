@@ -17,7 +17,7 @@ This guide defines the end-to-end integration flow for a Space Apps judge openin
   - `401 Unauthorized`: Missing/expired Bearer token. Attempt `/v1/auth/refresh` (or re-run `POST /v1/auth/demo` for demo guests).
   - `422 Unprocessable Entity`: Request validation error (`detail` explains the invalid field/range). Display inline field errors.
   - `429 Too Many Requests`: Rate limit exceeded on `POST /v1/auth/demo` (`DEMO_RATE_LIMIT_PER_MINUTE=20` per IP). Show a friendly retry message.
-  - `503 Service Unavailable`: Active demo guest cap (`DEMO_MAX_GUESTS=200`) or `ml-service` unreachable when `ML_MODE=http`.
+  - `503 Service Unavailable`: Demo guest cap (`DEMO_MAX_GUESTS`, default 1000 guests created in the last 24 hours) or `ml-service` unreachable when `ML_MODE=http`.
 
 ---
 

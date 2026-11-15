@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     # when the call fails.
     demo_ml_source: Literal["snapshot", "live"] = "snapshot"
     demo_rate_limit_per_minute: int = 20
-    demo_max_guests: int = 200
+    demo_max_guests: int = 1000
     max_upload_bytes: int = 2 * 1024 * 1024
     raw_uploads_dir: str = "data/raw/uploads"
 
