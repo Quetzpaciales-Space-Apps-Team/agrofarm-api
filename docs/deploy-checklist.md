@@ -69,3 +69,24 @@ curl -si -X OPTIONS "$API_URL/v1/auth/login" \
 - **Custom Domain & CORS (`OPS-002`):** Map `https://agrofarming.site` (frontend) and API subdomain on the same registrable domain so `httpOnly; Secure; SameSite=Lax` refresh cookies work, and set `CORS_ORIGINS=https://agrofarming.site` in `envs/*.tfvars`.
 - **CD Workflows:** Add GitHub Actions deploy workflows (`develop` -> staging, `main` -> prod) using WIF (`sa-ci-deployer`).
 - **Branch Protection (`OPS-004`):** Enforce `ci-gate` and PR review rules on `develop` and `main`, and open the final `develop` -> `main` release PR before freeze.
+
+---
+
+## 5. Enabling `ML_MODE=http` (`ml-service` Integration)
+
+`core-api` is verified end-to-end against `agrofarm-analytic/services/ml` (`agrofarm_ml`) over HTTP (`tests/integration/test_ml_service_real_http.py`). Staging and production remain on `DEMO_MODE=true` (`ML_MODE=fixture`) until `ml-service` is deployed to Cloud Run (`OPS-001` / `ML-001`).
+
+To run with the real `ml-service` locally:
+```bash
+# Terminal 1 (agrofarm-analytic/services/ml)
+uv run uvicorn agrofarm_ml.main:create_app --factory --host 127.0.0.1 --port 8081
+
+# Terminal 2 (agrofarm-api)
+ML_MODE=http ML_SERVICE_URL=http://127.0.0.1:8081 DATABASE_URL="$DATABASE_URL" \
+  uv run uvicorn core_api.main:create_app --factory --port 8080
+```
+
+To enable `ML_MODE=http` in staging/prod once `ml-service` is deployed:
+1. Set `ML_SERVICE_URL` to the deployed Cloud Run `ml-service` URL.
+2. Set `ML_MODE=http` (and `DEMO_MODE=false` if live predictions should replace cached demo snapshots).
+3. Verify `POST /v1/scenarios/simulate` and `POST /v1/farms/{farm_id}/recommendations` return `200`/`201` with `>=3` strategies.
