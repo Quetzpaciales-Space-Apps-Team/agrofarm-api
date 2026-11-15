@@ -29,3 +29,6 @@ This file records pragmatic decisions made during the NASA Space Apps Challenge 
 ## 8. NASA POWER Climate Series (`GET /v1/climate/nasa-power`)
 - **Decision:** The endpoint serves the static snapshot `src/core_api/demo_snapshots/nasa_power.json` (372 monthly rows, 1995-01 to 2025-12, built from NASA POWER daily data at 14.59, -90.53) in every mode, with the same auth as `/v1/climate/enso`. Values are served unchanged; a missing value is `null`, never 0 or -999. The response carries `resolution_note` (a reanalysis grid cell of about 50 km, not a station) and the `disclaimer`.
 - **Why:** The frontend can show real NASA data now. Reading it from the `data-service` `clean/` datasets by manifest version is the later step; the snapshot is not refreshed automatically.
+
+## 8. AI Use Traceability for Earlier Commits (`G11` / `G8`)
+- **Decision:** Earlier commits authored by `@MarceloDetlefsen` before `G11` was adopted (or before `Assisted-by:` trailers were enforced) are not rewritten (`G8`: never rewrite published history). Instead, they are covered retroactively by adding `@MarceloDetlefsen`'s row to `AI_USAGE.md` (with `TODO_TEAM_CONFIRM` for the exact model ID until confirmed by the user) and applying `Assisted-by:` trailers to all subsequent commits.
