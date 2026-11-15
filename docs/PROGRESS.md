@@ -33,3 +33,7 @@ DB_PORT=5433 make seed-demo
 DATABASE_URL=postgresql+psycopg://agrofarm:local-dev-only@localhost:5433/agrofarm \
   DEMO_MODE=true uv run uvicorn core_api.main:create_app --factory --port 8080
 ```
+
+| BE-090 | `agrofarm-api#37` | [agrofarm-api#39](https://github.com/Quetzpaciales-Space-Apps-Team/agrofarm-api/pull/39) | PR open | `POST /v1/auth/demo` (`DEMO_MODE=true`), isolated `demo-guest-*` + cloned pilot farm, rate limit, cap, `make purge-demo-guests`. |
+| ML-HTTP | — | [agrofarm-api#40](https://github.com/Quetzpaciales-Space-Apps-Team/agrofarm-api/pull/40) | PR open | Real HTTP integration test (`ML_MODE=http`) verified locally against `agrofarm-analytic/services/ml` (`agrofarm_ml`). |
+| Submission | — | [agrofarm-docs#34](https://github.com/Quetzpaciales-Space-Apps-Team/agrofarm-docs/pull/34) | PR open | Updated SI disclosure & provisional staging URL (`https://frontend-staging-7l2bzjrqpq-uc.a.run.app`) in `submission-form.md`. |
