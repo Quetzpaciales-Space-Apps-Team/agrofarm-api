@@ -1,6 +1,9 @@
 """Authentication service (MVP): register, login, refresh, logout, and /me."""
 
+import secrets
+import time
 import uuid
+from collections import defaultdict, deque
 from datetime import UTC, datetime, timedelta
 
 from core_api.domain.auth import (
@@ -18,6 +21,31 @@ from core_api.domain.problem import ProblemError
 from core_api.repositories.auth import AuthRepository
 
 _DUMMY_PASSWORD_HASH = hash_password("dummy-timing-equalizer-password")
+
+
+class DemoRateLimiter:
+    """In-memory per-IP sliding-window limiter for anonymous demo session creation."""
+
+    def __init__(self, *, max_requests: int = 20, window_seconds: float = 60.0) -> None:
+        self._max_requests = max_requests
+        self._window_seconds = window_seconds
+        self._hits: dict[str, deque[float]] = defaultdict(deque)
+
+    def check(self, key: str) -> None:
+        if self._max_requests <= 0:
+            raise ProblemError(429, "rate_limited", "Demo rate limit exceeded.")
+        now = time.monotonic()
+        cutoff = now - self._window_seconds
+        bucket = self._hits[key]
+        while bucket and bucket[0] <= cutoff:
+            bucket.popleft()
+        if len(bucket) >= self._max_requests:
+            raise ProblemError(
+                429,
+                "rate_limited",
+                "Too many demo sessions requested. Please try again shortly.",
+            )
+        bucket.append(now)
 
 
 class AuthService:
@@ -98,6 +126,25 @@ class AuthService:
             expires_at=datetime.now(UTC) + timedelta(seconds=self._refresh_ttl),
         )
         return access_token, self._access_ttl, raw_refresh
+
+    def create_demo_guest(self, *, max_guests: int = 200) -> tuple[UserRecord, str, int, str]:
+        """Provision an isolated ephemeral guest user for DEMO_MODE without credentials."""
+        if self._repo.count_demo_guests() >= max_guests:
+            raise ProblemError(
+                503,
+                "demo_capacity_reached",
+                "Demo guest capacity reached. Please try again later.",
+            )
+        email = f"demo-guest-{uuid.uuid4()}@demo.agrofarm.invalid"
+        password_hash = hash_password(secrets.token_urlsafe(32))
+        user = self._repo.create_user(
+            email=email,
+            name="Demo Guest",
+            role="farmer",
+            password_hash=password_hash,
+        )
+        access_token, expires_in, raw_refresh = self._issue_tokens(user)
+        return user, access_token, expires_in, raw_refresh
 
     def ensure_user_exists(self, user_id: uuid.UUID) -> bool:
         return self._repo.get_user_by_id(user_id) is not None
