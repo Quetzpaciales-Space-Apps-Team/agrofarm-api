@@ -4,7 +4,7 @@ import uuid
 from datetime import UTC, datetime
 from typing import Protocol
 
-from sqlalchemy import DateTime, ForeignKey, String, select, update
+from sqlalchemy import DateTime, ForeignKey, String, func, select, update
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.engine import Engine
 from sqlalchemy.exc import IntegrityError
@@ -62,6 +62,8 @@ class AuthRepository(Protocol):
     def get_refresh_token(self, token_hash: str) -> RefreshTokenRecord | None: ...
 
     def revoke_refresh_token(self, token_hash: str) -> None: ...
+
+    def count_demo_guests(self, prefix: str = "demo-guest-") -> int: ...
 
 
 def _to_user(row: UserRow) -> UserRecord:
@@ -166,3 +168,12 @@ class SqlAlchemyAuthRepository:
             if row and row.revoked_at is None:
                 row.revoked_at = datetime.now(UTC)
                 session.commit()
+
+    def count_demo_guests(self, prefix: str = "demo-guest-") -> int:
+        with Session(self._engine) as session:
+            count = session.scalar(
+                select(func.count())
+                .select_from(UserRow)
+                .where(UserRow.email.like(f"{prefix.lower()}%@demo.agrofarm.invalid"))
+            )
+            return int(count or 0)

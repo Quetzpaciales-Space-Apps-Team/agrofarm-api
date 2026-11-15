@@ -12,6 +12,7 @@ from core_api.contract import load_contract
 from core_api.middleware.errors import register_error_handlers
 from core_api.middleware.request_id import RequestContextMiddleware
 from core_api.repositories.database import DatabaseProbe, create_db_engine
+from core_api.services.auth import DemoRateLimiter
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -24,6 +25,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.settings = settings
     app.state.engine = engine
     app.state.probes = [DatabaseProbe(engine)]
+    app.state.demo_rate_limiter = DemoRateLimiter(max_requests=settings.demo_rate_limit_per_minute)
 
     # Order (outermost first): request id and logging, CORS, [rate limit, auth: later tasks],
     # error handlers. Starlette runs the middleware added last first.
