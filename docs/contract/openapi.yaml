@@ -531,6 +531,49 @@ paths:
                 disclaimer: "This tool supports decisions. It does not replace farmers or local agronomists."
         "401": { $ref: "#/components/responses/Problem" }
         "422": { $ref: "#/components/responses/Problem" }
+  /v1/climate/nasa-power:
+    get:
+      tags: [data]
+      operationId: getNasaPower
+      summary: Monthly NASA POWER climate series (reanalysis grid cell, not a station)
+      description: >-
+        Read-only monthly series built from NASA POWER daily data for one point at 14.59, -90.53.
+        The value is a reanalysis grid cell of about 50 km, not a station measurement. `start` and
+        `end` are inclusive months (`YYYY-MM`), both optional. A range without data gives an empty
+        `items` list. A missing value is `null`, never 0 or -999. The data is a static snapshot
+        shipped with the service, not read from the data-service.
+      parameters:
+        - { name: start, in: query, schema: { type: string, pattern: "^[0-9]{4}-(0[1-9]|1[0-2])$" } }
+        - { name: end, in: query, schema: { type: string, pattern: "^[0-9]{4}-(0[1-9]|1[0-2])$" } }
+      responses:
+        "200":
+          description: NASA POWER monthly series
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/NasaPowerSeries" }
+              example:
+                location: { latitude: 14.59, longitude: -90.53 }
+                items:
+                  - { month: "1995-01", rainfall_mm: 7.18, temperature_mean_c: 20.62, temperature_min_c: 14.39, temperature_max_c: 29.29, relative_humidity_pct: 61.69, solar_radiation_mj_m2: 18.85, wind_speed_kmh: 8.08 }
+                  - { month: "1995-02", rainfall_mm: 1.31, temperature_mean_c: 21.55, temperature_min_c: 14.74, temperature_max_c: 30.72, relative_humidity_pct: 57.28, solar_radiation_mj_m2: 21.12, wind_speed_kmh: 7.91 }
+                  - { month: "2025-12", rainfall_mm: 61.41, temperature_mean_c: 19.46, temperature_min_c: 15.44, temperature_max_c: 24.99, relative_humidity_pct: 83.39, solar_radiation_mj_m2: 16.23, wind_speed_kmh: 7.46 }
+                aggregation:
+                  rainfall_mm: "sum of daily values in the month (mm per month)"
+                  temperature_mean_c: "mean of daily values"
+                  temperature_min_c: "mean of the daily minimum"
+                  temperature_max_c: "mean of the daily maximum"
+                  relative_humidity_pct: "mean of daily values"
+                  solar_radiation_mj_m2: "mean daily total (MJ/m2 per day)"
+                  wind_speed_kmh: "mean of daily values"
+                source: "NASA POWER Daily API, community AG (MERRA-2 meteorology, CERES SYN1deg solar radiation)"
+                source_url: "https://power.larc.nasa.gov"
+                attribution: "NASA Langley Research Center (LaRC) POWER Project, funded through the NASA Earth Science/Applied Science Program"
+                resolution_note: "One point taken from a grid cell of about 0.5 x 0.625 degrees (about 50 km). It is a reanalysis, not a station measurement."
+                dataset_checksum_sha256: "f3d67c4d22bcc20c753bb46598ba004e0a6487cffd41df520cc53db7b7e11456"
+                processing_version: "0.1.0"
+                disclaimer: "This tool supports decisions. It does not replace farmers or local agronomists."
+        "401": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
   /v1/scenarios/simulate:
     post:
       tags: [simulation]
@@ -857,6 +900,46 @@ components:
               oni: { type: [number, "null"] }
               roni: { type: [number, "null"] }
               phase: { $ref: "#/components/schemas/EnsoPhase" }
+    NasaPowerSeries:
+      type: object
+      required:
+        - location
+        - items
+        - aggregation
+        - source
+        - source_url
+        - attribution
+        - resolution_note
+        - dataset_checksum_sha256
+        - processing_version
+        - disclaimer
+      properties:
+        location:
+          type: object
+          required: [latitude, longitude]
+          properties: { latitude: { type: number }, longitude: { type: number } }
+        aggregation: { type: object, additionalProperties: { type: string } }
+        source: { type: string }
+        source_url: { type: string }
+        attribution: { type: string }
+        resolution_note: { type: string }
+        dataset_checksum_sha256: { type: string }
+        processing_version: { type: string }
+        disclaimer: { type: string }
+        items:
+          type: array
+          items:
+            type: object
+            required: [month, rainfall_mm, temperature_mean_c, temperature_min_c, temperature_max_c, relative_humidity_pct, solar_radiation_mj_m2, wind_speed_kmh]
+            properties:
+              month: { type: string, pattern: "^[0-9]{4}-[0-9]{2}$" }
+              rainfall_mm: { type: [number, "null"] }
+              temperature_mean_c: { type: [number, "null"] }
+              temperature_min_c: { type: [number, "null"] }
+              temperature_max_c: { type: [number, "null"] }
+              relative_humidity_pct: { type: [number, "null"] }
+              solar_radiation_mj_m2: { type: [number, "null"] }
+              wind_speed_kmh: { type: [number, "null"] }
     Scenario:
       type: object
       additionalProperties: false

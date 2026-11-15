@@ -20,7 +20,7 @@ def test_openapi_enforces_disclaimer_and_full_provenance() -> None:
     app = create_app(Settings(database_url=TEST_DATABASE_URL))
     schemas = app.openapi()["components"]["schemas"]
 
-    for schema_name in ("EnsoSeries", "SimulationResult", "RecommendationSet"):
+    for schema_name in ("EnsoSeries", "NasaPowerSeries", "SimulationResult", "RecommendationSet"):
         schema = schemas[schema_name]
         assert "disclaimer" in schema["required"]
         assert "disclaimer" in schema["properties"]
