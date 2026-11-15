@@ -25,3 +25,7 @@ This file records pragmatic decisions made during the NASA Space Apps Challenge 
 ## 7. Passwordless Demo Guest Access (`BE-090`)
 - **Decision:** `POST /v1/auth/demo` provisions an isolated ephemeral guest user (`demo-guest-<uuid>@demo.agrofarm.invalid`) with a random discarded password, clones the provisional Guatemala City pilot farm and default priorities, and returns an access token + `farm_id` + `is_demo_guest: true`. Protected by an in-memory per-IP rate limiter (`DEMO_RATE_LIMIT_PER_MINUTE=20`), a max-guest cap (`DEMO_MAX_GUESTS=200`), and `make purge-demo-guests` (`>24h`).
 - **Why:** Allows judges to test the full flow in a private browser window without publishing any credentials while keeping real user data strictly isolated.
+
+## 8. NASA POWER Climate Series (`GET /v1/climate/nasa-power`)
+- **Decision:** The endpoint serves the static snapshot `src/core_api/demo_snapshots/nasa_power.json` (372 monthly rows, 1995-01 to 2025-12, built from NASA POWER daily data at 14.59, -90.53) in every mode, with the same auth as `/v1/climate/enso`. Values are served unchanged; a missing value is `null`, never 0 or -999. The response carries `resolution_note` (a reanalysis grid cell of about 50 km, not a station) and the `disclaimer`.
+- **Why:** The frontend can show real NASA data now. Reading it from the `data-service` `clean/` datasets by manifest version is the later step; the snapshot is not refreshed automatically.

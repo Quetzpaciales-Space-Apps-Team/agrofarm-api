@@ -39,6 +39,20 @@
 | `disclaimer` | `disclaimer` | `string` | Keep; always present in `core-api`. |
 | `threshold_c`, `items[].month`, `items[].phase` | `threshold_c`, `items[].month`, `items[].phase` | `0.5`, `YYYY-MM`, `el_nino \| la_nina \| neutral` | Keep. |
 
+### 1.4b `GET /v1/climate/nasa-power` (new, `NasaPowerSeries`)
+Read-only monthly NASA POWER series for one point (14.59, -90.53). New endpoint, nothing to migrate: the frontend does not consume it yet.
+| `core-api` Field | Type / Unit / Notes |
+|---|---|
+| `start`, `end` (query) | Optional, `YYYY-MM`, both inclusive. `422` if the format is wrong or `start` is after `end`. A range with no data gives `items: []`. |
+| `items[].month` | `YYYY-MM` |
+| `items[].rainfall_mm` | `number \| null`, mm per month (sum of daily values) |
+| `items[].temperature_mean_c`, `temperature_min_c`, `temperature_max_c` | `number \| null`, °C |
+| `items[].relative_humidity_pct` | `number \| null`, % |
+| `items[].solar_radiation_mj_m2` | `number \| null`, MJ/m² per day (monthly mean) |
+| `items[].wind_speed_kmh` | `number \| null`, km/h |
+| `location`, `aggregation`, `source`, `source_url`, `attribution`, `resolution_note`, `dataset_checksum_sha256`, `processing_version` | Provenance. Show `resolution_note`: the value is a reanalysis grid cell of about 50 km, not a station. |
+| `disclaimer` | `string`, always present. Keep it visible. |
+
 ### 1.5 `POST /v1/scenarios/simulate` (`ScenarioSimulationResponse` -> `SimulationResult`)
 | Frontend Field | `core-api` Field | Type / Unit / Notes | Action in Frontend |
 |---|---|---|---|
