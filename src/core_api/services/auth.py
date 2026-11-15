@@ -20,6 +20,8 @@ from core_api.domain.auth import (
 from core_api.domain.problem import ProblemError
 from core_api.repositories.auth import AuthRepository
 
+ACTIVE_GUEST_WINDOW = timedelta(hours=24)  # a demo guest counts toward the cap for one day
+
 _DUMMY_PASSWORD_HASH = hash_password("dummy-timing-equalizer-password")
 
 
@@ -129,7 +131,10 @@ class AuthService:
 
     def create_demo_guest(self, *, max_guests: int = 200) -> tuple[UserRecord, str, int, str]:
         """Provision an isolated ephemeral guest user for DEMO_MODE without credentials."""
-        if self._repo.count_demo_guests() >= max_guests:
+        # Only guests of the last day count. Older ones are expired (the purge command removes
+        # them) and must never lock the demo for the visitors who come after.
+        recent = datetime.now(UTC) - ACTIVE_GUEST_WINDOW
+        if self._repo.count_demo_guests(created_after=recent) >= max_guests:
             raise ProblemError(
                 503,
                 "demo_capacity_reached",

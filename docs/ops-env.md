@@ -19,6 +19,6 @@ All configuration is read from environment variables (or a local `.env` file, ne
 | `DEMO_MODE` | No | `false` | `false` / `true` | Enables `POST /v1/auth/demo` guest sessions and, unless `DEMO_ML_SOURCE=live`, serves `cached_demo` snapshots instead of calling `ml-service`. Never auto-seeds DB. |
 | `DEMO_ML_SOURCE` | No | `snapshot` | `snapshot` / `live` | Only read when `DEMO_MODE=true`. `snapshot`: every simulation and rotation answer is the same cached file, whatever the scenario. `live`: with `ML_MODE=http`, calls `ml-service` and uses the cached file only when that call fails; the provenance then says `cached_demo`. |
 | `DEMO_RATE_LIMIT_PER_MINUTE` | No | `20` | `20` | Per-IP sliding-window limit for `POST /v1/auth/demo`. |
-| `DEMO_MAX_GUESTS` | No | `200` | `200` | Maximum concurrent `demo-guest-*` accounts allowed before `503`. |
+| `DEMO_MAX_GUESTS` | No | `1000` | `1000` | Maximum `demo-guest-*` accounts created in the last 24 hours before `503`. Older guests do not count; `make purge-demo-guests` removes them. |
 | `MAX_UPLOAD_BYTES` | No | `2097152` | `2097152` | 2 MiB streaming cap for farm CSV/GeoJSON uploads. |
 | `RAW_UPLOADS_DIR` | No | `data/raw/uploads` | `data/raw/uploads` | Local raw upload storage path. |

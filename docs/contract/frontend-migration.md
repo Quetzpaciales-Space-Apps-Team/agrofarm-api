@@ -114,7 +114,7 @@ Judges and public visitors can try the full application without credentials when
     ```
   - `404 Not Found`: Returned when `DEMO_MODE=false`.
   - `429 Too Many Requests`: Returned when per-IP rate limit (`DEMO_RATE_LIMIT_PER_MINUTE`, default `20/min`) is exceeded.
-  - `503 Service Unavailable`: Returned when active demo guest cap (`DEMO_MAX_GUESTS`, default `200`) is reached.
+  - `503 Service Unavailable`: Returned when demo guest cap (`DEMO_MAX_GUESTS`, default `1000` guests created in the last 24 hours) is reached.
 - **Recommended frontend flow ("Try the demo"):**
   1. Call `POST /v1/auth/demo` with `credentials: "include"`.
   2. Store `access_token` in memory (same as `/v1/auth/login`), save `farm_id` and `is_demo_guest`, and navigate directly to the farm dashboard / recommendations view for `farm_id`.

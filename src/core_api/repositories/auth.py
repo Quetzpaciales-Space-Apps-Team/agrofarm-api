@@ -63,7 +63,9 @@ class AuthRepository(Protocol):
 
     def revoke_refresh_token(self, token_hash: str) -> None: ...
 
-    def count_demo_guests(self, prefix: str = "demo-guest-") -> int: ...
+    def count_demo_guests(
+        self, prefix: str = "demo-guest-", created_after: datetime | None = None
+    ) -> int: ...
 
 
 def _to_user(row: UserRow) -> UserRecord:
@@ -169,11 +171,15 @@ class SqlAlchemyAuthRepository:
                 row.revoked_at = datetime.now(UTC)
                 session.commit()
 
-    def count_demo_guests(self, prefix: str = "demo-guest-") -> int:
+    def count_demo_guests(
+        self, prefix: str = "demo-guest-", created_after: datetime | None = None
+    ) -> int:
+        query = (
+            select(func.count())
+            .select_from(UserRow)
+            .where(UserRow.email.like(f"{prefix.lower()}%@demo.agrofarm.invalid"))
+        )
+        if created_after is not None:
+            query = query.where(UserRow.created_at >= created_after)
         with Session(self._engine) as session:
-            count = session.scalar(
-                select(func.count())
-                .select_from(UserRow)
-                .where(UserRow.email.like(f"{prefix.lower()}%@demo.agrofarm.invalid"))
-            )
-            return int(count or 0)
+            return int(session.scalar(query) or 0)
