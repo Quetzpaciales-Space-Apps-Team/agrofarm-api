@@ -104,6 +104,27 @@ paths:
         "401": { $ref: "#/components/responses/Problem" }
         "422": { $ref: "#/components/responses/Problem" }
         "429": { $ref: "#/components/responses/Problem" }
+  /v1/auth/demo:
+    post:
+      tags: [auth]
+      operationId: demoLogin
+      summary: Create an ephemeral demo guest session with a cloned pilot farm (only when DEMO_MODE=true)
+      security: []
+      responses:
+        "201":
+          description: Ephemeral demo guest session created with a provisional Guatemala City pilot farm
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DemoAuthResponse" }
+              example:
+                access_token: stub.access.token
+                token_type: bearer
+                expires_in: 900
+                farm_id: 22222222-2222-4222-8222-222222222222
+                is_demo_guest: true
+        "404": { $ref: "#/components/responses/Problem" }
+        "429": { $ref: "#/components/responses/Problem" }
+        "503": { $ref: "#/components/responses/Problem" }
   /v1/auth/refresh:
     post:
       tags: [auth]
@@ -645,6 +666,15 @@ components:
         access_token: { type: string }
         token_type: { type: string, enum: [bearer] }
         expires_in: { type: integer, description: Seconds }
+    DemoAuthResponse:
+      type: object
+      required: [access_token, token_type, expires_in, farm_id, is_demo_guest]
+      properties:
+        access_token: { type: string }
+        token_type: { type: string, enum: [bearer] }
+        expires_in: { type: integer, description: Seconds }
+        farm_id: { type: string, format: uuid }
+        is_demo_guest: { type: boolean }
     Polygon:
       type: object
       description: GeoJSON Polygon in EPSG:4326, longitude first

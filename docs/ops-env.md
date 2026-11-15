@@ -16,6 +16,8 @@ All configuration is read from environment variables (or a local `.env` file, ne
 | `ML_MODE` | No | `fixture` | `fixture` / `http` | `http` calls `ML_SERVICE_URL`; `fixture` uses deterministic local outputs. |
 | `ML_SERVICE_URL` | No | `http://localhost:8081` | `https://ml-service-....run.app` | Base URL for `ml-service` when `ML_MODE=http`. |
 | `ML_TIMEOUT_SECONDS` | No | `5.0` | `5.0` | HTTP client timeout when calling `ml-service`. |
-| `DEMO_MODE` | No | `false` | `false` / `true` | Serves `cached_demo` snapshots for ENSO, simulate, and recommendations. Never auto-seeds DB. |
+| `DEMO_MODE` | No | `false` | `false` / `true` | Serves `cached_demo` snapshots and enables `POST /v1/auth/demo` guest sessions. Never auto-seeds DB. |
+| `DEMO_RATE_LIMIT_PER_MINUTE` | No | `20` | `20` | Per-IP sliding-window limit for `POST /v1/auth/demo`. |
+| `DEMO_MAX_GUESTS` | No | `200` | `200` | Maximum concurrent `demo-guest-*` accounts allowed before `503`. |
 | `MAX_UPLOAD_BYTES` | No | `2097152` | `2097152` | 2 MiB streaming cap for farm CSV/GeoJSON uploads. |
 | `RAW_UPLOADS_DIR` | No | `data/raw/uploads` | `data/raw/uploads` | Local raw upload storage path. |

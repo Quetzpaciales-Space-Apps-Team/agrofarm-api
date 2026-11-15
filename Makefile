@@ -1,4 +1,4 @@
-.PHONY: dev test test-unit test-integration lint format typecheck build check migrate seed-demo export-openapi audit db-up db-down
+.PHONY: dev test test-unit test-integration lint format typecheck build check migrate seed-demo purge-demo-guests export-openapi audit db-up db-down
 DB_PORT ?= 5432
 TEST_DATABASE_URL ?= postgresql+psycopg://agrofarm:local-dev-only@localhost:$(DB_PORT)/agrofarm
 
@@ -45,6 +45,9 @@ check: lint typecheck test ## what CI runs
 
 seed-demo: db-up migrate ## idempotently seed demo user, farm, priorities, and recommendation
 	DATABASE_URL=$(TEST_DATABASE_URL) uv run python -m core_api.seed_demo
+
+purge-demo-guests: db-up migrate ## remove demo-guest accounts older than 24 hours
+	DATABASE_URL=$(TEST_DATABASE_URL) uv run python -m core_api.purge_demo_guests
 
 export-openapi: ## export app.openapi() to docs/contract/openapi.yaml
 	DATABASE_URL=$(TEST_DATABASE_URL) uv run python -c "from pathlib import Path; import yaml; from core_api.config import Settings; from core_api.main import create_app; app = create_app(Settings(database_url='postgresql+psycopg://u:p@localhost:5432/db')); Path('docs/contract/openapi.yaml').write_text(yaml.safe_dump(app.openapi(), sort_keys=False), encoding='utf-8')"

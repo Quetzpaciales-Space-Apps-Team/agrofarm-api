@@ -21,3 +21,7 @@ This file records pragmatic decisions made during the NASA Space Apps Challenge 
 
 ## 6. Canonical OpenAPI & Provenance (`feat/contract-source-of-truth`)
 - **Decision:** `agrofarm-api/docs/contract/openapi.yaml` is the single source of truth for frontend and backend. `Provenance.data_versions` uses a flat `dict[str, str]` (simpler than nested dataset arrays) and `Provenance` always includes `model_name`, `model_version`, `data_versions`, `input_hash`, and `generated_at`. `disclaimer` is included on `/v1/climate/enso`, `/v1/scenarios/simulate`, and `/v1/farms/{farm_id}/recommendations`.
+
+## 7. Passwordless Demo Guest Access (`BE-090`)
+- **Decision:** `POST /v1/auth/demo` provisions an isolated ephemeral guest user (`demo-guest-<uuid>@demo.agrofarm.invalid`) with a random discarded password, clones the provisional Guatemala City pilot farm and default priorities, and returns an access token + `farm_id` + `is_demo_guest: true`. Protected by an in-memory per-IP rate limiter (`DEMO_RATE_LIMIT_PER_MINUTE=20`), a max-guest cap (`DEMO_MAX_GUESTS=200`), and `make purge-demo-guests` (`>24h`).
+- **Why:** Allows judges to test the full flow in a private browser window without publishing any credentials while keeping real user data strictly isolated.

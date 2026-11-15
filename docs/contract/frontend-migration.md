@@ -80,3 +80,28 @@
    ```bash
    npm run typecheck && npm run lint && npm test && npm run build
    ```
+
+
+## Demo guest login (`BE-090` / `FE-090`)
+
+Judges and public visitors can try the full application without credentials when the API runs with `DEMO_MODE=true`.
+
+- **Endpoint:** `POST /v1/auth/demo` (`security: []`, no body required)
+- **Responses:**
+  - `201 Created`: Creates an isolated ephemeral guest account (`demo-guest-<uuid>@demo.agrofarm.invalid`), clones the provisional Guatemala City pilot farm (`Guatemala Pilot Farm (Provisional)`) with default priorities, sets the `refresh_token` httpOnly cookie, and returns:
+    ```json
+    {
+      "access_token": "...",
+      "token_type": "bearer",
+      "expires_in": 900,
+      "farm_id": "22222222-2222-4222-8222-222222222222",
+      "is_demo_guest": true
+    }
+    ```
+  - `404 Not Found`: Returned when `DEMO_MODE=false`.
+  - `429 Too Many Requests`: Returned when per-IP rate limit (`DEMO_RATE_LIMIT_PER_MINUTE`, default `20/min`) is exceeded.
+  - `503 Service Unavailable`: Returned when active demo guest cap (`DEMO_MAX_GUESTS`, default `200`) is reached.
+- **Recommended frontend flow ("Try the demo"):**
+  1. Call `POST /v1/auth/demo` with `credentials: "include"`.
+  2. Store `access_token` in memory (same as `/v1/auth/login`), save `farm_id` and `is_demo_guest`, and navigate directly to the farm dashboard / recommendations view for `farm_id`.
+  3. Keep `/v1/auth/login` and `/v1/auth/register` available for farmers with real farm data; demo guests cannot read or modify any other user's farms.
