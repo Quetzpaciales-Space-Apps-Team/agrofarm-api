@@ -1,0 +1,195 @@
+openapi: 3.1.0
+info:
+  title: AgroFarm ml-service (Expected by core-api)
+  version: 0.1.0
+  description: >
+    Contract expected by core-api when ML_MODE=http.
+    Units: rainfall mm/day (or % anomaly), temperature °C, humidity %, wind km/h,
+    radiation MJ/m2/day. Missing values must be null (never -99.9 or 0).
+paths:
+  /healthz:
+    get:
+      summary: Liveness probe
+      responses:
+        "200":
+          description: Alive
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [status]
+                properties:
+                  status: { type: string }
+  /v1/simulate:
+    post:
+      summary: Simulate crop yield anomaly under a climate/ENSO scenario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SimulateRequest"
+      responses:
+        "200":
+          description: Quantile prediction with attributions and provenance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulateResponse"
+  /v1/rotations/score:
+    post:
+      summary: Score and explain >= 3 crop rotation strategies (including current)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RotationScoreRequest"
+      responses:
+        "200":
+          description: Ranked rotation strategies with full decision-support context
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RotationScoreResponse"
+components:
+  schemas:
+    Scenario:
+      type: object
+      required: [rainfall_change_pct, temperature_change_c, enso_phase]
+      properties:
+        rainfall_change_pct: { type: number, minimum: -80, maximum: 100 }
+        temperature_change_c: { type: number, minimum: -5, maximum: 8 }
+        enso_phase: { type: string, enum: [el_nino, la_nina, neutral] }
+    SimulateRequest:
+      type: object
+      required: [farm_id, centroid_lat, centroid_lon, crop, scenario]
+      properties:
+        farm_id: { type: string, format: uuid }
+        centroid_lat: { type: number, minimum: -90, maximum: 90 }
+        centroid_lon: { type: number, minimum: -180, maximum: 180 }
+        crop: { type: string }
+        scenario: { $ref: "#/components/schemas/Scenario" }
+    QuantileRange:
+      type: object
+      description: Must satisfy p10 <= p50 <= p90
+      required: [p10, p50, p90]
+      properties:
+        p10: { type: number }
+        p50: { type: number }
+        p90: { type: number }
+    Provenance:
+      type: object
+      required: [model_version, data_versions, generated_at]
+      properties:
+        model_name: { type: string }
+        model_version: { type: string }
+        data_versions: { type: object, additionalProperties: { type: string } }
+        generated_at: { type: string, format: date-time }
+    SimulateResponse:
+      type: object
+      required: [crop, target, unit, baseline, scenario, attributions, out_of_range_inputs, provenance]
+      properties:
+        crop: { type: string }
+        target: { type: string }
+        unit: { type: string }
+        baseline: { $ref: "#/components/schemas/QuantileRange" }
+        scenario: { $ref: "#/components/schemas/QuantileRange" }
+        attributions:
+          type: array
+          items:
+            type: object
+            required: [feature, contribution]
+            properties:
+              feature: { type: string }
+              contribution: { type: number }
+        out_of_range_inputs:
+          type: array
+          items: { type: string }
+        provenance: { $ref: "#/components/schemas/Provenance" }
+    RotationScoreRequest:
+      type: object
+      required: [farm_id, centroid_lat, centroid_lon, current_rotation, priorities, scenario]
+      properties:
+        farm_id: { type: string, format: uuid }
+        centroid_lat: { type: number, minimum: -90, maximum: 90 }
+        centroid_lon: { type: number, minimum: -180, maximum: 180 }
+        current_rotation: { type: array, items: { type: string } }
+        priorities:
+          type: object
+          required: [weights, constraints]
+          properties:
+            weights: { type: object, additionalProperties: { type: number, minimum: 0, maximum: 1 } }
+            constraints: { type: object }
+        scenario: { $ref: "#/components/schemas/Scenario" }
+    Strategy:
+      type: object
+      required:
+        - id
+        - name
+        - is_current
+        - sequence
+        - overall_score
+        - scores
+        - uncertainty
+        - why
+        - evidence
+        - benefits
+        - gaps
+        - risks
+        - needs_local_review
+      properties:
+        id: { type: string }
+        name: { type: string }
+        is_current: { type: boolean }
+        sequence: { type: array, minItems: 1, items: { type: string } }
+        overall_score: { type: number, minimum: 0, maximum: 1 }
+        scores:
+          type: object
+          required:
+            - water_use
+            - income
+            - soil_structure
+            - forage_value
+            - nitrogen_fixing
+            - erosion_reduction
+            - market_suitability
+          additionalProperties: { type: number, minimum: 0, maximum: 1 }
+        uncertainty:
+          type: object
+          required: [low, high]
+          properties:
+            low: { type: number, minimum: 0, maximum: 1 }
+            high: { type: number, minimum: 0, maximum: 1 }
+        why: { type: array, minItems: 1, items: { type: string } }
+        evidence:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [statement, source]
+            properties:
+              statement: { type: string }
+              source: { type: string }
+        benefits: { type: array, minItems: 1, items: { type: string } }
+        gaps: { type: array, minItems: 1, items: { type: string } }
+        risks:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [description, needs_local_review]
+            properties:
+              description: { type: string }
+              needs_local_review: { type: boolean }
+        needs_local_review: { type: boolean }
+    RotationScoreResponse:
+      type: object
+      required: [disclaimer, strategies, provenance]
+      properties:
+        disclaimer: { type: string }
+        strategies:
+          type: array
+          minItems: 3
+          items: { $ref: "#/components/schemas/Strategy" }
+        provenance: { $ref: "#/components/schemas/Provenance" }

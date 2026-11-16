@@ -4,6 +4,40 @@ Public REST API: auth, farms, uploads, search and orchestration. Owns PostgreSQL
 
 Part of AgroFarm, a crop growth and rotation simulator for farmers. The tool supports decisions. It never replaces farmers or local agronomists.
 
+## Run it
+
+Needs Docker and [uv](https://docs.astral.sh/uv/) (dependency manager for this repo, lockfile `uv.lock`).
+
+```
+cp .env.example .env
+make dev      # API on http://localhost:8080 and PostgreSQL, migrations applied
+make check    # lint, typecheck and all tests against a real PostgreSQL (what CI runs)
+```
+
+Other targets: `make test-unit`, `make test-integration`, `make migrate`, `make format`, `make audit`, `make build`, `make export-openapi`. If port 5432 or 8080 is taken, set `DB_PORT` or `API_PORT`.
+
+Layout (`src/core_api/`): `api/` routers, `middleware/`, `services/` use cases, `repositories/` data access, `domain/` pure code, `clients/` other services, `config.py` settings. The layer rules are enforced by `tests/unit/test_architecture.py`.
+
+## Contract
+
+The API contract is [`docs/contract/openapi.yaml`](docs/contract/openapi.yaml). It is exported from the FastAPI app with `make export-openapi`, and `tests/contract/test_openapi_drift.py` fails when the file and `app.openapi()` differ. Change the contract first, then the tests, then the code. The service serves it at `/openapi.json`.
+
+Operations still marked `x-stub: true` (`GET /v1/farms/{farm_id}/insights`, `GET /v1/layers`, `GET /v1/search`) answer with the example data of the contract (response header `X-Stub: true`). They do not validate input and do not check authentication. When the real implementation of an operation lands, `x-stub` is removed from it.
+
+## Deployed environments
+
+- Staging core-api: https://core-api-staging-7l2bzjrqpq-uc.a.run.app
+- Staging frontend: https://frontend-staging-7l2bzjrqpq-uc.a.run.app
+- Production: the deploy of `main` to Cloud Run is defined in `.github/workflows/cd.yml`, but production has never been deployed (no CD run on `main` before 2026-11-16). The production deploy job has no required reviewers.
+
+## Demo mode and snapshots
+
+With `DEMO_MODE=true`, `POST /v1/auth/demo` gives a passwordless guest session with a cloned pilot farm. Run `make seed-demo` for the seeded demo data and `make purge-demo-guests` to remove guests older than 24 hours. With `DEMO_ML_SOURCE=live` and `ML_MODE=http`, demo mode calls ml-service and falls back to cached answers (`cached_demo` in the provenance). See [`docs/ops-env.md`](docs/ops-env.md) for all variables.
+
+## Demo snapshots
+
+`src/core_api/demo_snapshots/` holds static JSON served by the climate and demo endpoints. `nasa_power.json` backs `GET /v1/climate/nasa-power`: monthly NASA POWER data (1995-01 to 2025-12) for one point, a reanalysis grid cell of about 50 km and not a station. It is served unchanged in every mode and is not read from the data-service yet.
+
 ## Start here
 
 - **Rules for people and agents:** [`AGENTS.md`](AGENTS.md). Read it before changing anything.
@@ -26,3 +60,7 @@ Part of AgroFarm, a crop growth and rotation simulator for farmers. The tool sup
 | `agrofarm-api` | `core-api` |
 | `agrofarm-analytic` | `ml-service`, `data-service` |
 | `agrofarm-docs` | documentation only |
+
+## AI assistance
+
+Parts of this repository were written with AI coding assistants and reviewed by the team. See [`AI_USAGE.md`](AI_USAGE.md) for the tools, what they were used for and how to trace each use.

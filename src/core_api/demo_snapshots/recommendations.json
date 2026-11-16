@@ -1,0 +1,95 @@
+{
+  "disclaimer": "This tool supports decisions. It does not replace farmers or local agronomists.",
+  "strategies": [
+    {
+      "id": "current",
+      "name": "Maize, then fallow",
+      "is_current": true,
+      "sequence": ["maize", "fallow"],
+      "overall_score": 0.48,
+      "scores": {
+        "water_use": 0.5,
+        "income": 0.6,
+        "soil_structure": 0.3,
+        "forage_value": 0.1,
+        "nitrogen_fixing": 0.1,
+        "erosion_reduction": 0.3,
+        "market_suitability": 0.7
+      },
+      "uncertainty": {"low": 0.38, "high": 0.57},
+      "why": ["Current farm practice used as baseline."],
+      "evidence": [
+        {"statement": "93% of yearly rain falls May-October at INSIVUMEH station.", "source": "insivumeh_daily"}
+      ],
+      "benefits": ["Known practice, no new equipment."],
+      "gaps": ["Limited parcel yield records uploaded."],
+      "risks": [
+        {"description": "Bare soil Dec-Apr raises erosion risk.", "needs_local_review": true}
+      ],
+      "needs_local_review": true
+    },
+    {
+      "id": "maize_beans",
+      "name": "Maize, then black beans",
+      "is_current": false,
+      "sequence": ["maize", "black_beans"],
+      "overall_score": 0.68,
+      "scores": {
+        "water_use": 0.6,
+        "income": 0.7,
+        "soil_structure": 0.6,
+        "forage_value": 0.2,
+        "nitrogen_fixing": 0.9,
+        "erosion_reduction": 0.6,
+        "market_suitability": 0.7
+      },
+      "uncertainty": {"low": 0.54, "high": 0.78},
+      "why": ["Beans fix nitrogen and shorten bare-field months."],
+      "evidence": [
+        {"statement": "Legumes fix atmospheric nitrogen (crop traits v1).", "source": "crop_traits"}
+      ],
+      "benefits": ["Lower nitrogen fertilizer need.", "Soil covered longer."],
+      "gaps": ["Late-season rain uncertain under El Nino."],
+      "risks": [
+        {"description": "Late-sown beans may face dry spells before pod fill.", "needs_local_review": true}
+      ],
+      "needs_local_review": true
+    },
+    {
+      "id": "maize_cover_crop",
+      "name": "Maize, then a cover crop",
+      "is_current": false,
+      "sequence": ["maize", "cover_crop"],
+      "overall_score": 0.62,
+      "scores": {
+        "water_use": 0.7,
+        "income": 0.4,
+        "soil_structure": 0.8,
+        "forage_value": 0.6,
+        "nitrogen_fixing": 0.6,
+        "erosion_reduction": 0.9,
+        "market_suitability": 0.3
+      },
+      "uncertainty": {"low": 0.48, "high": 0.73},
+      "why": ["Protects topsoil during dry season and matches erosion priority."],
+      "evidence": [
+        {"statement": "Heavy rain events (>50 mm/day) drive erosion on bare slopes.", "source": "nasa_power_chirps"}
+      ],
+      "benefits": ["Lower erosion risk.", "Improved soil structure."],
+      "gaps": ["Cover-crop seed cost and availability not verified locally."],
+      "risks": [
+        {"description": "Cover crop gives no direct cash income.", "needs_local_review": true}
+      ],
+      "needs_local_review": true
+    }
+  ],
+  "provenance": {
+    "model_version": "cached_demo-0.1.0",
+    "data_versions": {
+      "insivumeh_daily": "2026-11-14",
+      "enso_monthly": "2026-11",
+      "snapshot_mode": "cached_demo"
+    },
+    "generated_at": "2026-11-14T15:20:00Z"
+  }
+}

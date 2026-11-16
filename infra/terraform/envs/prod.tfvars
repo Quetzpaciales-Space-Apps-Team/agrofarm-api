@@ -1,0 +1,5 @@
+environment  = "prod"
+region       = "us-central1"
+github_org   = "Quetzpaciales-Space-Apps-Team"
+db_tier      = "db-g1-small"
+cors_origins = "https://app.agrofarm.example"
