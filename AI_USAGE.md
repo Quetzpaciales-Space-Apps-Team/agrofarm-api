@@ -11,6 +11,7 @@ AI coding assistants were used as tools to write and review code, tests, CI work
 | Tool | Model | Used by | Used for |
 |---|---|---|---|
 | Claude Code | `claude-fable-5-2` | `eldmark` | Repository rules, CI, scaffolds, connectors, tests, documentation, data analysis |
+| Claude Code | `claude-sonnet-5-5` | `eldmark` | Demo ML live fallback, real ENSO snapshot, smoke-test cold-start tolerance, demo guest cap, documentation (2026-11-14 to 2026-11-15) |
 | OpenAI Codex | `GPT-6` | `eldmark` | Demo credential removal, safe demo seeding, documentation and model-status corrections, staging ML configuration and behavioral deployment smoke checks, authenticated farm photo forwarding and response-validation tests |
 | Antigravity | `Gemini 4 Hydrogen` | `MarceloDetlefsen` | Backend API implementation, unit/integration tests, OpenAPI contract updates, deployment & demo docs (human-reviewed by `@MarceloDetlefsen`) |
 | Antigravity | `Gemini 3.8` | `Angel Chavez (angcoder-c)` | Secret management verification, Cloud Run and staging domain configuration, CORS and farm endpoint verification |

@@ -12,9 +12,9 @@ This checklist covers container verification, environment variables, database mi
 | `ENVIRONMENT` | `local` | `staging` | `prod` |
 | `JWT_SECRET` | Optional (dev default allowed) | **Required** (Secret Manager, non-default) | **Required** (Secret Manager, non-default) |
 | `CORS_ALLOWED_ORIGINS` (or `CORS_ORIGINS`) | `["http://localhost:5173","https://agrofarming.site"]` | `https://agrofarming.site` | `https://agrofarming.site` |
-| `ML_MODE` | `fixture` | `fixture` (until `ml-service` HTTP endpoints land) | `fixture` or `http` |
+| `ML_MODE` | `fixture` | `http` (set by the staging deploy in `cd.yml`) | `fixture` or `http` |
 | `ML_SERVICE_URL` | `http://localhost:8081` | Cloud Run `ml-service` URL | Cloud Run `ml-service` URL |
-| `DEMO_MODE` | `false` (or `true` for offline demo) | `true` for hackathon fallback, else `false` | `false` (or `true` only for demo fallback) |
+| `DEMO_MODE` | `false` (or `true` for offline demo) | `true` (set by the staging deploy in `cd.yml`, with `DEMO_ML_SOURCE=live`) | `false` (or `true` only for demo fallback) |
 
 ---
 
@@ -66,14 +66,14 @@ curl -si -X OPTIONS "$API_URL/v1/auth/login" \
 
 - **GCP Foundation (`OPS-001`):** Provision staging/prod Cloud SQL, Secret Manager values (`database_url`, `jwt_secret`), and Cloud Run services via `infra/terraform`.
 - **Custom Domain & CORS (`OPS-002`):** Map `https://agrofarming.site` (frontend) and API subdomain on the same registrable domain so `httpOnly; Secure; SameSite=Lax` refresh cookies work, and set `CORS_ORIGINS=https://agrofarming.site` in `envs/*.tfvars`.
-- **CD Workflows:** Add GitHub Actions deploy workflows (`develop` -> staging, `main` -> prod) using WIF (`sa-ci-deployer`).
+- **CD Workflows:** done in `.github/workflows/cd.yml` (`develop` -> staging, `main` -> prod, via WIF). Production has never been deployed.
 - **Branch Protection (`OPS-004`):** Enforce `ci-gate` and PR review rules on `develop` and `main`, and open the final `develop` -> `main` release PR before freeze.
 
 ---
 
 ## 5. Enabling `ML_MODE=http` (`ml-service` Integration)
 
-`core-api` is verified end-to-end against `agrofarm-analytic/services/ml` (`agrofarm_ml`) over HTTP (`tests/integration/test_ml_service_real_http.py`). Staging and production remain on `DEMO_MODE=true` (`ML_MODE=fixture`) until `ml-service` is deployed to Cloud Run (`OPS-001` / `ML-001`).
+`core-api` is verified end-to-end against `agrofarm-analytic/services/ml` (`agrofarm_ml`) over HTTP (`tests/integration/test_ml_service_real_http.py`). The staging deploy in `cd.yml` already sets `ML_MODE=http`, `ML_AUTH=google_id_token`, `DEMO_MODE=true` and `DEMO_ML_SOURCE=live`. Production settings are not confirmed.
 
 To run with the real `ml-service` locally:
 ```bash
@@ -85,7 +85,7 @@ ML_MODE=http ML_SERVICE_URL=http://127.0.0.1:8081 DATABASE_URL="$DATABASE_URL" \
   uv run uvicorn core_api.main:create_app --factory --port 8080
 ```
 
-To enable `ML_MODE=http` in staging/prod once `ml-service` is deployed:
+To enable `ML_MODE=http` elsewhere (for example production):
 1. Set `ML_SERVICE_URL` to the deployed Cloud Run `ml-service` URL.
 2. Set `ML_MODE=http`. To keep the guest demo entry (`DEMO_MODE=true`) and still get live answers, also set `DEMO_ML_SOURCE=live`; with the default `snapshot`, demo mode keeps serving the cached file and the scenario sliders change nothing.
 3. Verify `POST /v1/scenarios/simulate` and `POST /v1/farms/{farm_id}/recommendations` return `200`/`201` with `>=3` strategies.
